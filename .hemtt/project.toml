@@ -2,3 +2,9 @@ name = "Moony's Magnificent Modules"
 author = "Moony"
 prefix = "mmm"
 mainprefix = "z"
+
+[version]
+major = 0
+minor = 1
+patch = 1
+build = 0
