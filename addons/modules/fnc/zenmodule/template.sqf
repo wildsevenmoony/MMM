@@ -38,4 +38,4 @@
 
 	// Code
 
-}] remoteexeccall ["zen_custom_modules_fnc_register", 0, true];
+}] remoteExecCall ["zen_custom_modules_fnc_register", 0, true];

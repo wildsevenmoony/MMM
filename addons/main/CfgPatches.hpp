@@ -1,8 +1,8 @@
 class CfgPatches {
-	class MMM {
-		name = "Moony's Magnificent Modules";
+	class MMM_MAIN {
+		name = "Moonys Magnificent Modules";
 		author = "Moony";
-		requiredAddons[] = {"zen_context_menu"};
+		requiredAddons[] = {};
 		requiredVersion = 0.1;
 		units[] = {};
 		weapons[] = {};

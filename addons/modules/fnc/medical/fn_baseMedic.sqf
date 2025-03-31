@@ -1,11 +1,11 @@
 params [
-	["_medic", ObjNull, [ObjNull]],
+	["_medic", objNull, [objNull]],
 	["_text", "Heal me", [""]],
 	["_text2", "Heal everyone", [""]],
 	["_condition", "true", [""]]
 ];
 
-if (!(isServer) && {_medic getVariable ["MMM_BaseMedic", false]}) exitWith {};
+if (!(isServer) && {_medic getVariable ["mmm_var_BaseMedic", false]}) exitWith {};
 
 // Adds "Heal me"
 _heal = [
@@ -14,7 +14,7 @@ _heal = [
 		(format ["<img size='1' shadow='1' image='\a3\ui_f\data\igui\cfg\Actions\heal_ca.paa'/> %1", _text]),
 		{
 			player call ace_medical_treatment_fnc_fullHealLocal;
-			["MMM_notification_healed",[]] call bis_fnc_showNotification;
+			["mmm_notification_healed",[]] call bis_fnc_showNotification;
 		},
 		[],
 		9,
@@ -23,7 +23,7 @@ _heal = [
 		"",
 		(
 			format [
-				"(_this distance _target < 3) && {%1} && (Alive _target)",
+				"(_this distance _target < 3) && {%1} && ([_target] call ace_common_fnc_isAwake)",
 				_condition
 			]
 		)
@@ -46,9 +46,9 @@ _healeveryone = [
 			} forEach _radiusUnits;
 
 			{
-				["MMM_notification_healedbysomeone",[]] remoteExecCall ["bis_fnc_showNotification", _x];
+				["mmm_notification_healedbysomeone",[]] remoteExecCall ["bis_fnc_showNotification", _x];
 			} forEach _healedUnits;
-			["MMM_notification_sombodyhealed",[]] call bis_fnc_showNotification;
+			["mmm_notification_sombodyhealed",[]] call bis_fnc_showNotification;
 		},
 		[],
 		8.5,
@@ -57,12 +57,12 @@ _healeveryone = [
 		"",
 		(
 			format [
-				"(_this distance _target < 3) && {%1} && (Alive _target)",
+				"(_this distance _target < 3) && {%1} && ([_target] call ace_common_fnc_isAwake)",
 				_condition
 			]
 		)
 	]
 ] remoteExec ["addAction", 0, true];
 
-[_medic, "MMM_Medic"] remoteExec ["BIS_fnc_setUnitInsignia", 0, true];
-_medic setVariable ["MMM_BaseMedic", true, true];
+[_medic, "mmm_Medic"] remoteExec ["BIS_fnc_setUnitInsignia", 0, true];
+_medic setVariable ["mmm_var_BaseMedic", true, true];

@@ -1,6 +1,6 @@
 class CfgFactionClasses
 {
-	class MMMModuleClass
+	class MMM_MODULES_ModuleClass
 	{
 		displayName = "Moony's Magnificent";
 	};

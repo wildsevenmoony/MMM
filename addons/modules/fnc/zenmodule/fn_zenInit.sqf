@@ -19,31 +19,31 @@ private _wait = [] spawn
 
 
 
-		private _MMMAI = [
-			["Toggle AI Stationary",{_this call MMM_fnc_stationaryAI}],
-			["Toggle Group Stationary",{_this call MMM_fnc_stationaryGroup}]
+		private _mmmAI = [
+			["Toggle AI Stationary",{_this call mmm_modules_fnc_stationaryAI}],
+			["Toggle Group Stationary",{_this call mmm_modules_fnc_stationaryGroup}]
 		];
 
-		private _MMMFun = [
-			["War Crimes",{_this call MMM_fnc_warcrimesNotification}],
-			["Zeus Hates Arma",{_this call MMM_fnc_zeusHatesArma}],
-			["Zeus Hates Playerbase",{_this call MMM_fnc_zeusHatesPlayerbase}]
+		private _mmmFun = [
+			["War Crimes",{_this call mmm_modules_fnc_warcrimesNotification}],
+			["Zeus Hates Arma",{_this call mmm_modules_fnc_zeusHatesArma}],
+			["Zeus Hates Playerbase",{_this call mmm_modules_fnc_zeusHatesPlayerbase}]
 		];
 
-		private _MMMMain = [
-			["Toggle Carryable (ACE)",{_this call MMM_fnc_aceCarryable}],
-			["Toggle Dragable (ACE)",{_this call MMM_fnc_aceDragable}],
-			["Destroy without Explosion",{_this call MMM_fnc_destroyWithoutExplosion}],
-			["Remove Crater Decal",{_this call MMM_fnc_removeCrater}],
-			["Unlimited Ammo",{_this call MMM_fnc_unlimitedAmmoZeus}],
-			["Unlimited Fuel",{_this call MMM_fnc_unlimitedFuelZeus}]
+		private _mmmMain = [
+			["Toggle Carryable (ACE)",{_this call mmm_modules_fnc_aceCarryable}],
+			["Toggle Dragable (ACE)",{_this call mmm_modules_fnc_aceDragable}],
+			["Destroy without Explosion",{_this call mmm_modules_fnc_destroyWithoutExplosion}],
+			["Remove Crater Decal",{_this call mmm_modules_fnc_removeCrater}],
+			["Unlimited Ammo",{_this call mmm_modules_fnc_unlimitedAmmoZeus}],
+			["Unlimited Fuel",{_this call mmm_modules_fnc_unlimitedFuelZeus}]
 		];
 
-		private _MMMMedical = [
-			["Base Medic",{_this call MMM_fnc_baseMedicZeus}]
+		private _mmmMedical = [
+			["Base Medic",{_this call mmm_modules_fnc_baseMedicZeus}]
 		];
 
-		_combinedArr = [_MMMMain, _MMMAI, _MMMFun, _MMMMedical];
+		_combinedArr = [_mmmMain, _mmmAI, _mmmFun, _mmmMedical];
 		_combinedArr;
 	};	
 
@@ -51,7 +51,7 @@ private _wait = [] spawn
 	{
 		private _regMain = 
 		[
-			"PMC MMMinel", 
+			"Moonys Magnificent", 
 			(_x select 0), 
 			(_x select 1),
 			(_x select 2)
@@ -61,7 +61,7 @@ private _wait = [] spawn
 	{
 		private _regAI = 
 		[
-			"PMC MMMinel AI", 
+			"Moonys Magnificent AI", 
 			(_x select 0), 
 			(_x select 1),
 			(_x select 2)
@@ -71,7 +71,7 @@ private _wait = [] spawn
 	{
 		private _regFun = 
 		[
-			"PMC MMMinel Fun", 
+			"Moonys Magnificent Fun", 
 			(_x select 0), 
 			(_x select 1),
 			(_x select 2)
@@ -81,7 +81,7 @@ private _wait = [] spawn
 	{
 		private _regMedical = 
 		[
-			"PMC MMMinel Medical", 
+			"Moonys Magnificent Medical", 
 			(_x select 0), 
 			(_x select 1),
 			(_x select 2)

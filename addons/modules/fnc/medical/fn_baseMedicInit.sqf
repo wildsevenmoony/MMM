@@ -1,8 +1,8 @@
 params [
-    ["_logic", ObjNull, [ObjNull]],
+    ["_logic", objNull, [objNull]],
 	["_objs", [], [[]]]
 ];
 
 {
-	[_x] call MMM_fnc_baseMedic;
+	[_x] call mmm_modules_fnc_baseMedic;
 } forEach _objs;

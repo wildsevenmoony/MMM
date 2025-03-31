@@ -1,19 +1,24 @@
 params [
-  ["_logic", ObjNull,[ObjNull]],
+	["_logic", objNull,[objNull]],
 	["_ai", [], [[]]],
-  ["_activated",true ,[true]]
+	["_activated",true ,[true]]
 ];
 
-_condition = _logic getVariable ["MMM_Module_AI_Stationary", "group"];
+_condition = _logic getVariable ["MMM_MODULES_Module_AI_Stationary", 0];
 
-if (_condition isEqualTo "group") then {
-	{
+switch (_condition) do {
+	case 0: {
 		{
-			[_x] remoteexec ["MMM_fnc_stationary_ai_stationary", _x];
-		} forEach units group _x;
-	} forEach _ai;
-} else {
-	{
-		[_x] remoteexec ["MMM_fnc_stationary_ai_stationary", _x];		
-	} forEach _ai;
+			{
+				[_x, "PATH"] remoteExec ["disableAI", 0, true];
+				_x setVariable ["mmm_var_AI_Stationary", true, true];
+			} forEach units group _x;
+		} forEach _ai;
+	};
+	case 1: {
+		{
+				[_x, "PATH"] remoteExec ["disableAI", 0, true];
+				_x setVariable ["mmm_var_AI_Stationary", true, true];		
+		} forEach _ai;
+	};
 };

@@ -1,40 +1,44 @@
 class CfgFunctions
 {
-	class MMM
+	class MMM_MODULES
 	{
 		class Ai
 		{
-			file = "\Modules\fnc\ai";
+			file = "z\mmm\addons\modules\fnc\ai";
 			class stationary_ai_stationary{};
 			class stationary_ai_moving{};
 			class stationary_ai_init{};
 		};
 		class Ambient
 		{
-			file = "\Modules\fnc\ambient";
+			file = "z\mmm\addons\modules\fnc\ambient";
 			class ambientanimationmp{};
 			class animation{};
-		
 		};
 		class Medical
 		{
-			file = "\Modules\fnc\medical";
+			file = "z\mmm\addons\modules\fnc\medical";
 			class baseMedic{};
 			class baseMedicInit{};
 		};
-
-
-
-
-		class Zenmodule_MMM
+		class Misc
 		{
-			file = "\Modules\fnc\zenmodule";
+			file = "z\mmm\addons\modules\fnc\misc";
+			class spawnwreck{};
+		};
+
+
+
+
+		class Zenmodule_mmm
+		{
+			file = "z\mmm\addons\modules\fnc\zenmodule";
 
 			class zenInit{postinit = 1;};
 		};
-		class Zenmodule_MMM_Main
+		class Zenmodule_mmm_Main
 		{
-			file = "\Modules\fnc\zenmodule\MMM_Main";
+			file = "z\mmm\addons\modules\fnc\zenmodule\mmm_Main";
 
 			class aceCarryable{};
 			class aceDragable{};
@@ -43,23 +47,23 @@ class CfgFunctions
 			class unlimitedAmmoZeus{};
 			class unlimitedFuelZeus{};
 		};
-		class Zenmodule_MMM_AI
+		class Zenmodule_mmm_AI
 		{
-			file = "\Modules\fnc\zenmodule\MMM_AI";
+			file = "z\mmm\addons\modules\fnc\zenmodule\mmm_AI";
 			class stationaryAI{};
 			class stationaryGroup{};
 		};
-		class Zenmodule_MMM_Fun
+		class Zenmodule_mmm_Fun
 		{
-			file = "\Modules\fnc\zenmodule\MMM_Fun";
+			file = "z\mmm\addons\modules\fnc\zenmodule\mmm_Fun";
 
 			class zeusHatesArma{};
 			class zeusHatesPlayerbase{};
 			class warcrimesNotification{};
 		};
-		class Zenmodule_MMM_Medical
+		class Zenmodule_mmm_Medical
 		{
-			file = "\Modules\fnc\zenmodule\MMM_Medical";
+			file = "z\mmm\addons\modules\fnc\zenmodule\mmm_Medical";
 
 			class baseMedicZeus{};
 		};

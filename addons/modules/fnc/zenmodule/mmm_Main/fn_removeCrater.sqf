@@ -4,8 +4,8 @@ params [
 	"_objectUnderCursor"
 ];
 
-#include "\Modules\fnc\zenmodule\Checks\fn_doNotPlaceOnObjectUnit.hpp"
-#include "\Modules\fnc\zenmodule\Checks\fn_placeOnNothing.hpp"
+#include "..\checks\fn_doNotPlaceOnObjectUnit.hpp"
+#include "..\checks\fn_placeOnNothing.hpp"
 
 // Code
 nearestObject [_position, "#crater"] hideObject true;

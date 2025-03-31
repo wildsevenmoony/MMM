@@ -1,41 +1,43 @@
 params [
-  ["_logic", ObjNull,[ObjNull]],
+  ["_logic", objNull,[objNull]],
 	["_vehicle", [], [[]]],
   ["_activated",true ,[true]]
 ];
 
-_condition = _logic getVariable ["MMM_Module_AmbientAnimationMP","None"];
-_string = _logic getVariable "MMM_Module_AmbientAnimationMP_Snap_Object";
-_object = call compile _string;
-_ambient = {};
-_regular = {};
+_condition = _logic getVariable ["MMM_MODULES_Module_AmbientAnimationMP", 0];
+_object = _logic getVariable "MMM_MODULES_Module_AmbientAnimationMP_Snap_Object";
+_snapObject = call compile _object;
+_allowDamage = _logic getVariable ["MMM_MODULES_Module_AmbientAnimationMP_Damage", 0];
+
+_conditionMove = ["STAND1","STAND2","STAND_U1","STAND_U2","STAND_U3","WATCH","WATCH2","GUARD","LISTEN_BRIEFING","LEAN_ON_TABLE","LEAN","SIT_AT_TABLE","SIT1","SIT","SIT3","SIT_U1","SIT_U2","SIT_U3","SIT_HIGH1","SIT_HIGH","SIT_LOW","SIT_LOW_U","SIT_SAD1","SIT_SAD2","KNEEL","REPAIR_VEH_PRONE","REPAIR_VEH_KNEEL","REPAIR_VEH_STAND","PRONE_INJURED_U1","PRONE_INJURED_U2","PRONE_INJURED","KNEEL_TREAT","KNEEL_TREAT2","BRIEFING","BRIEFING_POINT_LEFT","BRIEFING_POINT_RIGHT","BRIEFING_POINT_TABLE"];
+
+_conditionSelected = _conditionMove select _condition;
 
 //Run Code only on the server
-if (local (_vehicle select 0)) then {
-  
-  //Checks if a snapping object name is provided
-  if (isNil _string) then {
-    //Checks if "None" is chosen
-    if (_condition isEqualTo "None") then {
-      {
-        _x call BIS_fnc_ambientAnim__terminate;
-      } forEach _vehicle;
-    }
-    else {
-      {
-        [_x,_condition,"ASIS"] call BIS_fnc_ambientAnim;
-      } forEach _vehicle;
-    };
-  } else {
-    if (_condition isEqualTo "None") then {
-      {
-        _x call BIS_fnc_ambientAnim__terminate;
-      } forEach _vehicle;
-    }
-    else {
-      {
-        [_x,_condition,"ASIS",_object] call BIS_fnc_ambientAnim;
-      } forEach _vehicle;
+
+
+if (_activated) then {
+  //Run Code only on the server
+  if (local (_vehicle select 0)) then {
+    switch (isNil _object) do {
+      case true: {
+        {
+          [_x, _conditionSelected,"ASIS"] call BIS_fnc_ambientAnim;
+          switch (_allowDamage) do {
+            case 0: {[_x, false] remoteExec ["allowdamage", 0];};
+            case 1: {[_x, false] remoteExec ["allowdamage", 1];};
+          };
+        } forEach _vehicle;
+      };
+      case false: {
+        {
+          [_x, _conditionSelected,"ASIS",_snapObject] call BIS_fnc_ambientAnim;
+          switch (_allowDamage) do {
+            case 0: {[_x, false] remoteExec ["allowdamage", 0];};
+            case 1: {[_x, false] remoteExec ["allowdamage", 1];};
+          };
+        } forEach _vehicle;
+      };
     };
   };
 };

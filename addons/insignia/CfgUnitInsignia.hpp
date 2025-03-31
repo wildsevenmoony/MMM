@@ -4,7 +4,7 @@ class CfgUnitInsignia
 	{
 		displayName = "Medic";
 		author = "IndeedPete and Moony";
-		texture = "\insignia\icons\Medic.paa";
+		texture = "z\mmm\addons\insignia\icons\Medic.paa";
 		textureVehicle = "";
 	};
 
@@ -12,7 +12,7 @@ class CfgUnitInsignia
 	{
 		displayName = "Steve";
 		author = "Moony";
-		texture = "\insignia\icons\steve.paa";
+		texture = "z\mmm\addons\insignia\icons\steve.paa";
 		textureVehicle = "";
 	};
 
@@ -20,7 +20,7 @@ class CfgUnitInsignia
 	{
 		displayName = "Donald Duck";
 		author = "Moony";
-		texture = "\insignia\icons\donaldduck.paa";
+		texture = "z\mmm\addons\insignia\icons\donaldduck.paa";
 		textureVehicle = "";
 	};
 
@@ -28,7 +28,7 @@ class CfgUnitInsignia
 	{
 		displayName = "Hannie";
 		author = "Thom and Moony";
-		texture = "\insignia\icons\hannie.paa";
+		texture = "z\mmm\addons\insignia\icons\hannie.paa";
 		textureVehicle = "";
 	};
 };

@@ -4,8 +4,8 @@ params [
 	"_objectUnderCursor"
 ];
 
-#include "\Modules\fnc\zenmodule\Checks\fn_notNullObject.hpp"
-#include "\Modules\fnc\zenmodule\Checks\fn_placeOnObject.hpp"
+#include "..\checks\fn_notNullObject.hpp"
+#include "..\checks\fn_placeOnObject.hpp"
 
 // Code
 _objectUnderCursor setVariable ["ace_cookoff_enable", false, true];
