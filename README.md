@@ -3,7 +3,7 @@
 ## Description
 A collection of modules for 3Den and Zeus used by my former unit. You'll find nothing special and a lot of bad spaghetti code!
 
-This mod is usually used by the Mod I'm currently playing in and will have code specific to that Unit. 
+This mod is usually used by the unit I'm currently playing in and will have code specific to that unit. 
 
 ## Features
 - Selection of new insignias
