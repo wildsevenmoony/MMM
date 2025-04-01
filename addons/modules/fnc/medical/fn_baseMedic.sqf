@@ -45,9 +45,7 @@ _healeveryone = [
 				_x call ace_medical_treatment_fnc_fullHealLocal;
 			} forEach _radiusUnits;
 
-			{
-				["mmm_notification_healedbysomeone",[]] remoteExecCall ["bis_fnc_showNotification", _x];
-			} forEach _healedUnits;
+			["mmm_notification_healedbysomeone",[]] remoteExecCall ["bis_fnc_showNotification", _healedUnits];
 			["mmm_notification_sombodyhealed",[]] call bis_fnc_showNotification;
 		},
 		[],
@@ -64,5 +62,5 @@ _healeveryone = [
 	]
 ] remoteExec ["addAction", 0, true];
 
-[_medic, "mmm_Medic"] remoteExec ["BIS_fnc_setUnitInsignia", 0, true];
+[_medic, "mmm_Medic"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
 _medic setVariable ["mmm_var_BaseMedic", true, true];
