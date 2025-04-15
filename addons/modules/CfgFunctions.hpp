@@ -5,29 +5,58 @@ class CfgFunctions
 		class Ai
 		{
 			file = "z\mmm\addons\modules\fnc\ai";
-			class stationary_ai_stationary{};
-			class stationary_ai_moving{};
-			class stationary_ai_init{};
+			class stationaryAIStationary{};
+			class stationaryAIMoving{};
+			class stationaryAIInit{};
 		};
 		class Ambient
 		{
 			file = "z\mmm\addons\modules\fnc\ambient";
-			class ambientanimationmp{};
+			class ambientAnimationMP{};
 			class animation{};
 		};
 		class Medical
 		{
 			file = "z\mmm\addons\modules\fnc\medical";
+			class aceDamage{};
 			class baseMedic{};
 			class baseMedicInit{};
 		};
 		class Misc
 		{
 			file = "z\mmm\addons\modules\fnc\misc";
-			class spawnwreck{};
+			class spawnWreck{};
 		};
-
-
+		class Random_Backpacks
+		{
+			file = "z\mmm\addons\modules\fnc\random\backpacks";
+			class randomizeGearBackpacks{};
+			class randomizeGearBackpacksInit{};
+		};
+		class Random_Headgear
+		{
+			file = "z\mmm\addons\modules\fnc\random\headgear";
+			class randomizeGearHeadgear{};
+			class randomizeGearHeadgearInit{};
+		};
+		class Random_Unifroms
+		{
+			file = "z\mmm\addons\modules\fnc\random\uniforms";
+			class randomizeGearUniforms{};
+			class randomizeGearUniformsInit{};
+		};
+		class Random_Vests
+		{
+			file = "z\mmm\addons\modules\fnc\random\vests";
+			class randomizeGearVests{};
+			class randomizeGearVestsInit{};
+		};
+		class Random_Weapons
+		{
+			file = "z\mmm\addons\modules\fnc\random\weapons";
+			class randomizeGearWeapons{};
+			class randomizeGearWeaponsInit{};
+		};
 
 
 		class Zenmodule_mmm

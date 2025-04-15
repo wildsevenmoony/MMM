@@ -4,14 +4,14 @@ params [
   ["_activated",true ,[true]]
 ];
 
-_condition = _logic getVariable ["MMM_MODULES_Module_AmbientAnimationMP", 0];
-_object = _logic getVariable "MMM_MODULES_Module_AmbientAnimationMP_Snap_Object";
-_snapObject = call compile _object;
-_allowDamage = _logic getVariable ["MMM_MODULES_Module_AmbientAnimationMP_Damage", 0];
+private _condition = _logic getVariable ["MMM_MODULES_Module_AmbientAnimationMP", 0];
+private _object = _logic getVariable "MMM_MODULES_Module_AmbientAnimationMP_Snap_Object";
+private _snapObject = call compile _object;
+private _allowDamage = _logic getVariable ["MMM_MODULES_Module_AmbientAnimationMP_Damage", 0];
 
-_conditionMove = ["STAND1","STAND2","STAND_U1","STAND_U2","STAND_U3","WATCH","WATCH2","GUARD","LISTEN_BRIEFING","LEAN_ON_TABLE","LEAN","SIT_AT_TABLE","SIT1","SIT","SIT3","SIT_U1","SIT_U2","SIT_U3","SIT_HIGH1","SIT_HIGH","SIT_LOW","SIT_LOW_U","SIT_SAD1","SIT_SAD2","KNEEL","REPAIR_VEH_PRONE","REPAIR_VEH_KNEEL","REPAIR_VEH_STAND","PRONE_INJURED_U1","PRONE_INJURED_U2","PRONE_INJURED","KNEEL_TREAT","KNEEL_TREAT2","BRIEFING","BRIEFING_POINT_LEFT","BRIEFING_POINT_RIGHT","BRIEFING_POINT_TABLE"];
+private _conditionMove = ["STAND1","STAND2","STAND_U1","STAND_U2","STAND_U3","WATCH","WATCH2","GUARD","LISTEN_BRIEFING","LEAN_ON_TABLE","LEAN","SIT_AT_TABLE","SIT1","SIT","SIT3","SIT_U1","SIT_U2","SIT_U3","SIT_HIGH1","SIT_HIGH","SIT_LOW","SIT_LOW_U","SIT_SAD1","SIT_SAD2","KNEEL","REPAIR_VEH_PRONE","REPAIR_VEH_KNEEL","REPAIR_VEH_STAND","PRONE_INJURED_U1","PRONE_INJURED_U2","PRONE_INJURED","KNEEL_TREAT","KNEEL_TREAT2","BRIEFING","BRIEFING_POINT_LEFT","BRIEFING_POINT_RIGHT","BRIEFING_POINT_TABLE"];
 
-_conditionSelected = _conditionMove select _condition;
+private _conditionSelected = _conditionMove select _condition;
 
 //Run Code only on the server
 

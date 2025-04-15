@@ -1,3 +1,5 @@
+class CBA_Extended_EventHandlers_base;
+
 class CfgVehicles
 {
 	class Logic;
@@ -61,7 +63,7 @@ class CfgVehicles
 	{
 		category = "MMM_MODULES_ModuleClass";
 		displayName = "Spawen Vehicle as Wreck";
-		function = "MMM_MODULES_fnc_spawnwreck";
+		function = "MMM_MODULES_fnc_spawnWreck";
 		functionPriority = 10;
 		isDisposable = 0;
 		is3DEN = 0;
@@ -121,7 +123,7 @@ class CfgVehicles
 	{
 		category = "MMM_MODULES_ModuleClass";
 		displayName = "Ambient Animation MP";
-		function = "MMM_MODULES_fnc_ambientanimationmp";
+		function = "MMM_MODULES_fnc_ambientAnimationMP";
 		functionPriority = 10;
 		isDisposable = 0;
 		is3DEN = 0;
@@ -332,7 +334,7 @@ class CfgVehicles
 	{
 		category = "MMM_MODULES_ModuleClass";
 		displayName = "Turn AI Stationary";
-		function = "MMM_MODULES_fnc_stationary_ai_init";
+		function = "MMM_MODULES_fnc_stationaryAIInit";
 		functionPriority = 10;
 		isDisposable = 0;
 		is3DEN = 0;
@@ -370,6 +372,770 @@ class CfgVehicles
 				optional = 0;
 				duplicate = 0;
 				synced[] = {"AnyStaticObject", "AnyVehicle", "AnyAI"};
+			};
+		};
+	};
+
+	class MMM_MODULES_Module_Randomize_Gear_Backpacks_F: Module_F
+	{
+		category = "MMM_MODULES_ModuleClass";
+		displayName = "Gear Randomizer: Backpacks";
+		function = "MMM_MODULES_fnc_randomizeGearBackpacksInit";
+		functionPriority = 10;
+		isDisposable = 0;
+		is3DEN = 0;
+		isGlobal = 0;
+		isTriggerActivated = 0;
+		scope = 2;
+
+		class Attributes: AttributesBase
+		{
+				class MMM_BackpacksCategory {
+					data = "AttributeSystemSubcategory";
+					control = "SubCategory";
+					displayName = "Backpacks Attributes";
+					description = "";
+				};
+				class MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize_Checkbox ";
+					displayName = "Randomize";
+					tooltip = "Activate the backpacks randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Backpacks_Force: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Backpacks_Force_Checkbox ";
+					displayName = "Force adding";
+					tooltip = "Adds backpacks even if the unit did not have one before";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize_Content_Edit";
+					tooltip = "Enter classnames of Backpacks. \n\nE.g. H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo...";
+					displayName = "Classnames";
+					typeName = "STRING";
+					defaultValue = "";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize_Chance: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize_Chance_Edit";
+					displayName = "Empty Chance";
+					tooltip = "Enter the chance for the backpacks being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no backpacks being added";
+					typeName = "NUMBER";
+					defaultValue = "0";
+				};
+
+			class ModuleDescription: ModuleDescription{};
+		};
+
+		class ModuleDescription: ModuleDescription
+		{
+			description = "Sync a Unit to this module to randomize its backpacks!";
+			sync[] = {"LocationArea_F"};
+
+			class LocationArea_F
+			{
+				description[] =	{"Synchronise any Unit to this module."};
+				position = 0;
+				direction = 0;
+				optional = 0;
+				duplicate = 0;
+				synced[] = {"AnyBrain"};
+			};
+		};
+	};
+
+	class MMM_MODULES_Module_Randomize_Gear_Headgear_F: Module_F
+	{
+		category = "MMM_MODULES_ModuleClass";
+		displayName = "Gear Randomizer: Headgear";
+		function = "MMM_MODULES_fnc_randomizeGearHeadgearInit";
+		functionPriority = 10;
+		isDisposable = 0;
+		is3DEN = 0;
+		isGlobal = 0;
+		isTriggerActivated = 0;
+		scope = 2;
+
+		class Attributes: AttributesBase
+		{
+				class MMM_HeadgearCategory {
+					data = "AttributeSystemSubcategory";
+					control = "SubCategory";
+					displayName = "Headgear Attributes";
+					description = "";
+				};
+				class MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize_Checkbox ";
+					displayName = "Randomize";
+					tooltip = "Activate the headgear randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Headgear_Force: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Headgear_Force_Checkbox ";
+					displayName = "Force adding";
+					tooltip = "Adds headgear even if the unit did not have one before";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize_Content_Edit";
+					tooltip = "Enter classnames of Headgear. \n\nE.g. H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo...";
+					displayName = "Classnames";
+					typeName = "STRING";
+					defaultValue = "";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize_Chance: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize_Chance_Edit";
+					displayName = "Empty Chance";
+					tooltip = "Enter the chance for the headgear being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no headgear being added";
+					typeName = "NUMBER";
+					defaultValue = "0";
+				};
+
+			class ModuleDescription: ModuleDescription{};
+		};
+
+		class ModuleDescription: ModuleDescription
+		{
+			description = "Sync a Unit to this module to randomize its headgear!";
+			sync[] = {"LocationArea_F"};
+
+			class LocationArea_F
+			{
+				description[] =	{"Synchronise any Unit to this module."};
+				position = 0;
+				direction = 0;
+				optional = 0;
+				duplicate = 0;
+				synced[] = {"AnyBrain"};
+			};
+		};
+	};
+
+	class MMM_MODULES_Module_Randomize_Gear_Uniforms_F: Module_F
+	{
+		category = "MMM_MODULES_ModuleClass";
+		displayName = "Gear Randomizer: Uniforms";
+		function = "MMM_MODULES_fnc_randomizeGearUniformsInit";
+		functionPriority = 10;
+		isDisposable = 0;
+		is3DEN = 0;
+		isGlobal = 0;
+		isTriggerActivated = 0;
+		scope = 2;
+
+		class Attributes: AttributesBase
+		{
+				class MMM_UniformsCategory {
+					data = "AttributeSystemSubcategory";
+					control = "SubCategory";
+					displayName = "Uniforms Attributes";
+					description = "";
+				};
+				class MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize_Checkbox ";
+					displayName = "Randomize";
+					tooltip = "Activate the uniforms randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Uniforms_Force: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Uniforms_Force_Checkbox ";
+					displayName = "Force adding";
+					tooltip = "Adds uniforms even if the unit did not have one before";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize_Content_Edit";
+					tooltip = "Enter classnames of Uniforms. \n\nE.g. H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo...";
+					displayName = "Classnames";
+					typeName = "STRING";
+					defaultValue = "";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize_Chance: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize_Chance_Edit";
+					displayName = "Empty Chance";
+					tooltip = "Enter the chance for the uniforms being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no uniforms being added";
+					typeName = "NUMBER";
+					defaultValue = "0";
+				};
+
+			class ModuleDescription: ModuleDescription{};
+		};
+
+		class ModuleDescription: ModuleDescription
+		{
+			description = "Sync a Unit to this module to randomize its uniforms!";
+			sync[] = {"LocationArea_F"};
+
+			class LocationArea_F
+			{
+				description[] =	{"Synchronise any Unit to this module."};
+				position = 0;
+				direction = 0;
+				optional = 0;
+				duplicate = 0;
+				synced[] = {"AnyBrain"};
+			};
+		};
+	};
+
+	class MMM_MODULES_Module_Randomize_Gear_Vests_F: Module_F
+	{
+		category = "MMM_MODULES_ModuleClass";
+		displayName = "Gear Randomizer: Vests";
+		function = "MMM_MODULES_fnc_randomizeGearVestsInit";
+		functionPriority = 10;
+		isDisposable = 0;
+		is3DEN = 0;
+		isGlobal = 0;
+		isTriggerActivated = 0;
+		scope = 2;
+
+		class Attributes: AttributesBase
+		{
+				class MMM_VestsCategory {
+					data = "AttributeSystemSubcategory";
+					control = "SubCategory";
+					displayName = "Vests Attributes";
+					description = "";
+				};
+				class MMM_MODULES_Module_Randomize_Gear_Vests_Randomize: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Vests_Randomize_Checkbox ";
+					displayName = "Randomize";
+					tooltip = "Activate the vests randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Vests_Force: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Vests_Force_Checkbox ";
+					displayName = "Force adding";
+					tooltip = "Adds vests even if the unit did not have one before";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Vests_Randomize_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Vests_Randomize_Content_Edit";
+					tooltip = "Enter classnames of Vests. \n\nE.g. H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo...";
+					displayName = "Classnames";
+					typeName = "STRING";
+					defaultValue = "";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Vests_Randomize_Chance: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Vests_Randomize_Chance_Edit";
+					displayName = "Empty Chance";
+					tooltip = "Enter the chance for the vests being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no vests being added";
+					typeName = "NUMBER";
+					defaultValue = "0";
+				};
+
+			class ModuleDescription: ModuleDescription{};
+		};
+
+		class ModuleDescription: ModuleDescription
+		{
+			description = "Sync a Unit to this module to randomize its vests!";
+			sync[] = {"LocationArea_F"};
+
+			class LocationArea_F
+			{
+				description[] =	{"Synchronise any Unit to this module."};
+				position = 0;
+				direction = 0;
+				optional = 0;
+				duplicate = 0;
+				synced[] = {"AnyBrain"};
+			};
+		};
+	};
+
+	class MMM_MODULES_Module_Randomize_Gear_Weapons_F: Module_F
+	{
+		category = "MMM_MODULES_ModuleClass";
+		displayName = "Gear Randomizer: Weapons";
+		function = "MMM_MODULES_fnc_randomizeGearWeaponsInit";
+		functionPriority = 10;
+		isDisposable = 0;
+		is3DEN = 0;
+		isGlobal = 0;
+		isTriggerActivated = 0;
+		scope = 2;
+
+		class Attributes: AttributesBase
+		{
+			// Primary Weapon
+				class MMM_PrimaryCategory {
+					data = "AttributeSystemSubcategory";
+					control = "SubCategory";
+					displayName = "Primary Weapons Attributes";
+					description = "";
+				};
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Checkbox ";
+					displayName = "Randomize";
+					tooltip = "Activate the primary weapon randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Force_Primary: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Force_Primary_Checkbox ";
+					displayName = "Force adding";
+					tooltip = "Adds a primary weapon even if the unit did not have one before";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Content_Edit";
+					tooltip = "Enter classnames of Weapons. \n\nE.g. arifle_MX_F,arifle_MX_Black_F,arifle_MXC_F...";
+					displayName = "Classnames";
+					typeName = "STRING";
+					defaultValue = "";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Scope: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Scope_Checkbox ";
+					displayName = "[Scope] Randomize";
+					tooltip = "Activates the scope randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Scope_Chance: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Scope_Chance_Edit";
+					displayName = "[Scope] Empty Chance";
+					tooltip = "Enter the chance for the scope being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no scope being added";
+					typeName = "NUMBER";
+					defaultValue = "0";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Scope_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Scope_Content_Edit";
+					tooltip = "Enter classnames of scopes. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...";
+					displayName = "[Scope] Classnames";
+					typeName = "STRING";
+					defaultValue = "''";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Rail: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Rail_Checkbox ";
+					displayName = "[Rail] Randomize";
+					tooltip = "Activates the rail attachment randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Rail_Chance: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Rail_Chance_Edit";
+					displayName = "[Rail] Empty Chance";
+					tooltip = "Enter the chance for the rail attachment being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no rail attachment being added";
+					typeName = "NUMBER";
+					defaultValue = "0";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Rail_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Rail_Content_Edit";
+					tooltip = "Enter classnames of rail attachments. E.g. acc_pointer_IR,acc_flashlight,saber_light_lxWS...";
+					displayName = "[Rail] Classnames";
+					typeName = "STRING";
+					defaultValue = "''";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Muzzle: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Muzzle_Checkbox ";
+					displayName = "[Muzzle] Randomize";
+					tooltip = "Activates the muzzle randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Muzzle_Chance: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Muzzle_Chance_Edit";
+					displayName = "[Muzzle] Empty Chance";
+					tooltip = "Enter the chance for the muzzle being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no muzzle being added";
+					typeName = "NUMBER";
+					defaultValue = "0";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Muzzle_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Muzzle_Content_Edit";
+					tooltip = "Enter classnames of muzzles. E.g. muzzle_snds_M,muzzle_snds_m_khk_F,suppressor_l_lush_lxWS...";
+					displayName = "[Muzzle] Classnames";
+					typeName = "STRING";
+					defaultValue = "''";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Bipod: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Bipod_Checkbox ";
+					displayName = "[Bipod] Randomize";
+					tooltip = "Activates the bipod randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Bipod_Chance: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Bipod_Chance_Edit";
+					displayName = "[Bipod] Empty Chance";
+					tooltip = "Enter the chance for the bipod being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no bipod being added";
+					typeName = "NUMBER";
+					defaultValue = "0";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Bipod_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Bipod_Content_Edit";
+					tooltip = "Enter classnames of bipods. E.g. bipod_01_F_khk,bipod_03_F_blk,bipod_01_F_mtp...";
+					displayName = "[Bipod] Classnames";
+					typeName = "STRING";
+					defaultValue = "''";
+				};
+
+			// Sidearm Weapon
+				class MMM_SidearmCategory {
+					data = "AttributeSystemSubcategory";
+					control = "SubCategory";
+					displayName = "Sidearm Weapons Attributes";
+					description = "";
+				};
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Checkbox ";
+					displayName = "Randomize";
+					tooltip = "Activate the sidearm weapon randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Force_Sidearm: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Force_Sidearm_Checkbox ";
+					displayName = "Force adding";
+					tooltip = "Adds a sidearm weapon even if the unit did not have one before";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Content_Edit";
+					tooltip = "Enter classnames of Weapons. \n\nE.g. arifle_MX_F,arifle_MX_Black_F,arifle_MXC_F...";
+					displayName = "Classnames";
+					typeName = "STRING";
+					defaultValue = "";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Scope: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Scope_Checkbox ";
+					displayName = "[Scope] Randomize";
+					tooltip = "Activates the scope randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Scope_Chance: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Scope_Chance_Edit";
+					displayName = "[Scope] Empty Chance";
+					tooltip = "Enter the chance for the scope being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no scope being added";
+					typeName = "NUMBER";
+					defaultValue = "0";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Scope_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Scope_Content_Edit";
+					tooltip = "Enter classnames of scopes. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...";
+					displayName = "[Scope] Classnames";
+					typeName = "STRING";
+					defaultValue = "''";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Rail: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Rail_Checkbox ";
+					displayName = "[Rail] Randomize";
+					tooltip = "Activates the rail attachment randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Rail_Chance: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Rail_Chance_Edit";
+					displayName = "[Rail] Empty Chance";
+					tooltip = "Enter the chance for the rail attachment being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no rail attachment being added";
+					typeName = "NUMBER";
+					defaultValue = "0";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Rail_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Rail_Content_Edit";
+					tooltip = "Enter classnames of rail attachments. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...";
+					displayName = "[Rail] Classnames";
+					typeName = "STRING";
+					defaultValue = "''";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Muzzle: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Muzzle_Checkbox ";
+					displayName = "[Muzzle] Randomize";
+					tooltip = "Activates the muzzle randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Muzzle_Chance: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Muzzle_Chance_Edit";
+					displayName = "[Muzzle] Empty Chance";
+					tooltip = "Enter the chance for the muzzle being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no muzzle being added";
+					typeName = "NUMBER";
+					defaultValue = "0";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Muzzle_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Muzzle_Content_Edit";
+					tooltip = "Enter classnames of muzzles. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...";
+					displayName = "[Muzzle] Classnames";
+					typeName = "STRING";
+					defaultValue = "''";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Bipod: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Bipod_Checkbox ";
+					displayName = "[Bipod] Randomize";
+					tooltip = "Activates the bipod randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Bipod_Chance: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Bipod_Chance_Edit";
+					displayName = "[Bipod] Empty Chance";
+					tooltip = "Enter the chance for the bipod being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no bipod being added";
+					typeName = "NUMBER";
+					defaultValue = "0";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Bipod_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Bipod_Content_Edit";
+					tooltip = "Enter classnames of bipods. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...";
+					displayName = "[Bipod] Classnames";
+					typeName = "STRING";
+					defaultValue = "''";
+				};
+
+			// Secondary Weapon
+				class MMM_SecondaryCategory {
+					data = "AttributeSystemSubcategory";
+					control = "SubCategory";
+					displayName = "Secondary Weapons Attributes";
+					description = "";
+				};
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Checkbox ";
+					displayName = "Randomize";
+					tooltip = "Activate the secondary weapon randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Force_Secondary: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Force_Secondary_Checkbox ";
+					displayName = "Force adding";
+					tooltip = "Adds a secondary weapon even if the unit did not have one before";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Content_Edit";
+					tooltip = "Enter classnames of Weapons. \n\nE.g. arifle_MX_F,arifle_MX_Black_F,arifle_MXC_F...";
+					displayName = "Classnames";
+					typeName = "STRING";
+					defaultValue = "";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Scope: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Scope_Checkbox ";
+					displayName = "[Scope] Randomize";
+					tooltip = "Activates the scope randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Scope_Chance: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Scope_Chance_Edit";
+					displayName = "[Scope] Empty Chance";
+					tooltip = "Enter the chance for the scope being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no scope being added";
+					typeName = "NUMBER";
+					defaultValue = "0";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Scope_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Scope_Content_Edit";
+					tooltip = "Enter classnames of scopes. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...";
+					displayName = "[Scope] Classnames";
+					typeName = "STRING";
+					defaultValue = "''";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Rail: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Rail_Checkbox ";
+					displayName = "[Rail] Randomize";
+					tooltip = "Activates the rail attachment randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Rail_Chance: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Rail_Chance_Edit";
+					displayName = "[Rail] Empty Chance";
+					tooltip = "Enter the chance for the rail attachment being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no rail attachment being added";
+					typeName = "NUMBER";
+					defaultValue = "0";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Rail_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Rail_Content_Edit";
+					tooltip = "Enter classnames of rail attachments. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...";
+					displayName = "[Rail] Classnames";
+					typeName = "STRING";
+					defaultValue = "''";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Muzzle: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Muzzle_Checkbox ";
+					displayName = "[Muzzle] Randomize";
+					tooltip = "Activates the muzzle randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Muzzle_Chance: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Muzzle_Chance_Edit";
+					displayName = "[Muzzle] Empty Chance";
+					tooltip = "Enter the chance for the muzzle being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no muzzle being added";
+					typeName = "NUMBER";
+					defaultValue = "0";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Muzzle_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Muzzle_Content_Edit";
+					tooltip = "Enter classnames of muzzles. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...";
+					displayName = "[Muzzle] Classnames";
+					typeName = "STRING";
+					defaultValue = "''";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Bipod: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Bipod_Checkbox ";
+					displayName = "[Bipod] Randomize";
+					tooltip = "Activates the bipod randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Bipod_Chance: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Bipod_Chance_Edit";
+					displayName = "[Bipod] Empty Chance";
+					tooltip = "Enter the chance for the bipod being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no bipod being added";
+					typeName = "NUMBER";
+					defaultValue = "0";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Bipod_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Bipod_Content_Edit";
+					tooltip = "Enter classnames of bipods. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...";
+					displayName = "[Bipod] Classnames";
+					typeName = "STRING";
+					defaultValue = "''";
+				};
+
+			class ModuleDescription: ModuleDescription{};
+		};
+
+		class ModuleDescription: ModuleDescription
+		{
+			description = "Sync a Unit to this module to randomize its weapons!";
+			sync[] = {"LocationArea_F"};
+
+			class LocationArea_F
+			{
+				description[] =	{"Synchronise any Unit to this module."};
+				position = 0;
+				direction = 0;
+				optional = 0;
+				duplicate = 0;
+				synced[] = {"AnyBrain"};
 			};
 		};
 	};

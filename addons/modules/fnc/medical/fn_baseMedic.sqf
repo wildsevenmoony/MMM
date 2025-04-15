@@ -8,7 +8,7 @@ params [
 if (!(isServer) && {_medic getVariable ["mmm_var_BaseMedic", false]}) exitWith {};
 
 // Adds "Heal me"
-_heal = [
+private _heal = [
 	_medic,
 	[
 		(format ["<img size='1' shadow='1' image='\a3\ui_f\data\igui\cfg\Actions\heal_ca.paa'/> %1", _text]),
@@ -31,7 +31,7 @@ _heal = [
 ] remoteExec ["addAction", 0, true];
 
 // Adds Heal everyone
-_healeveryone = [
+private _healeveryone = [
 	_medic,
 	[
 		(format ["<img size='1' shadow='1' image='\a3\ui_f\data\igui\cfg\Actions\heal_ca.paa'/> %1", _text2]),
@@ -41,12 +41,18 @@ _healeveryone = [
 			_radiusUnits = _target nearEntities ["Man", 10];
 			_healedUnits = _radiusUnits - [_caller];
 
+			// Heal everyone
 			{
 				_x call ace_medical_treatment_fnc_fullHealLocal;
 			} forEach _radiusUnits;
 
-			["mmm_notification_healedbysomeone",[]] remoteExecCall ["bis_fnc_showNotification", _healedUnits];
-			["mmm_notification_sombodyhealed",[]] call bis_fnc_showNotification;
+			// Notify the caller (the one who used the action)
+			["mmm_notification_healedbysomeone", []] call bis_fnc_showNotification;
+
+			// Notify each healed unit — but only once, per unit
+			{
+				["mmm_notification_sombodyhealed", []] remoteExecCall ["bis_fnc_showNotification", _x];
+			} forEach _healedUnits;
 		},
 		[],
 		8.5,

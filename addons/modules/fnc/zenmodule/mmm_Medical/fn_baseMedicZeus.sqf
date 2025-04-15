@@ -8,7 +8,7 @@ params [
 #include "..\checks\fn_placeOnUnit.hpp"
 #include "..\checks\fn_isAlive.hpp"
 
-_condition = _objectUnderCursor getVariable ["mmm_var_BaseMedic", false];
+private _condition = _objectUnderCursor getVariable ["mmm_var_BaseMedic", false];
 
 if (_condition) exitWith {[objNull, "UNIT IS ALREADY A BASE MEDIC"] call BIS_fnc_showCuratorFeedbackMessage;};
 

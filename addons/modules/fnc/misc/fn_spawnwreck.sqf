@@ -4,8 +4,8 @@ params [
   ["_activated",true ,[true]]
 ];
 
-_cookOff = _logic getVariable ["MMM_MODULES_Module_SpawnWreck_ACE_Cooking_Off", 0];
-_explosionEffect = _logic getVariable ["MMM_MODULES_Module_SpawnWreck_Destroy_Effect", 0];
+private _cookOff = _logic getVariable ["MMM_MODULES_Module_SpawnWreck_ACE_Cooking_Off", 0];
+private _explosionEffect = _logic getVariable ["MMM_MODULES_Module_SpawnWreck_Destroy_Effect", 0];
 
 if (_activated) then {
   {

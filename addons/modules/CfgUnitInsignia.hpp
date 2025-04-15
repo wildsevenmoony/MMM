@@ -4,7 +4,7 @@ class CfgUnitInsignia
 	{
 		displayName = "Medic";
 		author = "IndeedPete and Moony";
-		texture = "z\mmm\addons\insignia\icons\Medic.paa";
+		texture = "z\mmm\addons\modules\icons\medic.paa";
 		textureVehicle = "";
 	};
 };

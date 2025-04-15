@@ -17,7 +17,7 @@ switch (_objectUnderCursor getVariable ["MMM_var_UnlimitedAmmo", false]) do {
 	};
 	case false: {
 
-		_UnlimitedAmmoEventhandler = _objectUnderCursor addEventHandler ["Fired",{(_this select 0) setVehicleAmmo 1}];
+		private _UnlimitedAmmoEventhandler = _objectUnderCursor addEventHandler ["Fired",{(_this select 0) setVehicleAmmo 1}];
 		[objNull, "UNIT HAS UNLIMITED AMMO NOW"] call BIS_fnc_showCuratorFeedbackMessage;
 		_objectUnderCursor setVariable ["MMM_var_UnlimitedAmmo", true];
 		_objectUnderCursor setVariable ["MMM_var_UnlimitedAmmoState", _UnlimitedAmmoEventhandler];

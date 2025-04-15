@@ -3,3 +3,4 @@
 #include "CfgNotifications.hpp"
 #include "CfgPatches.hpp"
 #include "CfgVehicles.hpp"
+#include "CfgUnitInsignia.hpp"

@@ -8,7 +8,7 @@ params [
 #include "..\checks\fn_placeOnObject.hpp"
 
 // Code
-_canDrag = _objectUnderCursor getVariable ["mmm_var_canDrag", false];
+private _canDrag = _objectUnderCursor getVariable ["mmm_var_canDrag", false];
 
 if (_canDrag) then {
 	[_objectUnderCursor, false] call ace_dragging_fnc_setDraggable;

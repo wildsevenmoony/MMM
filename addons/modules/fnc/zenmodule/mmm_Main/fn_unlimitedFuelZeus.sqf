@@ -19,7 +19,7 @@ switch (_objectUnderCursor getVariable ["MMM_var_UnlimitedFuel", false]) do {
 		[objNull, "VEHICLE HAS UNLIMITED FUEL"] call BIS_fnc_showCuratorFeedbackMessage;
 
 		[_objectUnderCursor] spawn {
-			_objectUnderCursor = _this select 0;
+			private _objectUnderCursor = _this select 0;
 
 			while {(alive _objectUnderCursor) OR ((_objectUnderCursor getVariable ["MMM_var_UnlimitedFuelState", false]) == false )} do {
 				if (fuel _objectUnderCursor < 0.8) then {

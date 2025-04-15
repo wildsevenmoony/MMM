@@ -4,7 +4,7 @@ params [
 	["_activated",true ,[true]]
 ];
 
-_condition = _logic getVariable ["MMM_MODULES_Module_AI_Stationary", 0];
+private _condition = _logic getVariable ["MMM_MODULES_Module_AI_Stationary", 0];
 
 switch (_condition) do {
 	case 0: {

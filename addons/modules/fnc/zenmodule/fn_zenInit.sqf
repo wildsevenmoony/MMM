@@ -43,7 +43,7 @@ private _wait = [] spawn
 			["Base Medic",{_this call mmm_modules_fnc_baseMedicZeus}]
 		];
 
-		_combinedArr = [_mmmMain, _mmmAI, _mmmFun, _mmmMedical];
+		private _combinedArr = [_mmmMain, _mmmAI, _mmmFun, _mmmMedical];
 		_combinedArr;
 	};	
 
