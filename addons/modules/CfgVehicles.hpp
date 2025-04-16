@@ -396,6 +396,7 @@ class CfgVehicles
 					displayName = "Backpacks Attributes";
 					description = "";
 				};
+
 				class MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize: Checkbox 
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize_Checkbox ";
@@ -414,15 +415,6 @@ class CfgVehicles
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize_Content: Edit
-				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize_Content_Edit";
-					tooltip = "Enter classnames of Backpacks. \n\nE.g. H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo...";
-					displayName = "Classnames";
-					typeName = "STRING";
-					defaultValue = "";
-				};
-
 				class MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize_Chance: Edit
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize_Chance_Edit";
@@ -430,6 +422,15 @@ class CfgVehicles
 					tooltip = "Enter the chance for the backpacks being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no backpacks being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize_Content_Edit";
+					tooltip = "Enter classnames of Backpacks. \n\nE.g. H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo...";
+					displayName = "Classnames";
+					typeName = "STRING";
+					defaultValue = "''";
 				};
 
 			class ModuleDescription: ModuleDescription{};
@@ -472,6 +473,7 @@ class CfgVehicles
 					displayName = "Headgear Attributes";
 					description = "";
 				};
+
 				class MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize: Checkbox 
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize_Checkbox ";
@@ -490,15 +492,6 @@ class CfgVehicles
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize_Content: Edit
-				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize_Content_Edit";
-					tooltip = "Enter classnames of Headgear. \n\nE.g. H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo...";
-					displayName = "Classnames";
-					typeName = "STRING";
-					defaultValue = "";
-				};
-
 				class MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize_Chance: Edit
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize_Chance_Edit";
@@ -506,6 +499,15 @@ class CfgVehicles
 					tooltip = "Enter the chance for the headgear being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no headgear being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize_Content_Edit";
+					tooltip = "Enter classnames of Headgear. \n\nE.g. H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo...";
+					displayName = "Classnames";
+					typeName = "STRING";
+					defaultValue = "''";
 				};
 
 			class ModuleDescription: ModuleDescription{};
@@ -548,6 +550,7 @@ class CfgVehicles
 					displayName = "Uniforms Attributes";
 					description = "";
 				};
+
 				class MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize: Checkbox 
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize_Checkbox ";
@@ -566,15 +569,6 @@ class CfgVehicles
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize_Content: Edit
-				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize_Content_Edit";
-					tooltip = "Enter classnames of Uniforms. \n\nE.g. H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo...";
-					displayName = "Classnames";
-					typeName = "STRING";
-					defaultValue = "";
-				};
-
 				class MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize_Chance: Edit
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize_Chance_Edit";
@@ -582,6 +576,15 @@ class CfgVehicles
 					tooltip = "Enter the chance for the uniforms being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no uniforms being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize_Content_Edit";
+					tooltip = "Enter classnames of Uniforms. \n\nE.g. H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo...";
+					displayName = "Classnames";
+					typeName = "STRING";
+					defaultValue = "''";
 				};
 
 			class ModuleDescription: ModuleDescription{};
@@ -624,6 +627,7 @@ class CfgVehicles
 					displayName = "Vests Attributes";
 					description = "";
 				};
+
 				class MMM_MODULES_Module_Randomize_Gear_Vests_Randomize: Checkbox 
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Vests_Randomize_Checkbox ";
@@ -642,15 +646,6 @@ class CfgVehicles
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Vests_Randomize_Content: Edit
-				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Vests_Randomize_Content_Edit";
-					tooltip = "Enter classnames of Vests. \n\nE.g. H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo...";
-					displayName = "Classnames";
-					typeName = "STRING";
-					defaultValue = "";
-				};
-
 				class MMM_MODULES_Module_Randomize_Gear_Vests_Randomize_Chance: Edit
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Vests_Randomize_Chance_Edit";
@@ -658,6 +653,15 @@ class CfgVehicles
 					tooltip = "Enter the chance for the vests being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no vests being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Vests_Randomize_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Vests_Randomize_Content_Edit";
+					tooltip = "Enter classnames of Vests. \n\nE.g. H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo...";
+					displayName = "Classnames";
+					typeName = "STRING";
+					defaultValue = "''";
 				};
 
 			class ModuleDescription: ModuleDescription{};
@@ -725,7 +729,7 @@ class CfgVehicles
 					tooltip = "Enter classnames of Weapons. \n\nE.g. arifle_MX_F,arifle_MX_Black_F,arifle_MXC_F...";
 					displayName = "Classnames";
 					typeName = "STRING";
-					defaultValue = "";
+					defaultValue = "''";
 				};
 
 				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Scope: Checkbox 
@@ -749,7 +753,7 @@ class CfgVehicles
 				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Scope_Content: Edit
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Scope_Content_Edit";
-					tooltip = "Enter classnames of scopes. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...";
+					tooltip = "Enter classnames of scopes. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...\n\nIf left Empty the Scope Attachment Slot will be Empty";
 					displayName = "[Scope] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
@@ -776,7 +780,7 @@ class CfgVehicles
 				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Rail_Content: Edit
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Rail_Content_Edit";
-					tooltip = "Enter classnames of rail attachments. E.g. acc_pointer_IR,acc_flashlight,saber_light_lxWS...";
+					tooltip = "Enter classnames of rail attachments. E.g. acc_pointer_IR,acc_flashlight,saber_light_lxWS...\n\nIf left Empty the Rail Attachment Slot will be Empty";
 					displayName = "[Rail] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
@@ -803,7 +807,7 @@ class CfgVehicles
 				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Muzzle_Content: Edit
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Muzzle_Content_Edit";
-					tooltip = "Enter classnames of muzzles. E.g. muzzle_snds_M,muzzle_snds_m_khk_F,suppressor_l_lush_lxWS...";
+					tooltip = "Enter classnames of muzzles. E.g. muzzle_snds_M,muzzle_snds_m_khk_F,suppressor_l_lush_lxWS...\n\nIf left Empty the Muzzle Attachment Slot will be Empty";
 					displayName = "[Muzzle] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
@@ -830,7 +834,7 @@ class CfgVehicles
 				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Bipod_Content: Edit
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Bipod_Content_Edit";
-					tooltip = "Enter classnames of bipods. E.g. bipod_01_F_khk,bipod_03_F_blk,bipod_01_F_mtp...";
+					tooltip = "Enter classnames of bipods. E.g. bipod_01_F_khk,bipod_03_F_blk,bipod_01_F_mtp...\n\nIf left Empty the Bipod Attachment Slot will be Empty";
 					displayName = "[Bipod] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
@@ -867,7 +871,7 @@ class CfgVehicles
 					tooltip = "Enter classnames of Weapons. \n\nE.g. arifle_MX_F,arifle_MX_Black_F,arifle_MXC_F...";
 					displayName = "Classnames";
 					typeName = "STRING";
-					defaultValue = "";
+					defaultValue = "''";
 				};
 
 				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Scope: Checkbox 
@@ -891,7 +895,7 @@ class CfgVehicles
 				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Scope_Content: Edit
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Scope_Content_Edit";
-					tooltip = "Enter classnames of scopes. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...";
+					tooltip = "Enter classnames of scopes. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...\n\nIf left Empty the Scope Attachment Slot will be Empty";
 					displayName = "[Scope] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
@@ -918,7 +922,7 @@ class CfgVehicles
 				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Rail_Content: Edit
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Rail_Content_Edit";
-					tooltip = "Enter classnames of rail attachments. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...";
+					tooltip = "Enter classnames of rail attachments. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...\n\nIf left Empty the Rail Attachment Slot will be Empty";
 					displayName = "[Rail] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
@@ -945,7 +949,7 @@ class CfgVehicles
 				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Muzzle_Content: Edit
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Muzzle_Content_Edit";
-					tooltip = "Enter classnames of muzzles. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...";
+					tooltip = "Enter classnames of muzzles. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...\n\nIf left Empty the Muzzle Attachment Slot will be Empty";
 					displayName = "[Muzzle] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
@@ -972,7 +976,7 @@ class CfgVehicles
 				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Bipod_Content: Edit
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Bipod_Content_Edit";
-					tooltip = "Enter classnames of bipods. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...";
+					tooltip = "Enter classnames of bipods. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...\n\nIf left Empty the Bipod Attachment Slot will be Empty";
 					displayName = "[Bipod] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
@@ -1009,7 +1013,7 @@ class CfgVehicles
 					tooltip = "Enter classnames of Weapons. \n\nE.g. arifle_MX_F,arifle_MX_Black_F,arifle_MXC_F...";
 					displayName = "Classnames";
 					typeName = "STRING";
-					defaultValue = "";
+					defaultValue = "''";
 				};
 
 				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Scope: Checkbox 
@@ -1033,7 +1037,7 @@ class CfgVehicles
 				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Scope_Content: Edit
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Scope_Content_Edit";
-					tooltip = "Enter classnames of scopes. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...";
+					tooltip = "Enter classnames of scopes. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...\n\nIf left Empty the Scope Attachment Slot will be Empty";
 					displayName = "[Scope] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
@@ -1060,7 +1064,7 @@ class CfgVehicles
 				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Rail_Content: Edit
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Rail_Content_Edit";
-					tooltip = "Enter classnames of rail attachments. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...";
+					tooltip = "Enter classnames of rail attachments. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...\n\nIf left Empty the Rail Attachment Slot will be Empty";
 					displayName = "[Rail] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
@@ -1087,7 +1091,7 @@ class CfgVehicles
 				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Muzzle_Content: Edit
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Muzzle_Content_Edit";
-					tooltip = "Enter classnames of muzzles. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...";
+					tooltip = "Enter classnames of muzzles. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...\n\nIf left Empty the Muzzle Attachment Slot will be Empty";
 					displayName = "[Muzzle] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
@@ -1114,7 +1118,7 @@ class CfgVehicles
 				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Bipod_Content: Edit
 				{
 					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Bipod_Content_Edit";
-					tooltip = "Enter classnames of bipods. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...";
+					tooltip = "Enter classnames of bipods. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...\n\nIf left Empty the Bipod Attachment Slot will be Empty";
 					displayName = "[Bipod] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
