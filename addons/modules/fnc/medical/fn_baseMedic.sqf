@@ -13,7 +13,9 @@ private _heal = [
 	[
 		(format ["<img size='1' shadow='1' image='\a3\ui_f\data\igui\cfg\Actions\heal_ca.paa'/> %1", _text]),
 		{
-			player call ace_medical_treatment_fnc_fullHealLocal;
+			params ["_target", "_caller", "_actionId", "_arguments"];
+
+			_caller call ace_medical_treatment_fnc_fullHealLocal;
 			["mmm_notification_healed",[]] call bis_fnc_showNotification;
 		},
 		[],
@@ -38,8 +40,8 @@ private _healeveryone = [
 		{
 			params ["_target", "_caller", "_actionId", "_arguments"];
 
-			_radiusUnits = _target nearEntities ["Man", 10];
-			_healedUnits = _radiusUnits - [_caller];
+			private _radiusUnits = _target nearEntities ["Man", 10];
+			private _healedUnits = _radiusUnits - [_caller];
 
 			// Heal everyone
 			{
@@ -47,12 +49,10 @@ private _healeveryone = [
 			} forEach _radiusUnits;
 
 			// Notify the caller (the one who used the action)
-			["mmm_notification_healedbysomeone", []] call bis_fnc_showNotification;
+			["mmm_notification_sombodyhealed", []] call bis_fnc_showNotification;
 
 			// Notify each healed unit — but only once, per unit
-			{
-				["mmm_notification_sombodyhealed", []] remoteExecCall ["bis_fnc_showNotification", _x];
-			} forEach _healedUnits;
+			["mmm_notification_healedbysomeone", []] remoteExecCall ["bis_fnc_showNotification", _healedUnits];
 		},
 		[],
 		8.5,
