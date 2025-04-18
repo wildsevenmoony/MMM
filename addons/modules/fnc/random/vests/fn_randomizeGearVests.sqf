@@ -13,7 +13,7 @@ if (_randomizeVests && ((_forceVests) || (!_forceVests && (vest _unit) != ""))) 
 	#include "fn_defaultVests.hpp"
 
 	if (_contentVests isNotEqualTo "" || _contentVests isNotEqualTo "[]") then {
-		private _vestsArray = ([_contentVests] call CBA_fnc_removeWhitespace) splitString ",";
+		_vestsArray = ([_contentVests] call CBA_fnc_removeWhitespace) splitString ",";
 	};
 	private _selectedVests = selectRandom _vestsArray;
 
@@ -24,7 +24,7 @@ if (_randomizeVests && ((_forceVests) || (!_forceVests && (vest _unit) != ""))) 
 	removeVest _unit;
 
 	// Add new Vests
-	if (random 1 < _chanceVests) then {
+	if (random 1 <= _chanceVests) then {
 	} else {
 		_unit addVest _selectedVests;
 	};
@@ -33,6 +33,8 @@ if (_randomizeVests && ((_forceVests) || (!_forceVests && (vest _unit) != ""))) 
 	{
 		_unit addItemToVest _x;
 	} forEach _currentContent;
+
+	_unit setVariable ["MMM_var_randomizationVestsSelected", _selectedVests, true];
 };
 
 _unit setVariable ["MMM_var_randomizationVestsDone", true, true];

@@ -11,7 +11,7 @@ if (_randomizeBackpacks && ((_forceBackpacks) || (!_forceBackpacks && (backpack 
 	#include "fn_defaultBackpacks.hpp"
 
 	if (_contentBackpacks isNotEqualTo "" || _contentBackpacks isNotEqualTo "[]") then {
-		private _backpacksArray = ([_contentBackpacks] call CBA_fnc_removeWhitespace) splitString ",";
+		_backpacksArray = ([_contentBackpacks] call CBA_fnc_removeWhitespace) splitString ",";
 	};
 	private _selectedBackpacks = selectRandom _backpacksArray;
 
@@ -22,7 +22,7 @@ if (_randomizeBackpacks && ((_forceBackpacks) || (!_forceBackpacks && (backpack 
 	removeBackpack _unit;
 
 	// Add new Backpacks
-	if (random 1 < _chanceBackpacks) then {
+	if (random 1 <= _chanceBackpacks) then {
 	} else {
 		_unit addBackpack _selectedBackpacks;
 	};
@@ -31,6 +31,8 @@ if (_randomizeBackpacks && ((_forceBackpacks) || (!_forceBackpacks && (backpack 
 	{
 		_unit addItemToBackpack _x;
 	} forEach _currentContent;
+
+	_unit setVariable ["MMM_var_randomizationBackpacksSelected", _selectedBackpacks, true];
 };
 
 _unit setVariable ["MMM_var_randomizationBackpacksDone", true, true];

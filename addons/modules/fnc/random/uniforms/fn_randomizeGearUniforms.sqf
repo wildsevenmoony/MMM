@@ -13,7 +13,7 @@ if (_randomizeUniforms && ((_forceUniforms) || (!_forceUniforms && (uniform _uni
 	#include "fn_defaultUniforms.hpp"
 
 	if (_contentUniforms isNotEqualTo "" || _contentUniforms isNotEqualTo "[]") then {
-		private _uniformsArray = ([_contentUniforms] call CBA_fnc_removeWhitespace) splitString ",";
+		_uniformsArray = ([_contentUniforms] call CBA_fnc_removeWhitespace) splitString ",";
 	};
 	private _selectedUniforms = selectRandom _uniformsArray;
 
@@ -24,7 +24,7 @@ if (_randomizeUniforms && ((_forceUniforms) || (!_forceUniforms && (uniform _uni
 	removeUniform _unit;
 
 	// Add new Uniforms
-	if (random 1 < _chanceUniforms) then {
+	if (random 1 <= _chanceUniforms) then {
 	} else {
 		_unit forceAddUniform _selectedUniforms;
 	};
@@ -33,6 +33,8 @@ if (_randomizeUniforms && ((_forceUniforms) || (!_forceUniforms && (uniform _uni
 	{
 		_unit addItemToUniform _x;
 	} forEach _currentContent;
+
+	_unit setVariable ["MMM_var_randomizationUniformsSelected", _selectedUniforms, true];
 };
 
 _unit setVariable ["MMM_var_randomizationUniformsDone", true, true];

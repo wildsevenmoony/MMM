@@ -13,7 +13,7 @@ if (_randomizeHeadgear && ((_forceHeadgear) || (!_forceHeadgear && (headgear _un
 	#include "fn_defaultHeadgear.hpp"
 
 	if (_contentHeadgear isNotEqualTo "" || _contentHeadgear isNotEqualTo "[]") then {
-		private _headgearArray = ([_contentHeadgear] call CBA_fnc_removeWhitespace) splitString ",";
+		_headgearArray = ([_contentHeadgear] call CBA_fnc_removeWhitespace) splitString ",";
 	};
 	private _selectedHeadgear = selectRandom _headgearArray;
 
@@ -21,10 +21,12 @@ if (_randomizeHeadgear && ((_forceHeadgear) || (!_forceHeadgear && (headgear _un
 	removeHeadgear _unit;
 
 	// Add new Headgear
-	if (random 1 < _chanceHeadgear) then {
+	if (random 1 <= _chanceHeadgear) then {
 	} else {
 		_unit addHeadgear _selectedHeadgear;
 	};
+
+	_unit setVariable ["MMM_var_randomizationHeadgearSelected", _selectedHeadgear, true];
 };
 
 _unit setVariable ["MMM_var_randomizationHeadgearDone", true, true];
