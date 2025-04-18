@@ -453,6 +453,83 @@ class CfgVehicles
 		};
 	};
 
+	class MMM_MODULES_Module_Randomize_Gear_Goggles_F: Module_F
+	{
+		category = "MMM_MODULES_ModuleClass";
+		displayName = "Gear Randomizer: Goggles";
+		function = "MMM_MODULES_fnc_randomizeGearGogglesInit";
+		functionPriority = 10;
+		isDisposable = 0;
+		is3DEN = 0;
+		isGlobal = 0;
+		isTriggerActivated = 0;
+		scope = 2;
+
+		class Attributes: AttributesBase
+		{
+				class MMM_GogglesCategory {
+					data = "AttributeSystemSubcategory";
+					control = "SubCategory";
+					displayName = "Goggles Attributes";
+					description = "";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Goggles_Randomize: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Goggles_Randomize_Checkbox ";
+					displayName = "Randomize";
+					tooltip = "Activate the vests randomization";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Goggles_Force: Checkbox 
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Goggles_Force_Checkbox ";
+					displayName = "Force adding";
+					tooltip = "Adds vests even if the unit did not have one before";
+					typeName = "BOOL";
+					defaultValue = "false";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Goggles_Randomize_Chance: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Goggles_Randomize_Chance_Edit";
+					displayName = "Empty Chance";
+					tooltip = "Enter the chance for the vests being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no vests being added";
+					typeName = "NUMBER";
+					defaultValue = "0";
+				};
+
+				class MMM_MODULES_Module_Randomize_Gear_Goggles_Randomize_Content: Edit
+				{
+					property = "MMM_MODULES_Module_Randomize_Gear_Goggles_Randomize_Content_Edit";
+					tooltip = "Enter classnames of Goggles. \n\nE.g. H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo...";
+					displayName = "Classnames";
+					typeName = "STRING";
+					defaultValue = "''";
+				};
+
+			class ModuleDescription: ModuleDescription{};
+		};
+
+		class ModuleDescription: ModuleDescription
+		{
+			description = "Sync a Unit to this module to randomize its vests!";
+			sync[] = {"LocationArea_F"};
+
+			class LocationArea_F
+			{
+				description[] =	{"Synchronise any Unit to this module."};
+				position = 0;
+				direction = 0;
+				optional = 0;
+				duplicate = 0;
+				synced[] = {"AnyBrain"};
+			};
+		};
+	};
+
 	class MMM_MODULES_Module_Randomize_Gear_Headgear_F: Module_F
 	{
 		category = "MMM_MODULES_ModuleClass";

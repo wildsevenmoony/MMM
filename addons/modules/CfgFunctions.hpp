@@ -18,7 +18,6 @@ class CfgFunctions
 		class Medical
 		{
 			file = "z\mmm\addons\modules\fnc\medical";
-			class aceDamage{};
 			class baseMedic{};
 			class baseMedicInit{};
 		};
@@ -32,6 +31,12 @@ class CfgFunctions
 			file = "z\mmm\addons\modules\fnc\random\backpacks";
 			class randomizeGearBackpacks{};
 			class randomizeGearBackpacksInit{};
+		};
+		class Random_Goggles
+		{
+			file = "z\mmm\addons\modules\fnc\random\goggles";
+			class randomizeGearGoggles{};
+			class randomizeGearGogglesInit{};
 		};
 		class Random_Headgear
 		{
