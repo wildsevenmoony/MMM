@@ -1,5 +1,3 @@
-class CBA_Extended_EventHandlers_base;
-
 class CfgVehicles
 {
 	class Logic;
@@ -7,29 +5,20 @@ class CfgVehicles
 	{
 		class AttributesBase
 		{
-			class Default;
 			class Edit; // Default edit box (i.e., text input field)
 			class Combo; // Default combo box (i.e., drop-down menu)
 			class Checkbox; // Default checkbox (returned value is Bool)
-			class CheckboxNumber; // Default checkbox (returned value is Number)
 			class ModuleDescription; // Module description
-			class Units; // Selection of units on which the module is applied
 		};
 		// Description base classes, for more information see below
-		class ModuleDescription
-		{
-			class AnyBrain;
-			class AnyAI;
-			class AnyVehicle;
-			class AnyStaticObject;
-		};
+		class ModuleDescription;
 	};
 
-	class MMM_MODULES_Module_Base_Medic_F: Module_F
+	class GVAR(baseMedic): Module_F
 	{
-		category = "MMM_MODULES_ModuleClass";
+		category = QGVAR(Modules);
 		displayName = "Base Medic";
-		function = "MMM_MODULES_fnc_baseMedicInit";
+		function = QEFUNC(modules,baseMedicInit);
 		functionPriority = 10;
 		isDisposable = 0;
 		is3DEN = 0;
@@ -59,11 +48,11 @@ class CfgVehicles
 		};
 	};
 
-	class MMM_MODULES_Module_SpawnWreck_F: Module_F
+	class GVAR(spawnWreck): Module_F
 	{
-		category = "MMM_MODULES_ModuleClass";
+		category = QGVAR(Modules);
 		displayName = "Spawen Vehicle as Wreck";
-		function = "MMM_MODULES_fnc_spawnWreck";
+		function = QEFUNC(modules,spawnWreck);
 		functionPriority = 10;
 		isDisposable = 0;
 		is3DEN = 0;
@@ -73,9 +62,9 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
-			class MMM_MODULES_Module_SpawnWreck_ACE_Cooking_Off: Combo
+			class GVAR(spawnWreckACECookingOff): Combo
   			{
-				property = "MMM_MODULES_Module_SpawnWreck_ACE_Cooking_Off_Combo";
+				property = QGVAR(spawnWreckACECookingOffCombo);
 				displayName = "ACE Cook off";
 				typeName = "NUMBER";
 				defaultValue = "0";
@@ -86,9 +75,9 @@ class CfgVehicles
 				};
 			};
 
-			class MMM_MODULES_Module_SpawnWreck_Destroy_Effect: Combo
+			class GVAR(spawnWreckDestroyEffect): Combo
   			{
-				property = "MMM_MODULES_Module_SpawnWreck_Destroy_Effect_Combo";
+				property = QGVAR(spawnWreckDestroyEffectCombo);
 				displayName = "Trigger explosion";
 				typeName = "NUMBER";
 				defaultValue = "0";
@@ -119,11 +108,11 @@ class CfgVehicles
 		};
 	};
 
-	class MMM_MODULES_Module_AmbientAnimationMP_F: Module_F
+	class GVAR(ambientAnimationMP): Module_F
 	{
-		category = "MMM_MODULES_ModuleClass";
+		category = QGVAR(Modules);
 		displayName = "Ambient Animation MP";
-		function = "MMM_MODULES_fnc_ambientAnimationMP";
+		function = QEFUNC(modules,ambientAnimationMP);
 		functionPriority = 10;
 		isDisposable = 0;
 		is3DEN = 0;
@@ -133,9 +122,9 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
-			class MMM_MODULES_Module_AmbientAnimationMP: Combo
+			class GVAR(ambientAnimationMPSelection): Combo
   			{
-				property = "MMM_MODULES_Module_AmbientAnimationMP_Combo";
+				property = QGVAR(ambientAnimationMPSelectionCombo);
 				displayName = "Choose an Ambient Animation";
 				typeName = "NUMBER";
 				defaultValue = "0";
@@ -181,16 +170,16 @@ class CfgVehicles
 				};
 			};
 
-			class MMM_MODULES_Module_AmbientAnimationMP_Snap_Object: Edit
+			class GVAR(ambientAnimationMPSnapObject): Edit
   			{
-				property = "MMM_MODULES_Module_AmbientAnimationMP_Snap_Object_Edit";
+				property = QGVAR(ambientAnimationMPSnapObjectEdit);
 				displayName = "Assign an Object to snap to!";
 				tooltip = "Leave empty if you don't want to snap to an object";
 			};
 			
-			class MMM_MODULES_Module_AmbientAnimationMP_Damage: Combo
+			class GVAR(ambientAnimationMPDamage): Combo
   			{
-				property = "MMM_MODULES_Module_AmbientAnimationMP_Damage_Combo";
+				property = QGVAR(ambientAnimationMPDamageCombo);
 				displayName = "Allow Damage";
 				typeName = "NUMBER";
 				defaultValue = "0";
@@ -221,11 +210,11 @@ class CfgVehicles
 		};
 	};
 
-	class MMM_MODULES_Module_Animation_F: Module_F
+	class GVAR(animation): Module_F
 	{
-		category = "MMM_MODULES_ModuleClass";
+		category = QGVAR(Modules);
 		displayName = "SwitchMove Animation";
-		function = "MMM_MODULES_fnc_animation";
+		function = QEFUNC(modules,animation);
 		functionPriority = 10;
 		isDisposable = 0;
 		is3DEN = 0;
@@ -235,9 +224,9 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
-			class MMM_MODULES_Module_Animation_Animations: Combo
+			class GVAR(animationSelection): Combo
   			{
-					property = "MMM_MODULES_Module_Animation_Animations_Combo";
+					property = QGVAR(animationSelectionCombo);
 					displayName = "Choose an Animation";
 					typeName = "NUMBER";
 					defaultValue = "0";
@@ -298,9 +287,9 @@ class CfgVehicles
 					};
 			};
 			
-			class MMM_MODULES_Module_Animation_Damage: Combo
+			class GVAR(animationDamage): Combo
   			{
-				property = "MMM_MODULES_Module_Animation_Damage_Combo";
+				property = QGVAR(animationDamageCombo);
 				displayName = "Allow Damage";
 				typeName = "NUMBER";
 				defaultValue = "0";
@@ -330,11 +319,11 @@ class CfgVehicles
 		};
 	};
 
-	class MMM_MODULES_Module_AI_Stationary_F: Module_F
+	class GVAR(aiStationary): Module_F
 	{
-		category = "MMM_MODULES_ModuleClass";
+		category = QGVAR(Modules);
 		displayName = "Turn AI Stationary";
-		function = "MMM_MODULES_fnc_stationaryAIInit";
+		function = QEFUNC(modules,stationaryAIInit);
 		functionPriority = 10;
 		isDisposable = 0;
 		is3DEN = 0;
@@ -344,9 +333,9 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
-			class MMM_MODULES_Module_AI_Stationary: Combo
+			class GVAR(aiStationaryGroup): Combo
   			{
-					property = "MMM_MODULES_Module_AI_Stationary_Combo";
+					property = QGVAR(aiStationaryGroupCombo);
 					displayName = "Single AI or Group?";
 					typeName = "NUMBER";
 					defaultValue = "0";
@@ -376,11 +365,11 @@ class CfgVehicles
 		};
 	};
 
-	class MMM_MODULES_Module_Randomize_Gear_Backpacks_F: Module_F
+	class GVAR(randomizeGearBackpacks): Module_F
 	{
-		category = "MMM_MODULES_ModuleClass";
+		category = QGVAR(Modules);
 		displayName = "Gear Randomizer: Backpacks";
-		function = "MMM_MODULES_fnc_randomizeGearBackpacksInit";
+		function = QEFUNC(modules,randomizeGearBackpacksInit);
 		functionPriority = 10;
 		isDisposable = 0;
 		is3DEN = 0;
@@ -390,45 +379,46 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
-				class MMM_BackpacksCategory {
+				class GVAR(backpacksCategory) 
+				{
 					data = "AttributeSystemSubcategory";
 					control = "SubCategory";
 					displayName = "Backpacks Attributes";
 					description = "";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize: Checkbox 
+				class GVAR(randomizeGearBackpacksRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize_Checkbox ";
+					property = QGVAR(randomizeGearBackpacksRandomizeCheckbox);
 					displayName = "Randomize";
 					tooltip = "Activate the backpacks randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Backpacks_Force: Checkbox 
+				class GVAR(randomizeGearBackpacksForce): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Backpacks_Force_Checkbox ";
+					property = QGVAR(randomizeGearBackpacksForceCheckbox);
 					displayName = "Force adding";
 					tooltip = "Adds backpacks even if the unit did not have one before";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize_Chance: Edit
+				class GVAR(randomizeGearBackpacksChance): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize_Chance_Edit";
+					property = QGVAR(randomizeGearBackpacksChanceEdit);
 					displayName = "Empty Chance";
 					tooltip = "Enter the chance for the backpacks being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no backpacks being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize_Content: Edit
+				class GVAR(randomizeGearBackpacksContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize_Content_Edit";
-					tooltip = "Enter classnames of Backpacks. \n\nE.g. H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo...";
+					property = QGVAR(randomizeGearBackpacksContent);
 					displayName = "Classnames";
+					tooltip = "Enter classnames of Backpacks. \n\nE.g. B_AssaultPack_blk,B_Bergen_blk,B_Carryall_blk...";
 					typeName = "STRING";
 					defaultValue = "''";
 				};
@@ -453,11 +443,11 @@ class CfgVehicles
 		};
 	};
 
-	class MMM_MODULES_Module_Randomize_Gear_Goggles_F: Module_F
+	class GVAR(randomizeGearGoggles): Module_F
 	{
-		category = "MMM_MODULES_ModuleClass";
+		category = QGVAR(Modules);
 		displayName = "Gear Randomizer: Goggles";
-		function = "MMM_MODULES_fnc_randomizeGearGogglesInit";
+		function = QEFUNC(modules,randomizeGearGogglesInit);
 		functionPriority = 10;
 		isDisposable = 0;
 		is3DEN = 0;
@@ -467,44 +457,45 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
-				class MMM_GogglesCategory {
+				class GVAR(gogglesCategory) 
+				{
 					data = "AttributeSystemSubcategory";
 					control = "SubCategory";
 					displayName = "Goggles Attributes";
 					description = "";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Goggles_Randomize: Checkbox 
+				class GVAR(randomizeGearGogglesRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Goggles_Randomize_Checkbox ";
+					property = QGVAR(randomizeGearGogglesRandomizeCheckbox);
 					displayName = "Randomize";
 					tooltip = "Activate the vests randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Goggles_Force: Checkbox 
+				class GVAR(randomizeGearGogglesForce): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Goggles_Force_Checkbox ";
+					property = QGVAR(randomizeGearGogglesForceCheckbox);
 					displayName = "Force adding";
 					tooltip = "Adds vests even if the unit did not have one before";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Goggles_Randomize_Chance: Edit
+				class GVAR(randomizeGearGogglesChance): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Goggles_Randomize_Chance_Edit";
+					property = QGVAR(randomizeGearGogglesChanceEdit);
 					displayName = "Empty Chance";
 					tooltip = "Enter the chance for the vests being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no vests being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Goggles_Randomize_Content: Edit
+				class GVAR(randomizeGearGogglesContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Goggles_Randomize_Content_Edit";
-					tooltip = "Enter classnames of Goggles. \n\nE.g. H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo...";
+					property = QGVAR(randomizeGearGogglesContentEdit);
+					tooltip = "Enter classnames of Goggles. \n\nE.g. G_Balaclava_blk,G_Bandanna_blk,G_Shades_Black...";
 					displayName = "Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
@@ -530,11 +521,11 @@ class CfgVehicles
 		};
 	};
 
-	class MMM_MODULES_Module_Randomize_Gear_Headgear_F: Module_F
+	class GVAR(randomizeGearHeadgear): Module_F
 	{
-		category = "MMM_MODULES_ModuleClass";
+		category = QGVAR(Modules);
 		displayName = "Gear Randomizer: Headgear";
-		function = "MMM_MODULES_fnc_randomizeGearHeadgearInit";
+		function = QEFUNC(modules,randomizeGearHeadgearInit);
 		functionPriority = 10;
 		isDisposable = 0;
 		is3DEN = 0;
@@ -544,43 +535,44 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
-				class MMM_HeadgearCategory {
+				class GVAR(headgearCategory) 
+				{
 					data = "AttributeSystemSubcategory";
 					control = "SubCategory";
 					displayName = "Headgear Attributes";
 					description = "";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize: Checkbox 
+				class GVAR(randomizeGearHeadgearRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize_Checkbox ";
+					property = QGVAR(randomizeGearHeadgearRandomizeCheckbox);
 					displayName = "Randomize";
 					tooltip = "Activate the headgear randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Headgear_Force: Checkbox 
+				class GVAR(randomizeGearHeadgearForce): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Headgear_Force_Checkbox ";
+					property = QGVAR(randomizeGearHeadgearForceCheckbox);
 					displayName = "Force adding";
 					tooltip = "Adds headgear even if the unit did not have one before";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize_Chance: Edit
+				class GVAR(randomizeGearHeadgearChance): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize_Chance_Edit";
+					property = QGVAR(randomizeGearHeadgearChanceEdit);
 					displayName = "Empty Chance";
 					tooltip = "Enter the chance for the headgear being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no headgear being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize_Content: Edit
+				class GVAR(randomizeGearHeadgearContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize_Content_Edit";
+					property = QGVAR(randomizeGearHeadgearContentEdit);
 					tooltip = "Enter classnames of Headgear. \n\nE.g. H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo...";
 					displayName = "Classnames";
 					typeName = "STRING";
@@ -607,11 +599,11 @@ class CfgVehicles
 		};
 	};
 
-	class MMM_MODULES_Module_Randomize_Gear_Uniforms_F: Module_F
+	class GVAR(randomizeGearUniforms): Module_F
 	{
-		category = "MMM_MODULES_ModuleClass";
+		category = QGVAR(Modules);
 		displayName = "Gear Randomizer: Uniforms";
-		function = "MMM_MODULES_fnc_randomizeGearUniformsInit";
+		function = QEFUNC(modules,randomizeGearUniformsInit);
 		functionPriority = 10;
 		isDisposable = 0;
 		is3DEN = 0;
@@ -621,44 +613,45 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
-				class MMM_UniformsCategory {
+				class GVAR(uniformsCategory) 
+				{
 					data = "AttributeSystemSubcategory";
 					control = "SubCategory";
 					displayName = "Uniforms Attributes";
 					description = "";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize: Checkbox 
+				class GVAR(randomizeGearUniformsRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize_Checkbox ";
+					property = QGVAR(randomizeGearUniformsRandomizeCheckbox);
 					displayName = "Randomize";
 					tooltip = "Activate the uniforms randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Uniforms_Force: Checkbox 
+				class GVAR(randomizeGearUniformsForce): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Uniforms_Force_Checkbox ";
+					property = QGVAR(randomizeGearUniformsForceCheckbox);
 					displayName = "Force adding";
 					tooltip = "Adds uniforms even if the unit did not have one before";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize_Chance: Edit
+				class GVAR(randomizeGearUniformsChance): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize_Chance_Edit";
+					property = QGVAR(randomizeGearUniformsChanceEdit);
 					displayName = "Empty Chance";
 					tooltip = "Enter the chance for the uniforms being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no uniforms being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize_Content: Edit
+				class GVAR(randomizeGearUniformsContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Uniforms_Randomize_Content_Edit";
-					tooltip = "Enter classnames of Uniforms. \n\nE.g. H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo...";
+					property = QGVAR(randomizeGearUniformsContent);
+					tooltip = "Enter classnames of Uniforms. \n\nE.g. U_BG_Guerilla1_1,U_B_CombatUniform_mcam_tshirt,U_B_GEN_Commander_F...";
 					displayName = "Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
@@ -684,11 +677,11 @@ class CfgVehicles
 		};
 	};
 
-	class MMM_MODULES_Module_Randomize_Gear_Vests_F: Module_F
+	class GVAR(randomizeGearVests): Module_F
 	{
-		category = "MMM_MODULES_ModuleClass";
+		category = QGVAR(Modules);
 		displayName = "Gear Randomizer: Vests";
-		function = "MMM_MODULES_fnc_randomizeGearVestsInit";
+		function = QEFUNC(modules,randomizeGearVestsInit);
 		functionPriority = 10;
 		isDisposable = 0;
 		is3DEN = 0;
@@ -698,44 +691,45 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
-				class MMM_VestsCategory {
+				class GVAR(vestsCategory) 
+				{
 					data = "AttributeSystemSubcategory";
 					control = "SubCategory";
 					displayName = "Vests Attributes";
 					description = "";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Vests_Randomize: Checkbox 
+				class GVAR(randomizeGearVestsRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Vests_Randomize_Checkbox ";
+					property = QGVAR(randomizeGearVestsRandomizeCheckbox);
 					displayName = "Randomize";
 					tooltip = "Activate the vests randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Vests_Force: Checkbox 
+				class GVAR(randomizeGearVestsForce): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Vests_Force_Checkbox ";
+					property = QGVAR(randomizeGearVestsForceCheckbox);
 					displayName = "Force adding";
 					tooltip = "Adds vests even if the unit did not have one before";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Vests_Randomize_Chance: Edit
+				class GVAR(randomizeGearVestsChance): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Vests_Randomize_Chance_Edit";
+					property = QGVAR(randomizeGearVestsChanceEdit);
 					displayName = "Empty Chance";
 					tooltip = "Enter the chance for the vests being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no vests being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Vests_Randomize_Content: Edit
+				class GVAR(randomizeGearVestsContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Vests_Randomize_Content_Edit";
-					tooltip = "Enter classnames of Vests. \n\nE.g. H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo...";
+					property = QGVAR(randomizeGearVestsContent);
+					tooltip = "Enter classnames of Vests. \n\nE.g. V_BandollierB_blk,V_Chestrig_blk,V_PlateCarrier1_blk...";
 					displayName = "Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
@@ -761,11 +755,11 @@ class CfgVehicles
 		};
 	};
 
-	class MMM_MODULES_Module_Randomize_Gear_Weapons_F: Module_F
+	class GVAR(randomizeGearWeapons): Module_F
 	{
-		category = "MMM_MODULES_ModuleClass";
+		category = QGVAR(Modules);
 		displayName = "Gear Randomizer: Weapons";
-		function = "MMM_MODULES_fnc_randomizeGearWeaponsInit";
+		function = QEFUNC(modules,randomizeGearWeaponsInit);
 		functionPriority = 10;
 		isDisposable = 0;
 		is3DEN = 0;
@@ -776,141 +770,141 @@ class CfgVehicles
 		class Attributes: AttributesBase
 		{
 			// Primary Weapon
-				class MMM_PrimaryCategory {
+				class GVAR(primaryCategory) {
 					data = "AttributeSystemSubcategory";
 					control = "SubCategory";
 					displayName = "Primary Weapons Attributes";
 					description = "";
 				};
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary: Checkbox 
+				class GVAR(randomizeGearWeaponsPrimaryRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Checkbox ";
+					property = QGVAR(randomizeGearWeaponsRandomizePrimaryCheckbox);
 					displayName = "Randomize";
 					tooltip = "Activate the primary weapon randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Force_Primary: Checkbox 
+				class GVAR(randomizeGearWeaponsPrimaryForce): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Force_Primary_Checkbox ";
+					property = QGVAR(randomizeGearWeaponsPrimaryForceCheckbox);
 					displayName = "Force adding";
 					tooltip = "Adds a primary weapon even if the unit did not have one before";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Content: Edit
+				class GVAR(randomizeGearWeaponsPrimaryContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Content_Edit";
+					property = QGVAR(randomizeGearWeaponsPrimaryContentEdit);
 					tooltip = "Enter classnames of Weapons. \n\nE.g. arifle_MX_F,arifle_MX_Black_F,arifle_MXC_F...";
 					displayName = "Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Scope: Checkbox 
+				class GVAR(randomizeGearWeaponsPrimaryAttachmentScopeRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Scope_Checkbox ";
+					property = QGVAR(randomizeGearWeaponsPrimaryAttachmentScopeRandomizeCheckbox);
 					displayName = "[Scope] Randomize";
 					tooltip = "Activates the scope randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Scope_Chance: Edit
+				class GVAR(randomizeGearWeaponsPrimaryAttachmentScopeChance): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Scope_Chance_Edit";
+					property = QGVAR(randomizeGearWeaponsPrimaryAttachmentScopeChance);
 					displayName = "[Scope] Empty Chance";
 					tooltip = "Enter the chance for the scope being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no scope being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Scope_Content: Edit
+				class GVAR(randomizeGearWeaponsPrimaryAttachmentScopeContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Scope_Content_Edit";
+					property = QGVAR(randomizeGearWeaponsPrimaryAttachmentScopeContentEdit);
 					tooltip = "Enter classnames of scopes. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...\n\nIf left Empty the Scope Attachment Slot will be Empty";
 					displayName = "[Scope] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Rail: Checkbox 
+				class GVAR(randomizeGearWeaponsPrimaryAttachmentRailRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Rail_Checkbox ";
+					property = QGVAR(randomizeGearWeaponsPrimaryAttachmentRailRandomizeCheckbox);
 					displayName = "[Rail] Randomize";
 					tooltip = "Activates the rail attachment randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Rail_Chance: Edit
+				class GVAR(randomizeGearWeaponsPrimaryAttachmentRailChance): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Rail_Chance_Edit";
+					property = QGVAR(randomizeGearWeaponsPrimaryAttachmentRailChance);
 					displayName = "[Rail] Empty Chance";
 					tooltip = "Enter the chance for the rail attachment being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no rail attachment being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Rail_Content: Edit
+				class GVAR(randomizeGearWeaponsPrimaryAttachmentRailContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Rail_Content_Edit";
+					property = QGVAR(randomizeGearWeaponsPrimaryAttachmentRailContentEdit);
 					tooltip = "Enter classnames of rail attachments. E.g. acc_pointer_IR,acc_flashlight,saber_light_lxWS...\n\nIf left Empty the Rail Attachment Slot will be Empty";
 					displayName = "[Rail] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Muzzle: Checkbox 
+				class GVAR(randomizeGearWeaponsPrimaryAttachmentMuzzleRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Muzzle_Checkbox ";
+					property = QGVAR(randomizeGearWeaponsPrimaryAttachmentMuzzleRandomizeCheckbox);
 					displayName = "[Muzzle] Randomize";
 					tooltip = "Activates the muzzle randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Muzzle_Chance: Edit
+				class GVAR(randomizeGearWeaponsPrimaryAttachmentMuzzleChance): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Muzzle_Chance_Edit";
+					property = QGVAR(randomizeGearWeaponsPrimaryAttachmentMuzzleChanceEdit);
 					displayName = "[Muzzle] Empty Chance";
 					tooltip = "Enter the chance for the muzzle being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no muzzle being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Muzzle_Content: Edit
+				class GVAR(randomizeGearWeaponsPrimaryAttachmentMuzzleContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Muzzle_Content_Edit";
+					property = QGVAR(randomizeGearWeaponsPrimaryAttachmentMuzzleContentEdit);
 					tooltip = "Enter classnames of muzzles. E.g. muzzle_snds_M,muzzle_snds_m_khk_F,suppressor_l_lush_lxWS...\n\nIf left Empty the Muzzle Attachment Slot will be Empty";
 					displayName = "[Muzzle] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Bipod: Checkbox 
+				class GVAR(randomizeGearWeaponsPrimaryAttachmentBipodRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Bipod_Checkbox ";
+					property = QGVAR(randomizeGearWeaponsPrimaryAttachmentBipodRandomizeCheckbox);
 					displayName = "[Bipod] Randomize";
 					tooltip = "Activates the bipod randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Bipod_Chance: Edit
+				class GVAR(randomizeGearWeaponsPrimaryAttachmentBipodChance): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Bipod_Chance_Edit";
+					property = QGVAR(randomizeGearWeaponsPrimaryAttachmentBipodChanceEdit);
 					displayName = "[Bipod] Empty Chance";
 					tooltip = "Enter the chance for the bipod being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no bipod being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Bipod_Content: Edit
+				class GVAR(randomizeGearWeaponsPrimaryAttachmentBipodContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary_Attachment_Bipod_Content_Edit";
+					property = QGVAR(randomizeGearWeaponsPrimaryAttachmentBipodContentEdit);
 					tooltip = "Enter classnames of bipods. E.g. bipod_01_F_khk,bipod_03_F_blk,bipod_01_F_mtp...\n\nIf left Empty the Bipod Attachment Slot will be Empty";
 					displayName = "[Bipod] Classnames";
 					typeName = "STRING";
@@ -918,141 +912,141 @@ class CfgVehicles
 				};
 
 			// Sidearm Weapon
-				class MMM_SidearmCategory {
+				class GVAR(sidearmCategory) {
 					data = "AttributeSystemSubcategory";
 					control = "SubCategory";
 					displayName = "Sidearm Weapons Attributes";
 					description = "";
 				};
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm: Checkbox 
+				class GVAR(randomizeGearWeaponsSidearmRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Checkbox ";
+					property = QGVAR(randomizeGearWeaponsSidearmRandomizeCheckbox);
 					displayName = "Randomize";
 					tooltip = "Activate the sidearm weapon randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Force_Sidearm: Checkbox 
+				class GVAR(randomizeGearWeaponsSidearmForce): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Force_Sidearm_Checkbox ";
+					property = QGVAR(randomizeGearWeaponsSidearmForceCheckbox);
 					displayName = "Force adding";
 					tooltip = "Adds a sidearm weapon even if the unit did not have one before";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Content: Edit
+				class GVAR(randomizeGearWeaponsSidearmContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Content_Edit";
-					tooltip = "Enter classnames of Weapons. \n\nE.g. arifle_MX_F,arifle_MX_Black_F,arifle_MXC_F...";
+					property = QGVAR(randomizeGearWeaponsSidearmContentEdit);
+					tooltip = "Enter classnames of Weapons. \n\nE.g. hgun_P07_blk_F,hgun_Rook40_F,hgun_P07_F...";
 					displayName = "Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Scope: Checkbox 
+				class GVAR(randomizeGearWeaponsSidearmAttachmentScopeRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Scope_Checkbox ";
+					property = QGVAR(randomizeGearWeaponsSidearmAttachmentScopeRandomizeCheckbox);
 					displayName = "[Scope] Randomize";
 					tooltip = "Activates the scope randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Scope_Chance: Edit
+				class GVAR(randomizeGearWeaponsSidearmAttachmentScopeChance): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Scope_Chance_Edit";
+					property = QGVAR(randomizeGearWeaponsSidearmAttachmentScopeChanceEdit);
 					displayName = "[Scope] Empty Chance";
 					tooltip = "Enter the chance for the scope being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no scope being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Scope_Content: Edit
+				class GVAR(randomizeGearWeaponsSidearmAttachmentScopeContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Scope_Content_Edit";
+					property = QGVAR(randomizeGearWeaponsSidearmAttachmentScopeContentEdit);
 					tooltip = "Enter classnames of scopes. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...\n\nIf left Empty the Scope Attachment Slot will be Empty";
 					displayName = "[Scope] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Rail: Checkbox 
+				class GVAR(randomizeGearWeaponsSidearmAttachmentRailRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Rail_Checkbox ";
+					property = QGVAR(randomizeGearWeaponsSidearmAttachmentRailRandomizeCheckbox);
 					displayName = "[Rail] Randomize";
 					tooltip = "Activates the rail attachment randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Rail_Chance: Edit
+				class GVAR(randomizeGearWeaponsSidearmAttachmentRailChance): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Rail_Chance_Edit";
+					property = QGVAR(randomizeGearWeaponsSidearmAttachmentRailChanceEdit);
 					displayName = "[Rail] Empty Chance";
 					tooltip = "Enter the chance for the rail attachment being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no rail attachment being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Rail_Content: Edit
+				class GVAR(randomizeGearWeaponsSidearmAttachmentRailContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Rail_Content_Edit";
+					property = QGVAR(randomizeGearWeaponsSidearmAttachmentRailContentEdit);
 					tooltip = "Enter classnames of rail attachments. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...\n\nIf left Empty the Rail Attachment Slot will be Empty";
 					displayName = "[Rail] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Muzzle: Checkbox 
+				class GVAR(randomizeGearWeaponsSidearmAttachmentMuzzleRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Muzzle_Checkbox ";
+					property = QGVAR(randomizeGearWeaponsSidearmAttachmentMuzzleRandomizeCheckbox);
 					displayName = "[Muzzle] Randomize";
 					tooltip = "Activates the muzzle randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Muzzle_Chance: Edit
+				class GVAR(randomizeGearWeaponsSidearmAttachmentMuzzleChance): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Muzzle_Chance_Edit";
+					property = QGVAR(randomizeGearWeaponsSidearmAttachmentMuzzleChanceEdit);
 					displayName = "[Muzzle] Empty Chance";
 					tooltip = "Enter the chance for the muzzle being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no muzzle being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Muzzle_Content: Edit
+				class GVAR(randomizeGearWeaponsSidearmAttachmentMuzzleContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Muzzle_Content_Edit";
+					property = QGVAR(randomizeGearWeaponsSidearmAttachmentMuzzleContentEdit);
 					tooltip = "Enter classnames of muzzles. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...\n\nIf left Empty the Muzzle Attachment Slot will be Empty";
 					displayName = "[Muzzle] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Bipod: Checkbox 
+				class GVAR(randomizeGearWeaponsSidearmAttachmentBipodRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Bipod_Checkbox ";
+					property = QGVAR(randomizeGearWeaponsSidearmAttachmentBipodRandomizeCheckbox);
 					displayName = "[Bipod] Randomize";
 					tooltip = "Activates the bipod randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Bipod_Chance: Edit
+				class GVAR(randomizeGearWeaponsSidearmAttachmentBipodChance): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Bipod_Chance_Edit";
+					property = QGVAR(randomizeGearWeaponsSidearmAttachmentBipodChanceEdit);
 					displayName = "[Bipod] Empty Chance";
 					tooltip = "Enter the chance for the bipod being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no bipod being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Bipod_Content: Edit
+				class GVAR(randomizeGearWeaponsSidearmAttachmentBipodContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Sidearm_Attachment_Bipod_Content_Edit";
+					property = QGVAR(randomizeGearWeaponsSidearmAttachmentBipodContentEdit);
 					tooltip = "Enter classnames of bipods. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...\n\nIf left Empty the Bipod Attachment Slot will be Empty";
 					displayName = "[Bipod] Classnames";
 					typeName = "STRING";
@@ -1060,141 +1054,141 @@ class CfgVehicles
 				};
 
 			// Secondary Weapon
-				class MMM_SecondaryCategory {
+				class GVAR(secondaryCategory) {
 					data = "AttributeSystemSubcategory";
 					control = "SubCategory";
 					displayName = "Secondary Weapons Attributes";
 					description = "";
 				};
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary: Checkbox 
+				class GVAR(randomizeGearWeaponsSecondaryRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Checkbox ";
+					property = QGVAR(randomizeGearWeaponsSecondaryRandomizeCheckbox);
 					displayName = "Randomize";
 					tooltip = "Activate the secondary weapon randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Force_Secondary: Checkbox 
+				class GVAR(randomizeGearWeaponsSecondaryForce): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Force_Secondary_Checkbox ";
+					property = QGVAR(randomizeGearWeaponsSecondaryForceCheckbox);
 					displayName = "Force adding";
 					tooltip = "Adds a secondary weapon even if the unit did not have one before";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Content: Edit
+				class GVAR(randomizeGearWeaponsSecondaryContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Content_Edit";
-					tooltip = "Enter classnames of Weapons. \n\nE.g. arifle_MX_F,arifle_MX_Black_F,arifle_MXC_F...";
+					property = QGVAR(randomizeGearWeaponsSecondaryContentEdit);
+					tooltip = "Enter classnames of Weapons. \n\nE.g. launch_NLAW_F,launch_RPG32_F,launch_MRAWS_green_F...";
 					displayName = "Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Scope: Checkbox 
+				class GVAR(randomizeGearWeaponsSecondaryAttachmentScopeRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Scope_Checkbox ";
+					property = QGVAR(randomizeGearWeaponsSecondaryAttachmentScopeRandomizeCheckbox);
 					displayName = "[Scope] Randomize";
 					tooltip = "Activates the scope randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Scope_Chance: Edit
+				class GVAR(randomizeGearWeaponsSecondaryAttachmentScopeChance): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Scope_Chance_Edit";
+					property = QGVAR(randomizeGearWeaponsSecondaryAttachmentScopeChanceEdit);
 					displayName = "[Scope] Empty Chance";
 					tooltip = "Enter the chance for the scope being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no scope being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Scope_Content: Edit
+				class GVAR(randomizeGearWeaponsSecondaryAttachmentScopeContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Scope_Content_Edit";
+					property = QGVAR(randomizeGearWeaponsSecondaryAttachmentScopeContentEdit);
 					tooltip = "Enter classnames of scopes. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...\n\nIf left Empty the Scope Attachment Slot will be Empty";
 					displayName = "[Scope] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Rail: Checkbox 
+				class GVAR(randomizeGearWeaponsSecondaryAttachmentRailRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Rail_Checkbox ";
+					property = QGVAR(randomizeGearWeaponsSecondaryAttachmentRailRandomizeCheckbox);
 					displayName = "[Rail] Randomize";
 					tooltip = "Activates the rail attachment randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Rail_Chance: Edit
+				class GVAR(randomizeGearWeaponsSecondaryAttachmentRailChance): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Rail_Chance_Edit";
+					property = QGVAR(randomizeGearWeaponsSecondaryAttachmentRailChanceEdit);
 					displayName = "[Rail] Empty Chance";
 					tooltip = "Enter the chance for the rail attachment being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no rail attachment being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Rail_Content: Edit
+				class GVAR(randomizeGearWeaponsSecondaryAttachmentRailContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Rail_Content_Edit";
+					property = QGVAR(randomizeGearWeaponsSecondaryAttachmentRailContentEdit);
 					tooltip = "Enter classnames of rail attachments. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...\n\nIf left Empty the Rail Attachment Slot will be Empty";
 					displayName = "[Rail] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Muzzle: Checkbox 
+				class GVAR(randomizeGearWeaponsSecondaryAttachmentMuzzleRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Muzzle_Checkbox ";
+					property = QGVAR(randomizeGearWeaponsSecondaryAttachmentMuzzleRandomizeCheckbox);
 					displayName = "[Muzzle] Randomize";
 					tooltip = "Activates the muzzle randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Muzzle_Chance: Edit
+				class GVAR(randomizeGearWeaponsSecondaryAttachmentMuzzleChance): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Muzzle_Chance_Edit";
+					property = QGVAR(randomizeGearWeaponsSecondaryAttachmentMuzzleChanceEdit);
 					displayName = "[Muzzle] Empty Chance";
 					tooltip = "Enter the chance for the muzzle being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no muzzle being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Muzzle_Content: Edit
+				class GVAR(randomizeGearWeaponsSecondaryAttachmentMuzzleContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Muzzle_Content_Edit";
+					property = QGVAR(randomizeGearWeaponsSecondaryAttachmentMuzzleContentEdit);
 					tooltip = "Enter classnames of muzzles. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...\n\nIf left Empty the Muzzle Attachment Slot will be Empty";
 					displayName = "[Muzzle] Classnames";
 					typeName = "STRING";
 					defaultValue = "''";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Bipod: Checkbox 
+				class GVAR(randomizeGearWeaponsSecondaryAttachmentBipodRandomize): Checkbox 
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Bipod_Checkbox ";
+					property = QGVAR(randomizeGearWeaponsSecondaryAttachmentBipodRandomizeCheckbox);
 					displayName = "[Bipod] Randomize";
 					tooltip = "Activates the bipod randomization";
 					typeName = "BOOL";
 					defaultValue = "false";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Bipod_Chance: Edit
+				class GVAR(randomizeGearWeaponsSecondaryAttachmentBipodChance): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Bipod_Chance_Edit";
+					property = QGVAR(randomizeGearWeaponsSecondaryAttachmentBipodChanceEdit);
 					displayName = "[Bipod] Empty Chance";
 					tooltip = "Enter the chance for the bipod being empty \n\nEnter a value between 0 and 1.\nE.g. 0.4 = 40% chance of no bipod being added";
 					typeName = "NUMBER";
 					defaultValue = "0";
 				};
 
-				class MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Bipod_Content: Edit
+				class GVAR(randomizeGearWeaponsSecondaryAttachmentBipodContent): Edit
 				{
-					property = "MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Secondary_Attachment_Bipod_Content_Edit";
+					property = QGVAR(randomizeGearWeaponsSecondaryAttachmentBipodContentEdit);
 					tooltip = "Enter classnames of bipods. E.g. optic_ACO_grn,optic_ACO_grn,optic_Hamr...\n\nIf left Empty the Bipod Attachment Slot will be Empty";
 					displayName = "[Bipod] Classnames";
 					typeName = "STRING";
@@ -1220,4 +1214,33 @@ class CfgVehicles
 			};
 		};
 	};
+
+	// Zeus Modules
+
+	class GVAR(moduleBase): Module_F {
+		author = "Moony";
+        category = QGVAR(Modules);
+        function = "mmm_main_dummy";
+        functionPriority = 1;
+        isGlobal = 1;
+        isTriggerActivated = 0;
+        scope = 1;
+        scopeCurator = 2;
+    };
+
+	/*class GVAR(moduleDialogDemo): GVAR(moduleBase) {
+		scope = 2;
+		scopeCurator = 2;
+		category = QGVAR(modulesTest);
+		displayName = "Demo: Dynamic Dialog";
+		icon = "\a3\Modules_F_Curator\Data\portraitModule_ca.paa";
+		portrait = "\a3\Modules_F_Curator\Data\portraitModule_ca.paa";
+
+		// Opens the same display as createDialog QGVAR(RscDisplayExample).
+		// This is useful for testing the dialog from the vanilla Zeus module
+		// list, while your normal workflow can use the ZEN custom module below.
+		curatorInfoType = QGVAR(RscDisplayExample);
+		function = QEFUNC(modules,moduleExample);
+		isGlobal = 0;
+    };*/
 };

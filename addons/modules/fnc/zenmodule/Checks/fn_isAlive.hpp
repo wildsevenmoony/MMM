@@ -1,3 +1,3 @@
-private _isAlive = if !(alive _objectUnderCursor) exitWith {
+if !(alive _objectUnderCursor) exitWith {
 				[objNull, "UNIT MUST BE ALIVE"] call BIS_fnc_showCuratorFeedbackMessage;
 			};

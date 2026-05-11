@@ -1,5 +1,6 @@
 *.pbo
 .hemttout
+.hemttprivatekey
 hemtt
 hemtt.exe
 *.biprivatekey
@@ -8,4 +9,5 @@ hemtt.exe
 *.jpeg
 *.wav
 *.mp3
-
+include
+releases

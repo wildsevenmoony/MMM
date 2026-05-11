@@ -1,9 +1,9 @@
 class CfgPatches {
-	class MMM_MAIN {
+	class mmm_main {
 		name = "Moonys Magnificent Modules";
 		author = "Moony";
 		requiredAddons[] = {};
-		requiredVersion = 0.1;
+		requiredVersion = 1.32;
 		units[] = {};
 		weapons[] = {};
 	};

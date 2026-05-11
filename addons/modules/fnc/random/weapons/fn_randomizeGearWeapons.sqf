@@ -1,3 +1,72 @@
+/*
+ * Author: Moony
+ * Randomizes the primary weapon, sidearm and secondary weapon of the unit. Can also randomize the attachments of these three weapons 
+ * (Attachments Randomization only works if weapon gets randomized) 
+ *
+ * Arguments:
+ * 0: Unit <OBJECT>
+ *
+ * 1: Enable Primary Weapon Randomization <BOOL>
+ * 2: Classnames for randomization <STRING>
+ * 3: Enable Primary Scope Randomization <BOOL>
+ * 4: Chance of Primary Scope being empty <Number>
+ * 5: Classnames for Primary Scope randomization <String>
+ * 6: Enable Primary Rail Attachment Randomization <BOOL>
+ * 7: Chance of Primary Rail Attachment being empty <Number>
+ * 8: Classnames for Primary Rail Attachment randomization <String>
+ * 9: Enable Primary Muzzle Randomization <BOOL>
+ * 10: Chance of Primary Muzzle being empty <Number>
+ * 11: Classnames for Primary Muzzle randomization <String>
+ * 12: Enable Primary Bipod Randomization <BOOL>
+ * 13: Chance of Primary Bipod being empty <Number>
+ * 14: Classnames for Primary Bipod randomization <String>
+ * 15: Force adding Primary Weapon <BOOL>
+ * 16: Enable Sidearm Weapon Randomization <BOOL>
+ * 17: Classnames for randomization <STRING>
+ * 18: Enable Sidearm Scope Randomization <BOOL>
+ * 19: Chance of Sidearm Scope being empty <Number>
+ * 20: Classnames for Sidearm Scope randomization <String>
+ * 21: Enable Sidearm Rail Attachment Randomization <BOOL>
+ * 22: Chance of Sidearm Rail Attachment being empty <Number>
+ * 23: Classnames for Sidearm Rail Attachment randomization <String>
+ * 24: Enable Sidearm Muzzle Randomization <BOOL>
+ * 25: Chance of Sidearm Muzzle being empty <Number>
+ * 26: Classnames for Sidearm Muzzle randomization <String>
+ * 27: Enable Sidearm Bipod Randomization <BOOL>
+ * 28: Chance of Sidearm Bipod being empty <Number>
+ * 29: Classnames for Sidearm Bipod randomization <String>
+ * 30: Enable Secondary Weapon Randomization <BOOL>
+ * 31: Classnames for randomization <STRING>
+ * 32: Enable Secondary Scope Randomization <BOOL>
+ * 33: Force Adding Secondary Scope <BOOL>
+ * 34: Chance of Secondary Scope being empty <Number>
+ * 35: Classnames for Secondary Scope randomization <String>
+ * 36: Enable Secondary Rail Attachment Randomization <BOOL>
+ * 37: Force Adding Secondary Rail Attachment <BOOL>
+ * 38: Chance of Secondary Rail Attachment being empty <Number>
+ * 39: Classnames for Secondary Rail Attachment randomization <String>
+ * 40: Enable Secondary Muzzle Randomization <BOOL>
+ * 41: Force Adding Secondary Muzzle <BOOL>
+ * 42: Chance of Secondary Muzzle being empty <Number>
+ * 43: Classnames for Secondary Muzzle randomization <String>
+ * 44: Enable Secondary Bipod Randomization <BOOL>
+ * 45: Force Adding Secondary Bipod <BOOL>
+ * 46: Chance of Secondary Bipod being empty <Number>
+ * 47: Classnames for Secondary Bipod randomization <String>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [player, true, true,"arifle_MX_khk_F,srifle_DMR_07_blk_F,arifle_MSBS65_black_F", true,0,"optic_SOS,optic_NVS,ACE_optic_LRPS_2D", true,0,"acc_pointer_IR,EF_acc_pointer_IR_coy,saber_light_ir_khaki_lxWS", true,0,"muzzle_snds_H_khk_F,muzzle_snds_65_TI_ghex_F,suppressor_65_sand_RF", true,0,"bipod_02_F_arid,bipod_01_F_snd", true, true, "hgun_Pistol_heavy_01_F,hgun_Pistol_heavy_01_green_F,hgun_Glock19_RF", true,0,"optic_MRD_black,ef_optic_microsight_pistol_coy,optic_MRD_tan_RF", true,0,"acc_flashlight_pistol,acc_pointer_IR_pistol_RF", true,0,"muzzle_snds_L", true,0,"", true, true, "launch_NLAW_F,launch_PSRL1_black_RF,launch_RPG32_F", true,0,"optic_SOS,optic_NVS,ACE_optic_LRPS_2D", true,0,"", true,0,"", true,0,""] call mmm_modules_fnc_randomizeGearWeapons.sqf
+ *
+ * (See, its not made for calling it like this!)
+ *
+ * Public: Yes
+ */
+
+#include "\z\mmm\addons\modules\script_component.hpp"
+
 params [
 	"_unit",
 	"_randomizePrimary",
@@ -49,11 +118,11 @@ params [
 
 // Waits till other randomizations have happened
 private _flags = [
-    "MMM_var_randomizationBackpacksDone",
-    "MMM_var_randomizationHeadgearDone",
-    "MMM_var_randomizationUniformsDone",
-    "MMM_var_randomizationVestsDone",
-    "MMM_var_randomizationGogglesDone"
+    QGVAR(randomizationBackpacksDone),
+    QGVAR(randomizationHeadgearDone),
+    QGVAR(randomizationUniformsDone),
+    QGVAR(randomizationVestsDone),
+    QGVAR(randomizationGogglesDone)
 ];
 
 // Filter which ones exist
@@ -70,14 +139,15 @@ waitUntil {
 
 // Randomizes Primary Weapon if enabled
 if (_randomizePrimary && ((_forcePrimary) || (!_forcePrimary && (primaryWeapon _unit) != ""))) then {
-	#include "fn_defaultPrimary.hpp"
+	private _weaponPrimaryArray = [""];
 
-	if (_contentPrimary isNotEqualTo "" || _contentPrimary isNotEqualTo "[]") then {
+	if (_contentPrimary isNotEqualTo "" && {_contentPrimary isNotEqualTo "[]"}) then {
 		_weaponPrimaryArray = ([_contentPrimary] call CBA_fnc_removeWhitespace) splitString ",";
 	};
 
 	private _weaponPrimary = selectRandom _weaponPrimaryArray;
-	private _ammoPrimary = (compatibleMagazines [_weaponPrimary, "this"]) select 0;
+	private _compatibleAmmoPrimary = compatibleMagazines [_weaponPrimary, "this"];
+	private _ammoPrimary = if (_compatibleAmmoPrimary isEqualTo []) then {""} else {_compatibleAmmoPrimary select 0};
 
 	// Get all Primary Weapon Attachments
 	private _getPrimaryAttachments = primaryWeaponItems _unit;
@@ -95,78 +165,103 @@ if (_randomizePrimary && ((_forcePrimary) || (!_forcePrimary && (primaryWeapon _
 	// Remove Primary weapon
 	_unit removeWeapon (primaryWeapon _unit);
 
-	// Add new Primary weapon
-	_unit addWeapon _weaponPrimary;
+	if (_weaponPrimary != "") then {
+		// Add new Primary weapon
+		_unit addWeapon _weaponPrimary;
 
-	// Add Primary weapon Attachments from old weapons
-	// Muzzle Attachment
-	if (_randomizePrimaryMuzzle ) then {
-		if (random 1 <= _chancePrimaryMuzzle || _contentPrimaryMuzzle isEqualTo "") then {
-			_unit removePrimaryWeaponItem (_getPrimaryAttachments select 0);
+		// Add Primary weapon Attachments from old weapons
+		// Muzzle Attachment
+		if (_randomizePrimaryMuzzle ) then {
+			if (random 1 <= _chancePrimaryMuzzle || _contentPrimaryMuzzle isEqualTo "") then {
+				_unit removePrimaryWeaponItem (_getPrimaryAttachments select 0);
+			} else {
+				private _weaponPrimaryAttachmentMuzzleArray = ([_contentPrimaryMuzzle] call CBA_fnc_removeWhitespace) splitString ",";
+				private _weaponPrimaryAttachmentMuzzle = selectRandom _weaponPrimaryAttachmentMuzzleArray;
+				if (_weaponPrimaryAttachmentMuzzle != "") then {
+					_unit addPrimaryWeaponItem _weaponPrimaryAttachmentMuzzle;
+				};
+			};
 		} else {
-			private _weaponPrimaryAttachmentMuzzleArray = ([_contentPrimaryMuzzle] call CBA_fnc_removeWhitespace) splitString ",";
-			private _weaponPrimaryAttachmentMuzzle = selectRandom _weaponPrimaryAttachmentMuzzleArray;
-			_unit addPrimaryWeaponItem _weaponPrimaryAttachmentMuzzle;
+			private _oldMuzzle = _getPrimaryAttachments select 0;
+			if (_oldMuzzle != "") then {
+				_unit addPrimaryWeaponItem _oldMuzzle;
+			};
 		};
-	} else {
-		_unit addPrimaryWeaponItem (_getPrimaryAttachments select 0);
-	};
 	
-	// Rail Attachment
-	if (_randomizePrimaryRail) then {
-		if (random 1 <= _chancePrimaryRail || _contentPrimaryRail isEqualTo "") then {
-			_unit removePrimaryWeaponItem (_getPrimaryAttachments select 1);
+		// Rail Attachment
+		if (_randomizePrimaryRail) then {
+			if (random 1 <= _chancePrimaryRail || _contentPrimaryRail isEqualTo "") then {
+				_unit removePrimaryWeaponItem (_getPrimaryAttachments select 1);
+			} else {
+				private _weaponPrimaryAttachmentRailArray = ([_contentPrimaryRail] call CBA_fnc_removeWhitespace) splitString ",";
+				private _weaponPrimaryAttachmentRail = selectRandom _weaponPrimaryAttachmentRailArray;
+				if (_weaponPrimaryAttachmentRail != "") then {
+					_unit addPrimaryWeaponItem _weaponPrimaryAttachmentRail;
+				};
+			};
 		} else {
-			private _weaponPrimaryAttachmentRailArray = ([_contentPrimaryRail] call CBA_fnc_removeWhitespace) splitString ",";
-			private _weaponPrimaryAttachmentRail = selectRandom _weaponPrimaryAttachmentRailArray;
-			_unit addPrimaryWeaponItem _weaponPrimaryAttachmentRail;
+			private _oldRail = _getPrimaryAttachments select 1;
+			if (_oldRail != "") then {
+				_unit addPrimaryWeaponItem _oldRail;
+			};
 		};
-	} else {
-		_unit addPrimaryWeaponItem (_getPrimaryAttachments select 1);
-	};
 
-	// Sight
-	if (_randomizePrimaryScope) then {
-		if (random 1 <= _chancePrimaryScope || _contentPrimaryScope isEqualTo "") then {
-			_unit removePrimaryWeaponItem (_getPrimaryAttachments select 2);
+		// Sight
+		if (_randomizePrimaryScope) then {
+			if (random 1 <= _chancePrimaryScope || _contentPrimaryScope isEqualTo "") then {
+				_unit removePrimaryWeaponItem (_getPrimaryAttachments select 2);
+			} else {
+				private _weaponPrimaryAttachmentScopeArray = ([_contentPrimaryScope] call CBA_fnc_removeWhitespace) splitString ",";
+				private _weaponPrimaryAttachmentScope = selectRandom _weaponPrimaryAttachmentScopeArray;
+				if (_weaponPrimaryAttachmentScope != "") then {
+					_unit addPrimaryWeaponItem _weaponPrimaryAttachmentScope;
+				};
+			};
 		} else {
-			private _weaponPrimaryAttachmentScopeArray = ([_contentPrimaryScope] call CBA_fnc_removeWhitespace) splitString ",";
-			private _weaponPrimaryAttachmentScope = selectRandom _weaponPrimaryAttachmentScopeArray;
-			_unit addPrimaryWeaponItem _weaponPrimaryAttachmentScope;
+			private _oldScope = _getPrimaryAttachments select 2;
+			if (_oldScope != "") then {
+				_unit addPrimaryWeaponItem _oldScope;
+			};
 		};
-	} else {
-		_unit addPrimaryWeaponItem (_getPrimaryAttachments select 2);
-	};
 
-	// Bipod
-	if (_randomizePrimaryBipod) then {
-		if (random 1 <= _chancePrimaryBipod || _contentPrimaryBipod isEqualTo "") then {
-			_unit removePrimaryWeaponItem (_getPrimaryAttachments select 3);
+		// Bipod
+		if (_randomizePrimaryBipod) then {
+			if (random 1 <= _chancePrimaryBipod || _contentPrimaryBipod isEqualTo "") then {
+				_unit removePrimaryWeaponItem (_getPrimaryAttachments select 3);
+			} else {
+				private _weaponPrimaryAttachmentBipodArray = ([_contentPrimaryBipod] call CBA_fnc_removeWhitespace) splitString ",";
+				private _weaponPrimaryAttachmentBipod = selectRandom _weaponPrimaryAttachmentBipodArray;
+				if (_weaponPrimaryAttachmentBipod != "") then {
+					_unit addPrimaryWeaponItem _weaponPrimaryAttachmentBipod;
+				};
+			};
 		} else {
-			private _weaponPrimaryAttachmentBipodArray = ([_contentPrimaryBipod] call CBA_fnc_removeWhitespace) splitString ",";
-			private _weaponPrimaryAttachmentBipod = selectRandom _weaponPrimaryAttachmentBipodArray;
-			_unit addPrimaryWeaponItem _weaponPrimaryAttachmentBipod;
+			private _oldBipod = _getPrimaryAttachments select 3;
+			if (_oldBipod != "") then {
+				_unit addPrimaryWeaponItem _oldBipod;
+			};
 		};
-	} else {
-		_unit addPrimaryWeaponItem (_getPrimaryAttachments select 3);
+
+		// Magazine 
+		if (_ammoPrimary != "") then {
+			_unit addPrimaryWeaponItem _ammoPrimary;
+
+			// Add Primary weapon Magazines 
+			_unit addMagazines [_ammoPrimary, _getPrimaryAmmoCount];
+		};
 	};
-
-	// Magazine 
-	_unit addPrimaryWeaponItem _ammoPrimary;
-
-	// Add Primary weapon Magazines 
-	_unit addMagazines [_ammoPrimary, _getPrimaryAmmoCount];
 };
 
 // Randomizes Sidearm Weapon if enabled
 if (_randomizeSidearm && ((_forceSidearm) || (!_forceSidearm && (handgunWeapon _unit) != ""))) then {
-	#include "fn_defaultSidearm.hpp"
+	private _weaponSidearmArray = [""];
 
-	if (_contentSidearm isNotEqualTo "" || _contentSidearm isNotEqualTo "[]") then {
+	if (_contentSidearm isNotEqualTo "" && {_contentSidearm isNotEqualTo "[]"}) then {
 		_weaponSidearmArray = ([_contentSidearm] call CBA_fnc_removeWhitespace) splitString ",";
 	};
 	private _weaponSidearm = selectRandom _weaponSidearmArray;
-	private _ammoSidearm = (compatibleMagazines [_weaponSidearm, "this"]) select 0;
+	private _compatibleAmmoSidearm = compatibleMagazines [_weaponSidearm, "this"];
+	private _ammoSidearm = if (_compatibleAmmoSidearm isEqualTo []) then {""} else {_compatibleAmmoSidearm select 0};
 
 	// Get all Sidearm Weapon Attachments
 	private _getSidearmAttachments = handgunItems _unit;
@@ -183,78 +278,103 @@ if (_randomizeSidearm && ((_forceSidearm) || (!_forceSidearm && (handgunWeapon _
 	// Remove Sidearm weapon
 	_unit removeWeapon (handgunWeapon _unit);
 
-	// Add new Sidearm weapon
-	_unit addWeapon _weaponSidearm;
+	if (_weaponSidearm != "") then {
+		// Add new Sidearm weapon
+		_unit addWeapon _weaponSidearm;
 
-	// Add Sidearm weapon Attachments from old weapons
-	// Muzzle Attachment
-	if (_randomizeSidearmMuzzle) then {
-		if (random 1 <= _chanceSidearmMuzzle || _contentSidearmMuzzle isEqualTo "") then {
-			_unit removeHandgunItem (_getSidearmAttachments select 0);
+		// Add Sidearm weapon Attachments from old weapons
+		// Muzzle Attachment
+		if (_randomizeSidearmMuzzle) then {
+			if (random 1 <= _chanceSidearmMuzzle || _contentSidearmMuzzle isEqualTo "") then {
+				_unit removeHandgunItem (_getSidearmAttachments select 0);
+			} else {
+				private _weaponSidearmAttachmentMuzzleArray = ([_contentSidearmMuzzle] call CBA_fnc_removeWhitespace) splitString ",";
+				private _weaponSidearmAttachmentMuzzle = selectRandom _weaponSidearmAttachmentMuzzleArray;
+				if (_weaponSidearmAttachmentMuzzle != "") then {
+					_unit addHandgunItem _weaponSidearmAttachmentMuzzle;
+				};
+			};
 		} else {
-			private _weaponSidearmAttachmentMuzzleArray = ([_contentSidearmMuzzle] call CBA_fnc_removeWhitespace) splitString ",";
-			private _weaponSidearmAttachmentMuzzle = selectRandom _weaponSidearmAttachmentMuzzleArray;
-			_unit addHandgunItem _weaponSidearmAttachmentMuzzle;
+			private _oldMuzzle = _getSidearmAttachments select 0;
+			if (_oldMuzzle != "") then {
+				_unit addHandgunItem _oldMuzzle;
+			};
 		};
-	} else {
-		_unit addHandgunItem (_getSidearmAttachments select 0);
-	};
 	
-	// Rail Attachment
-	if (_randomizeSidearmRail) then {
-		if (random 1 <= _chanceSidearmRail || _contentSidearmRail isEqualTo "") then {
-			_unit removeHandgunItem (_getSidearmAttachments select 1);
+		// Rail Attachment
+		if (_randomizeSidearmRail) then {
+			if (random 1 <= _chanceSidearmRail || _contentSidearmRail isEqualTo "") then {
+				_unit removeHandgunItem (_getSidearmAttachments select 1);
+			} else {
+				private _weaponSidearmAttachmentRailArray = ([_contentSidearmRail] call CBA_fnc_removeWhitespace) splitString ",";
+				private _weaponSidearmAttachmentRail = selectRandom _weaponSidearmAttachmentRailArray;
+				if (_weaponSidearmAttachmentRail != "") then {
+					_unit addHandgunItem _weaponSidearmAttachmentRail;
+				};
+			};
 		} else {
-			private _weaponSidearmAttachmentRailArray = ([_contentSidearmRail] call CBA_fnc_removeWhitespace) splitString ",";
-			private _weaponSidearmAttachmentRail = selectRandom _weaponSidearmAttachmentRailArray;
-			_unit addHandgunItem _weaponSidearmAttachmentRail;
+			private _oldRail = _getSidearmAttachments select 1;
+			if (_oldRail != "") then {
+				_unit addHandgunItem _oldRail;
+			};
 		};
-	} else {
-		_unit addHandgunItem (_getSidearmAttachments select 1);
-	};
 
-	// Sight
-	if (_randomizeSidearmScope) then {
-		if (random 1 <= _chanceSidearmScope || _contentSidearmScope isEqualTo "") then {
-			_unit removeHandgunItem (_getSidearmAttachments select 2);
+		// Sight
+		if (_randomizeSidearmScope) then {
+			if (random 1 <= _chanceSidearmScope || _contentSidearmScope isEqualTo "") then {
+				_unit removeHandgunItem (_getSidearmAttachments select 2);
+			} else {
+				private _weaponSidearmAttachmentScopeArray = ([_contentSidearmScope] call CBA_fnc_removeWhitespace) splitString ",";
+				private _weaponSidearmAttachmentScope = selectRandom _weaponSidearmAttachmentScopeArray;
+				if (_weaponSidearmAttachmentScope != "") then {
+					_unit addHandgunItem _weaponSidearmAttachmentScope;
+				};
+			};
 		} else {
-			private _weaponSidearmAttachmentScopeArray = ([_contentSidearmScope] call CBA_fnc_removeWhitespace) splitString ",";
-			private _weaponSidearmAttachmentScope = selectRandom _weaponSidearmAttachmentScopeArray;
-			_unit addHandgunItem _weaponSidearmAttachmentScope;
+			private _oldScope = _getSidearmAttachments select 2;
+			if (_oldScope != "") then {
+				_unit addHandgunItem _oldScope;
+			};
 		};
-	} else {
-		_unit addHandgunItem (_getSidearmAttachments select 2);
-	};
 
-	// Bipod
-	if (_randomizeSidearmBipod) then {
-		if (random 1 <= _chanceSidearmBipod || _contentSidearmBipod isEqualTo "") then {
-			_unit removeHandgunItem (_getSidearmAttachments select 3);
+		// Bipod
+		if (_randomizeSidearmBipod) then {
+			if (random 1 <= _chanceSidearmBipod || _contentSidearmBipod isEqualTo "") then {
+				_unit removeHandgunItem (_getSidearmAttachments select 3);
+			} else {
+				private _weaponSidearmAttachmentBipodArray = ([_contentSidearmBipod] call CBA_fnc_removeWhitespace) splitString ",";
+				private _weaponSidearmAttachmentBipod = selectRandom _weaponSidearmAttachmentBipodArray;
+				if (_weaponSidearmAttachmentBipod != "") then {
+					_unit addHandgunItem _weaponSidearmAttachmentBipod;
+				};
+			};
 		} else {
-			private _weaponSidearmAttachmentBipodArray = ([_contentSidearmBipod] call CBA_fnc_removeWhitespace) splitString ",";
-			private _weaponSidearmAttachmentBipod = selectRandom _weaponSidearmAttachmentBipodArray;
-			_unit addHandgunItem _weaponSidearmAttachmentBipod;
+			private _oldBipod = _getSidearmAttachments select 3;
+			if (_oldBipod != "") then {
+				_unit addHandgunItem _oldBipod;
+			};
 		};
-	} else {
-		_unit addHandgunItem (_getSidearmAttachments select 3);
+
+		// Magazine 
+		if (_ammoSidearm != "") then {
+			_unit addHandgunItem _ammoSidearm;
+
+			// Add Sidearm weapon Magazines 
+			_unit addMagazines [_ammoSidearm, _getSidearmAmmoCount];
+		};
 	};
-
-	// Magazine 
-	_unit addHandgunItem _ammoSidearm;
-
-	// Add Sidearm weapon Magazines 
-	_unit addMagazines [_ammoSidearm, _getSidearmAmmoCount];
 };
 
 // Randomizes Secondary Weapon if enabled
 if (_randomizeSecondary && ((_forceSecondary) || (!_forceSecondary && (secondaryWeapon _unit) != ""))) then {
-	#include "fn_defaultSecondary.hpp"
+	private _weaponSecondaryArray = [""];
 
-	if (_contentSecondary isNotEqualTo "" || _contentSecondary isNotEqualTo "[]") then {
+	if (_contentSecondary isNotEqualTo "" && {_contentSecondary isNotEqualTo "[]"}) then {
 		_weaponSecondaryArray = ([_contentSecondary] call CBA_fnc_removeWhitespace) splitString ",";
 	};
 	private _weaponSecondary = selectRandom _weaponSecondaryArray;
-	private _ammoSecondary = (compatibleMagazines [_weaponSecondary, "this"]) select 0;
+	private _compatibleAmmoSecondary = compatibleMagazines [_weaponSecondary, "this"];
+	private _ammoSecondary = if (_compatibleAmmoSecondary isEqualTo []) then {""} else {_compatibleAmmoSecondary select 0};
 
 	// Get all Secondary Weapon Attachments
 	private _getSecondaryAttachments = secondaryWeaponItems _unit;
@@ -271,67 +391,91 @@ if (_randomizeSecondary && ((_forceSecondary) || (!_forceSecondary && (secondary
 	// Remove Secondary weapon
 	_unit removeWeapon (secondaryWeapon _unit);
 
-	// Add new Secondary weapon
-	_unit addWeapon _weaponSecondary;
+	if (_weaponSecondary != "") then {
+		// Add new Secondary weapon
+		_unit addWeapon _weaponSecondary;
 
-	// Add Secondary weapon Attachments from old weapons
-	// Muzzle Attachment
-	if (_randomizeSecondaryMuzzle) then {
-		if (random 1 <= _chanceSecondaryMuzzle || _contentSecondaryMuzzle isEqualTo "") then {
-			_unit removeSecondaryWeaponItem (_getSecondaryAttachments select 0);
+		// Add Secondary weapon Attachments from old weapons
+		// Muzzle Attachment
+		if (_randomizeSecondaryMuzzle) then {
+			if (random 1 <= _chanceSecondaryMuzzle || _contentSecondaryMuzzle isEqualTo "") then {
+				_unit removeSecondaryWeaponItem (_getSecondaryAttachments select 0);
+			} else {
+				private _weaponSecondaryAttachmentMuzzleArray = ([_contentSecondaryMuzzle] call CBA_fnc_removeWhitespace) splitString ",";
+				private _weaponSecondaryAttachmentMuzzle = selectRandom _weaponSecondaryAttachmentMuzzleArray;
+				if (_weaponSecondaryAttachmentMuzzle != "") then {
+					_unit addSecondaryWeaponItem _weaponSecondaryAttachmentMuzzle;
+				};
+			};
 		} else {
-			private _weaponSecondaryAttachmentMuzzleArray = ([_contentSecondaryMuzzle] call CBA_fnc_removeWhitespace) splitString ",";
-			private _weaponSecondaryAttachmentMuzzle = selectRandom _weaponSecondaryAttachmentMuzzleArray;
-			_unit addSecondaryWeaponItem _weaponSecondaryAttachmentMuzzle;
+			private _oldMuzzle = _getSecondaryAttachments select 0;
+			if (_oldMuzzle != "") then {
+				_unit addSecondaryWeaponItem _oldMuzzle;
+			};
 		};
-	} else {
-		_unit addSecondaryWeaponItem (_getSecondaryAttachments select 0);
-	};
 	
-	// Rail Attachment
-	if (_randomizeSecondaryRail) then {
-		if (random 1 <= _chanceSecondaryRail || _contentSecondaryRail isEqualTo "") then {
-			_unit removeSecondaryWeaponItem (_getSecondaryAttachments select 1);
+		// Rail Attachment
+		if (_randomizeSecondaryRail) then {
+			if (random 1 <= _chanceSecondaryRail || _contentSecondaryRail isEqualTo "") then {
+				_unit removeSecondaryWeaponItem (_getSecondaryAttachments select 1);
+			} else {
+				private _weaponSecondaryAttachmentRailArray = ([_contentSecondaryRail] call CBA_fnc_removeWhitespace) splitString ",";
+				private _weaponSecondaryAttachmentRail = selectRandom _weaponSecondaryAttachmentRailArray;
+				if (_weaponSecondaryAttachmentRail != "") then {
+					_unit addSecondaryWeaponItem _weaponSecondaryAttachmentRail;
+				};
+			};
 		} else {
-			private _weaponSecondaryAttachmentRailArray = ([_contentSecondaryRail] call CBA_fnc_removeWhitespace) splitString ",";
-			private _weaponSecondaryAttachmentRail = selectRandom _weaponSecondaryAttachmentRailArray;
-			_unit addSecondaryWeaponItem _weaponSecondaryAttachmentRail;
+			private _oldRail = _getSecondaryAttachments select 1;
+			if (_oldRail != "") then {
+				_unit addSecondaryWeaponItem _oldRail;
+			};
 		};
-	} else {
-		_unit addSecondaryWeaponItem (_getSecondaryAttachments select 1);
-	};
 
-	// Sight
-	if (_randomizeSecondaryScope) then {
-		if (random 1 <= _chanceSecondaryScope || _contentSecondaryScope isEqualTo "") then {
-			_unit removeSecondaryWeaponItem (_getSecondaryAttachments select 2);
+		// Sight
+		if (_randomizeSecondaryScope) then {
+			if (random 1 <= _chanceSecondaryScope || _contentSecondaryScope isEqualTo "") then {
+				_unit removeSecondaryWeaponItem (_getSecondaryAttachments select 2);
+			} else {
+				private _weaponSecondaryAttachmentScopeArray = ([_contentSecondaryScope] call CBA_fnc_removeWhitespace) splitString ",";
+				private _weaponSecondaryAttachmentScope = selectRandom _weaponSecondaryAttachmentScopeArray;
+				if (_weaponSecondaryAttachmentScope != "") then {
+					_unit addSecondaryWeaponItem _weaponSecondaryAttachmentScope;
+				};
+			};
 		} else {
-			private _weaponSecondaryAttachmentScopeArray = ([_contentSecondaryScope] call CBA_fnc_removeWhitespace) splitString ",";
-			private _weaponSecondaryAttachmentScope = selectRandom _weaponSecondaryAttachmentScopeArray;
-			_unit addSecondaryWeaponItem _weaponSecondaryAttachmentScope;
+			private _oldScope = _getSecondaryAttachments select 2;
+			if (_oldScope != "") then {
+				_unit addSecondaryWeaponItem _oldScope;
+			};
 		};
-	} else {
-		_unit addSecondaryWeaponItem (_getSecondaryAttachments select 2);
-	};
 
-	// Bipod
-	if (_randomizeSecondaryBipod) then {
-		if (random 1 <= _chanceSecondaryBipod || _contentSecondaryBipod isEqualTo "") then {
-			_unit removeSecondaryWeaponItem (_getSecondaryAttachments select 3);
+		// Bipod
+		if (_randomizeSecondaryBipod) then {
+			if (random 1 <= _chanceSecondaryBipod || _contentSecondaryBipod isEqualTo "") then {
+				_unit removeSecondaryWeaponItem (_getSecondaryAttachments select 3);
+			} else {
+				private _weaponSecondaryAttachmentBipodArray = ([_contentSecondaryBipod] call CBA_fnc_removeWhitespace) splitString ",";
+				private _weaponSecondaryAttachmentBipod = selectRandom _weaponSecondaryAttachmentBipodArray;
+				if (_weaponSecondaryAttachmentBipod != "") then {
+					_unit addSecondaryWeaponItem _weaponSecondaryAttachmentBipod;
+				};
+			};
 		} else {
-			private _weaponSecondaryAttachmentBipodArray = ([_contentSecondaryBipod] call CBA_fnc_removeWhitespace) splitString ",";
-			private _weaponSecondaryAttachmentBipod = selectRandom _weaponSecondaryAttachmentBipodArray;
-			_unit addSecondaryWeaponItem _weaponSecondaryAttachmentBipod;
+			private _oldBipod = _getSecondaryAttachments select 3;
+			if (_oldBipod != "") then {
+				_unit addSecondaryWeaponItem _oldBipod;
+			};
 		};
-	} else {
-		_unit addSecondaryWeaponItem (_getSecondaryAttachments select 3);
+
+		// Magazine 
+		if (_ammoSecondary != "") then {
+			_unit addSecondaryWeaponItem _ammoSecondary;
+
+			// Add Secondary weapon Magazines 
+			_unit addMagazines [_ammoSecondary, _getSecondaryAmmoCount];
+		};
 	};
-
-	// Magazine 
-	_unit addSecondaryWeaponItem _ammoSecondary;
-
-	// Add Secondary weapon Magazines 
-	_unit addMagazines [_ammoSecondary, _getSecondaryAmmoCount];
 };
 
 if ((primaryWeapon _unit) isNotEqualTo  "") exitWith {

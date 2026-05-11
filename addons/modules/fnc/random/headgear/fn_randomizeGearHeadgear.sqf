@@ -1,18 +1,39 @@
+/*
+ * Author: Moony
+ * Randomizes the headgear of the unit 
+ *
+ * Arguments:
+ * 0: Unit <OBJECT>
+ * 1: Enable Randomization <BOOL>
+ * 2: Force adding Headgear <BOOL>
+ * 3: Classnames for randomization <STRING>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [player, true, true, "H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo"] call mmm_modules_fnc_randomizeGearHeadgear.sqf
+ *
+ * Public: Yes
+ */
+
+#include "\z\mmm\addons\modules\script_component.hpp"
+
 params [
 	"_unit",
 	"_randomizeHeadgear",
 	"_forceHeadgear",
-	"_contentHeadgear",
-	"_chanceHeadgear"
+	"_chanceHeadgear",
+	"_contentHeadgear"
 ];
 
-_unit setVariable ["MMM_var_randomizationHeadgearDone", false];
+_unit setVariable [QGVAR(randomizationHeadgearDone), false];
 
 // Randomizes Headgear if enabled
 if (_randomizeHeadgear && ((_forceHeadgear) || (!_forceHeadgear && (headgear _unit) != ""))) then {
-	#include "fn_defaultHeadgear.hpp"
+	private _headgearArray = [""];
 
-	if (_contentHeadgear isNotEqualTo "" || _contentHeadgear isNotEqualTo "[]") then {
+	if (_contentHeadgear isNotEqualTo "" && {_contentHeadgear isNotEqualTo "[]"}) then {
 		_headgearArray = ([_contentHeadgear] call CBA_fnc_removeWhitespace) splitString ",";
 	};
 	private _selectedHeadgear = selectRandom _headgearArray;
@@ -21,12 +42,11 @@ if (_randomizeHeadgear && ((_forceHeadgear) || (!_forceHeadgear && (headgear _un
 	removeHeadgear _unit;
 
 	// Add new Headgear
-	if (random 1 <= _chanceHeadgear) then {
-	} else {
+	if ((random 1 > _chanceHeadgear) && {_selectedHeadgear != ""}) then {
 		_unit addHeadgear _selectedHeadgear;
 	};
 
-	_unit setVariable ["MMM_var_randomizationHeadgearSelected", _selectedHeadgear, true];
+	_unit setVariable [QGVAR(randomizationHeadgearSelected), _selectedHeadgear, true];
 };
 
-_unit setVariable ["MMM_var_randomizationHeadgearDone", true, true];
+_unit setVariable [QGVAR(randomizationHeadgearDone), true, true];

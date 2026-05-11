@@ -70,7 +70,7 @@
 				false // Force Default
 			],
 			[
-				"LIST", // Type
+				"EDIT", // Type
 				[
 					"", // Title
 					"" // Tooltip

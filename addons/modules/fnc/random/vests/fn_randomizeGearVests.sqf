@@ -1,18 +1,39 @@
+/*
+ * Author: Moony
+ * Randomizes the vests of the unit 
+ *
+ * Arguments:
+ * 0: Unit <OBJECT>
+ * 1: Enable Randomization <BOOL>
+ * 2: Force adding Vests <BOOL>
+ * 3: Classnames for randomization <STRING>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [player, true, true, "V_BandollierB_blk,V_Chestrig_blk,V_PlateCarrier1_blk"] call mmm_modules_fnc_randomizeGearVests.sqf
+ *
+ * Public: Yes
+ */
+
+#include "\z\mmm\addons\modules\script_component.hpp"
+
 params [
 	"_unit",
 	"_randomizeVests",
 	"_forceVests",
-	"_contentVests",
-	"_chanceVests"
+	"_chanceVests",
+	"_contentVests"
 ];
 
-_unit setVariable ["MMM_var_randomizationVestsDone", false];
+_unit setVariable [QGVAR(randomizationVestsDone), false];
 
 // Randomizes Vests if enabled
 if (_randomizeVests && ((_forceVests) || (!_forceVests && (vest _unit) != ""))) then {
-	#include "fn_defaultVests.hpp"
+	private _vestsArray = [""];
 
-	if (_contentVests isNotEqualTo "" || _contentVests isNotEqualTo "[]") then {
+	if (_contentVests isNotEqualTo "" && {_contentVests isNotEqualTo "[]"}) then {
 		_vestsArray = ([_contentVests] call CBA_fnc_removeWhitespace) splitString ",";
 	};
 	private _selectedVests = selectRandom _vestsArray;
@@ -24,17 +45,18 @@ if (_randomizeVests && ((_forceVests) || (!_forceVests && (vest _unit) != ""))) 
 	removeVest _unit;
 
 	// Add new Vests
-	if (random 1 <= _chanceVests) then {
-	} else {
+	if ((random 1 > _chanceVests) && {_selectedVests != ""}) then {
 		_unit addVest _selectedVests;
 	};
 
 	//Add content back
-	{
-		_unit addItemToVest _x;
-	} forEach _currentContent;
+	if (vest _unit != "") then {
+		{
+			_unit addItemToVest _x;
+		} forEach _currentContent;
+	};
 
-	_unit setVariable ["MMM_var_randomizationVestsSelected", _selectedVests, true];
+	_unit setVariable [QGVAR(randomizationVestsSelected), _selectedVests, true];
 };
 
-_unit setVariable ["MMM_var_randomizationVestsDone", true, true];
+_unit setVariable [QGVAR(randomizationVestsDone), true, true];

@@ -1,7 +1,11 @@
 class CfgFactionClasses
 {
-	class MMM_MODULES_ModuleClass
+	class GVAR(Modules)
 	{
-		displayName = "Moony's Magnificent";
+		displayName = "Moony's Magnificent Modules";
+	};
+	class GVAR(modulesTest)
+	{
+		displayName = "Moony's Magnificent Modules TEST";
 	};
 };

@@ -1,3 +1,3 @@
-private _placeOnVehicle = if (_objectUnderCursor isKindOf "CAManBase") exitWith {
-				[objNull, "PLACE ON AN VEHCILE"] call BIS_fnc_showCuratorFeedbackMessage;
+if (_objectUnderCursor isKindOf "CAManBase") exitWith {
+				[objNull, "PLACE ON A VEHICLE"] call BIS_fnc_showCuratorFeedbackMessage;
 			};

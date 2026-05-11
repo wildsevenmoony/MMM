@@ -1,3 +1,3 @@
-private _notNullVehicleUnit = if (isNull _objectUnderCursor) exitWith {
-				[objNull, "PLACE ON AN VEHCILE/UNIT"] call BIS_fnc_showCuratorFeedbackMessage;
+if (isNull _objectUnderCursor) exitWith {
+				[objNull, "PLACE ON A VEHICLE/UNIT"] call BIS_fnc_showCuratorFeedbackMessage;
 			};
