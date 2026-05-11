@@ -22,6 +22,7 @@ class CfgPatches {
 			QGVAR(randomizeGearUniforms),
 			QGVAR(randomizeGearVests),
 			QGVAR(randomizeGearWeapons),
+			QGVAR(randomizeGear)
 			//QGVAR(moduleDialogDemo)
 		};
         weapons[] = {};

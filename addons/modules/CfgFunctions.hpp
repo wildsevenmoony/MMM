@@ -32,6 +32,11 @@ class CfgFunctions
 			class randomizeGearBackpacks{};
 			class randomizeGearBackpacksInit{};
 		};
+		class Random_Full
+		{
+			file = PATHTOF(fnc\random\full);
+			class randomizeGearInit{};
+		};
 		class Random_Goggles
 		{
 			file = PATHTOF(fnc\random\goggles);
