@@ -115,7 +115,7 @@ class CfgVehicles
 		function = QEFUNC(modules,ambientAnimationMP);
 		functionPriority = 10;
 		isDisposable = 0;
-		is3DEN = 0;
+		is3DEN = 1;
 		isGlobal = 0;
 		isTriggerActivated = 0;
 		scope = 2;
@@ -128,6 +128,7 @@ class CfgVehicles
 				displayName = "Choose an Ambient Animation";
 				typeName = "NUMBER";
 				defaultValue = "0";
+				expression = "_this setVariable ['%s', _value]; if (is3DEN) then {[_this, 'ambient'] call mmm_modules_fnc_previewAnimation3DEN;};";
 				class Values
 				{
 					class Stand1	{name = "STAND1";	value = 0;};
@@ -175,6 +176,7 @@ class CfgVehicles
 				property = QGVAR(ambientAnimationMPSnapObjectEdit);
 				displayName = "Assign an Object to snap to!";
 				tooltip = "Leave empty if you don't want to snap to an object";
+				expression = "_this setVariable ['%s', _value]; if (is3DEN) then {[_this, 'ambient'] call mmm_modules_fnc_previewAnimation3DEN;};";
 			};
 			
 			class GVAR(ambientAnimationMPDamage): Combo
@@ -183,11 +185,23 @@ class CfgVehicles
 				displayName = "Allow Damage";
 				typeName = "NUMBER";
 				defaultValue = "0";
+				expression = "_this setVariable ['%s', _value];";
 				class Values
 				{
 					class answer_no	{name = "No"; value = 0;};
 					class answer_yes	{name = "Yes";	value = 1;};
 				};
+			};
+
+			class GVAR(ambientAnimationMPDelay): Edit
+  			{
+				property = QGVAR(ambientAnimationMPDelayEdit);
+				displayName = "Random Start Delay";
+				tooltip = "Maximum random start delay in seconds. Set to 0 to start all synced units at the same time.";
+				typeName = "NUMBER";
+				defaultValue = "0.5";
+				validate = "number";
+				expression = "_this setVariable ['%s', _value];";
 			};
 
 			class ModuleDescription: ModuleDescription{};
@@ -217,7 +231,7 @@ class CfgVehicles
 		function = QEFUNC(modules,animation);
 		functionPriority = 10;
 		isDisposable = 0;
-		is3DEN = 0;
+		is3DEN = 1;
 		isGlobal = 0;
 		isTriggerActivated = 0;
 		scope = 2;
@@ -230,6 +244,7 @@ class CfgVehicles
 					displayName = "Choose an Animation";
 					typeName = "NUMBER";
 					defaultValue = "0";
+					expression = "_this setVariable ['%s', _value]; if (is3DEN) then {[_this, 'switchMove'] call mmm_modules_fnc_previewAnimation3DEN;};";
 					class Values
 					{
 						class Idle_Standing_1 {name = "Idle Standing 01"; value = 0;};
@@ -286,6 +301,14 @@ class CfgVehicles
 						class Typing_Combat_Kneeling {name = "Typing Kneeling"; value = 51;};
 					};
 			};
+
+			class GVAR(animationCustom): Edit
+  			{
+				property = QGVAR(animationCustomEdit);
+				displayName = "Custom Animation";
+				tooltip = "Optional animation name. If set, this overrides the selected animation. Quoted input and comma-separated lists are accepted; only the first entry is used.";
+				expression = "_this setVariable ['%s', _value]; if (is3DEN) then {[_this, 'switchMove'] call mmm_modules_fnc_previewAnimation3DEN;};";
+			};
 			
 			class GVAR(animationDamage): Combo
   			{
@@ -293,11 +316,23 @@ class CfgVehicles
 				displayName = "Allow Damage";
 				typeName = "NUMBER";
 				defaultValue = "0";
+				expression = "_this setVariable ['%s', _value];";
 				class Values
 				{
 					class answer_no	{name = "No"; value = 0;};
 					class answer_yes	{name = "Yes";	value = 1;};
 				};
+			};
+
+			class GVAR(animationDelay): Edit
+  			{
+				property = QGVAR(animationDelayEdit);
+				displayName = "Random Start Delay";
+				tooltip = "Maximum random start delay in seconds. Set to 0 to start all synced units at the same time.";
+				typeName = "NUMBER";
+				defaultValue = "0.5";
+				validate = "number";
+				expression = "_this setVariable ['%s', _value];";
 			};
 			class ModuleDescription: ModuleDescription{};
 		};
@@ -305,6 +340,90 @@ class CfgVehicles
 		class ModuleDescription: ModuleDescription
 		{
 			description = "Sync an AI Unit to this module to make it play the selected Animation";
+			sync[] = {"LocationArea_F"};
+
+			class LocationArea_F
+			{
+				description[] =	{"Synchronise any AI to this module"};
+				position = 0;
+				direction = 0;
+				optional = 0;
+				duplicate = 0;
+				synced[] = {"AnyAI"};
+			};
+		};
+	};
+
+	class GVAR(playMoveAnimation): Module_F
+	{
+		category = QGVAR(Modules);
+		displayName = "PlayMove Animation";
+		function = QEFUNC(modules,playMoveAnimation);
+		functionPriority = 10;
+		isDisposable = 0;
+		is3DEN = 1;
+		isGlobal = 0;
+		isTriggerActivated = 0;
+		scope = 2;
+
+		class Attributes: AttributesBase
+		{
+			class GVAR(playMoveAnimationSelection): Combo
+  			{
+				property = QGVAR(playMoveAnimationSelectionCombo);
+				displayName = "Choose an Animation";
+				typeName = "NUMBER";
+				defaultValue = "0";
+				expression = "_this setVariable ['%s', _value]; if (is3DEN) then {[_this, 'playMove'] call mmm_modules_fnc_previewAnimation3DEN;};";
+				class Values
+				{
+					class Idle_Unarmed {name = "Idle Unarmed"; value = 0;};
+					class Exercise_Pushup {name = "Exercise Pushup"; value = 1;};
+					class Exercise_Kata {name = "Exercise Kata"; value = 2;};
+					class Exercise_KneeBend_A {name = "Exercise Knee Bend A"; value = 3;};
+					class Exercise_KneeBend_B {name = "Exercise Knee Bend B"; value = 4;};
+				};
+			};
+
+			class GVAR(playMoveAnimationCustom): Edit
+  			{
+				property = QGVAR(playMoveAnimationCustomEdit);
+				displayName = "Custom Animation";
+				tooltip = "Optional animation name. If set, this overrides the selected animation. Quoted input and comma-separated lists are accepted; only the first entry is used.";
+				expression = "_this setVariable ['%s', _value]; if (is3DEN) then {[_this, 'playMove'] call mmm_modules_fnc_previewAnimation3DEN;};";
+			};
+
+			class GVAR(playMoveAnimationDamage): Combo
+  			{
+				property = QGVAR(playMoveAnimationDamageCombo);
+				displayName = "Allow Damage";
+				typeName = "NUMBER";
+				defaultValue = "0";
+				expression = "_this setVariable ['%s', _value];";
+				class Values
+				{
+					class answer_no	{name = "No"; value = 0;};
+					class answer_yes	{name = "Yes";	value = 1;};
+				};
+			};
+
+			class GVAR(playMoveAnimationDelay): Edit
+  			{
+				property = QGVAR(playMoveAnimationDelayEdit);
+				displayName = "Random Start Delay";
+				tooltip = "Maximum random start delay in seconds. Set to 0 to start all synced units at the same time.";
+				typeName = "NUMBER";
+				defaultValue = "0.5";
+				validate = "number";
+				expression = "_this setVariable ['%s', _value];";
+			};
+
+			class ModuleDescription: ModuleDescription{};
+		};
+
+		class ModuleDescription: ModuleDescription
+		{
+			description = "Sync an AI Unit to this module to make it play the selected playMove animation";
 			sync[] = {"LocationArea_F"};
 
 			class LocationArea_F

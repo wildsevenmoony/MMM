@@ -27,15 +27,13 @@ switch (_condition) do {
 	case 0: {
 		{
 			{
-				[_x, "PATH"] remoteExec ["disableAI", 0, true];
-				_x setVariable [QGVAR(aiStationary), true, true];
+				[_x] remoteExec [QEFUNC(modules,stationaryAIStationary), _x];
 			} forEach units group _x;
 		} forEach _ai;
 	};
 	case 1: {
 		{
-				[_x, "PATH"] remoteExec ["disableAI", 0, true];
-				_x setVariable [QGVAR(aiStationary), true, true];		
+			[_x] remoteExec [QEFUNC(modules,stationaryAIStationary), _x];
 		} forEach _ai;
 	};
 };

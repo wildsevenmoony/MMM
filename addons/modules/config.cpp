@@ -4,6 +4,7 @@
 #include "CfgFunctions.hpp"
 #include "CfgNotifications.hpp"
 #include "CfgPatches.hpp"
+#include "Cfg3DEN.hpp"
 #include "CfgVehicles.hpp"
 #include "CfgUnitInsignia.hpp"
 

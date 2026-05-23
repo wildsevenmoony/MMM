@@ -7,6 +7,7 @@ class CfgPatches {
             "cba_main",
             "ace_main",
             "ace_common",
+            "3DEN",
             "zen_main",
             "zen_modules"
         };
@@ -15,6 +16,7 @@ class CfgPatches {
 			QGVAR(spawnWreck),
 			QGVAR(ambientAnimationMP),
 			QGVAR(animation),
+			QGVAR(playMoveAnimation),
 			QGVAR(aiStationary),
 			QGVAR(randomizeGearBackpacks),
 			QGVAR(randomizeGearGoggles),

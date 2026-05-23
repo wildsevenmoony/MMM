@@ -12,8 +12,15 @@ class CfgFunctions
 		class Ambient
 		{
 			file = PATHTOF(fnc\ambient);
+			class applyAmbientAnimation{};
+			class applyPlayMoveAnimation{};
+			class applySwitchMoveAnimation{};
 			class ambientAnimationMP{};
 			class animation{};
+			class parseCustomAnimation{};
+			class playMoveAnimation{};
+			class previewAnimation3DEN{};
+			class refreshAnimationPreview3DEN{};
 		};
 		class Medical
 		{
