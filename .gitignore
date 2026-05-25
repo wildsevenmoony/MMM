@@ -9,5 +9,6 @@
 *.mp3
 releases/
 include/
-.hemtt/
+.hemtt/*
+!.hemtt/project.toml
 .vscode

@@ -1,0 +1,10 @@
+name = "Moony's Magnificent Modules"
+author = "Moony"
+prefix = "mmm"
+mainprefix = "z"
+
+[version]
+major = 1
+minor = 6
+patch = 0
+build = 0
