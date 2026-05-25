@@ -1,13 +1,13 @@
 *.pbo
 .hemttout
 .hemttprivatekey
-hemtt
-hemtt.exe
 *.biprivatekey
 *.png
 *.jpg
 *.jpeg
 *.wav
 *.mp3
-include
-releases
+releases/
+include/
+.hemtt/
+.vscode
