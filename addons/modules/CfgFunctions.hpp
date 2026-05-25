@@ -2,35 +2,39 @@ class CfgFunctions
 {
 	class mmm_modules
 	{
-		class Ai
-		{
-			file = PATHTOF(fnc\ai);
-			class stationaryAIStationary{};
-			class stationaryAIMoving{};
-			class stationaryAIInit{};
-		};
 		class Ambient
 		{
 			file = PATHTOF(fnc\ambient);
+			class ambientAnimationMP{};
+			class animation{};
 			class applyAmbientAnimation{};
 			class applyPlayMoveAnimation{};
 			class applySwitchMoveAnimation{};
-			class ambientAnimationMP{};
-			class animation{};
 			class parseCustomAnimation{};
 			class playMoveAnimation{};
 			class previewAnimation3DEN{};
 			class refreshAnimationPreview3DEN{};
 		};
+		class Ai
+		{
+			file = PATHTOF(fnc\ai);
+			class stationaryAIInit{};
+			class stationaryAIMoving{};
+			class stationaryAIStationary{};
+		};
 		class Medical
 		{
 			file = PATHTOF(fnc\medical);
+			class aceDamage{};
+			class aceDamageInit{};
+			class aceDamageLocal{};
 			class baseMedic{};
 			class baseMedicInit{};
 		};
 		class Misc
 		{
 			file = PATHTOF(fnc\misc);
+			class parseClassnameList{};
 			class spawnWreck{};
 		};
 		class Random_Backpacks
@@ -105,9 +109,10 @@ class CfgFunctions
 
 			class aceCarryable{};
 			class aceDragable{};
+			class aceDraggable{};
 			class destroyWithoutExplosion{};
-			class respawnTimer{};
 			class removeCrater{};
+			class respawnTimer{};
 			class unlimitedAmmoZeus{};
 			class unlimitedFuelZeus{};
 		};
@@ -121,15 +126,18 @@ class CfgFunctions
 		{
 			file = PATHTOF(fnc\zenmodule\mmm_Fun);
 
+			class warcrimesNotification{};
 			class zeusHatesArma{};
 			class zeusHatesPlayerbase{};
-			class warcrimesNotification{};
 		};
 		class Zenmodule_mmm_Medical
 		{
 			file = PATHTOF(fnc\zenmodule\mmm_Medical);
 
+			class aceDamageZeus{};
 			class baseMedicZeus{};
+			class gui_aceDamage{};
+			class onConfirm_aceDamage{};
 		};
 		class Zenmodule_mmm_Random
 		{
@@ -137,13 +145,13 @@ class CfgFunctions
 			
 			class gui_randomizeGear{};
 			class onConfirm_randomizeGear{};
-			class randomizeGearZeus{};
 			class randomizeGearBackpacksGroupZeus{};
 			class randomizeGearGogglesGroupZeus{};
 			class randomizeGearHeadgearGroupZeus{};
 			class randomizeGearUniformsGroupZeus{};
 			class randomizeGearVestsGroupZeus{};
 			class randomizeGearWeaponsGroupZeus{};
+			class randomizeGearZeus{};
 		};
 	};
 };

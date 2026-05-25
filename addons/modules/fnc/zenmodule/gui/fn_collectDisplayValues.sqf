@@ -32,7 +32,15 @@ private _values = [];
                 cbChecked _control
             };
             case "slider": {
-                sliderPosition _control
+                (round ((sliderPosition _control) * 100)) / 100
+            };
+            case "combo": {
+                private _index = lbCurSel _control;
+                if (_index < 0) then {
+                    ""
+                } else {
+                    _control lbData _index
+                }
             };
             default {
                 diag_log format ["[MMM] %1: Unknown field type '%2' for '%3'", QEFUNC(modules,collectDisplayValues), _type, _label];

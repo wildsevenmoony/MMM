@@ -26,21 +26,27 @@ if (!isNull _title) then {
 private _controls = [];
 private _fields = [];
 
-private _xLabel = 0.5 * GUI_GRID_W;
-private _xField = 12 * GUI_GRID_W;
+private _contentPaddingY = 0.45 * GUI_GRID_H;
+private _xField = 12.5 * GUI_GRID_W;
 private _rowWLabel = 11 * GUI_GRID_W;
-private _rowWField = 14 * GUI_GRID_W;
-private _categoryW = 25.5 * GUI_GRID_W;
+private _rowWField = 13.5 * GUI_GRID_W;
+private _categoryBodyX = 0.35 * GUI_GRID_W;
+private _categoryBodyW = 26.9 * GUI_GRID_W;
+private _rowBackgroundX = 1.55 * GUI_GRID_W;
+private _columnGapW = 0.16 * GUI_GRID_W;
+private _sliderEditW = 2.3 * GUI_GRID_W;
+private _sliderGapW = 0.25 * GUI_GRID_W;
+private _toggleGapW = 0;
+private _sectionPadY = 0.16 * GUI_GRID_H;
 private _rowH = 1 * GUI_GRID_H;
 private _categoryH = 1 * GUI_GRID_H;
-private _rowGap = 0.25 * GUI_GRID_H;
-private _categoryGapTop = 0.35 * GUI_GRID_H;
-private _categoryGapBottom = 0.2 * GUI_GRID_H;
+private _rowGap = 0.16 * GUI_GRID_H;
+private _categoryGapTop = 0.32 * GUI_GRID_H;
 private _chanceRange = [0, 1];
 private _chanceSpeed = [0.01, 0.1];
 private _saveKey = QGVAR(randomizeGearDialogValues);
 private _savedValues = profileNamespace getVariable [_saveKey, []];
-private _y = 0;
+private _y = _contentPaddingY;
 
 #include "\z\mmm\addons\modules\fnc\zenmodule\gui\script_guiHelpers.hpp"
 
@@ -61,10 +67,10 @@ private _addEquipmentBlock = {
     ];
 
     [_title, _categoryIdc] call _addCategory;
-    ["Randomization", _randomLabelIdc, _randomControlIdc, false, format ["%1Random", _prefix]] call _addCheckbox;
-    ["Force adding", _forceLabelIdc, _forceControlIdc, false, format ["%1Force", _prefix]] call _addCheckbox;
-    ["Empty chance", _chanceLabelIdc, _chanceControlIdc, _chanceRange, 0, format ["%1Chance", _prefix], _chanceSpeed] call _addSlider;
-    [_contentHint, _contentLabelIdc, _contentControlIdc, "", format ["%1Content", _prefix]] call _addEdit;
+    ["Randomization", _randomLabelIdc, _randomControlIdc, false, format ["%1Random", _prefix], format ["Enable randomizing %1 for the selected unit.", toLowerANSI _title]] call _addCheckbox;
+    ["Force adding", _forceLabelIdc, _forceControlIdc, false, format ["%1Force", _prefix], format ["Add the new %1 even when the unit already has one.", toLowerANSI _title]] call _addCheckbox;
+    ["Empty chance", _chanceLabelIdc, _chanceControlIdc, _chanceRange, 0, format ["%1Chance", _prefix], _chanceSpeed, "Chance from 0 to 1 that this equipment slot is left empty."] call _addSlider;
+    [_contentHint, _contentLabelIdc, _contentControlIdc, "", format ["%1Content", _prefix], "Comma-separated classnames to choose from. Leave empty to use the module defaults."] call _addEdit;
 };
 
 private _addWeaponBlock = {
@@ -106,28 +112,28 @@ private _addWeaponBlock = {
     ];
 
     [_title, _categoryIdc] call _addCategory;
-    ["Randomization", _randomLabelIdc, _randomControlIdc, false, format ["%1Random", _prefix]] call _addCheckbox;
-    ["Force adding", _forceLabelIdc, _forceControlIdc, false, format ["%1Force", _prefix]] call _addCheckbox;
-    [_weaponHint, _contentLabelIdc, _contentControlIdc, "", format ["%1Content", _prefix]] call _addEdit;
+    ["Randomization", _randomLabelIdc, _randomControlIdc, false, format ["%1Random", _prefix], format ["Enable randomizing the %1 slot.", toLowerANSI _title]] call _addCheckbox;
+    ["Force adding", _forceLabelIdc, _forceControlIdc, false, format ["%1Force", _prefix], "Add the weapon even when the unit already has a weapon in this slot."] call _addCheckbox;
+    [_weaponHint, _contentLabelIdc, _contentControlIdc, "", format ["%1Content", _prefix], "Comma-separated weapon classnames to choose from. Leave empty to use the module defaults."] call _addEdit;
 
-    ["Scope randomization", _scopeRandomLabelIdc, _scopeRandomControlIdc, false, format ["%1ScopeRandom", _prefix]] call _addCheckbox;
-    ["Scope empty chance", _scopeChanceLabelIdc, _scopeChanceControlIdc, _chanceRange, 0, format ["%1ScopeChance", _prefix], _chanceSpeed] call _addSlider;
-    ["Scope classnames", _scopeContentLabelIdc, _scopeContentControlIdc, "", format ["%1ScopeContent", _prefix]] call _addEdit;
+    ["Scope randomization", _scopeRandomLabelIdc, _scopeRandomControlIdc, false, format ["%1ScopeRandom", _prefix], "Enable randomizing optic attachments for this weapon."] call _addCheckbox;
+    ["Scope empty chance", _scopeChanceLabelIdc, _scopeChanceControlIdc, _chanceRange, 0, format ["%1ScopeChance", _prefix], _chanceSpeed, "Chance from 0 to 1 that no optic is added."] call _addSlider;
+    ["Scope classnames", _scopeContentLabelIdc, _scopeContentControlIdc, "", format ["%1ScopeContent", _prefix], "Comma-separated optic classnames to choose from."] call _addEdit;
 
-    ["Rail randomization", _railRandomLabelIdc, _railRandomControlIdc, false, format ["%1RailRandom", _prefix]] call _addCheckbox;
-    ["Rail empty chance", _railChanceLabelIdc, _railChanceControlIdc, _chanceRange, 0, format ["%1RailChance", _prefix], _chanceSpeed] call _addSlider;
-    ["Rail classnames", _railContentLabelIdc, _railContentControlIdc, "", format ["%1RailContent", _prefix]] call _addEdit;
+    ["Rail randomization", _railRandomLabelIdc, _railRandomControlIdc, false, format ["%1RailRandom", _prefix], "Enable randomizing rail attachments for this weapon."] call _addCheckbox;
+    ["Rail empty chance", _railChanceLabelIdc, _railChanceControlIdc, _chanceRange, 0, format ["%1RailChance", _prefix], _chanceSpeed, "Chance from 0 to 1 that no rail attachment is added."] call _addSlider;
+    ["Rail classnames", _railContentLabelIdc, _railContentControlIdc, "", format ["%1RailContent", _prefix], "Comma-separated rail attachment classnames to choose from."] call _addEdit;
 
-    ["Muzzle randomization", _muzzleRandomLabelIdc, _muzzleRandomControlIdc, false, format ["%1MuzzleRandom", _prefix]] call _addCheckbox;
-    ["Muzzle empty chance", _muzzleChanceLabelIdc, _muzzleChanceControlIdc, _chanceRange, 0, format ["%1MuzzleChance", _prefix], _chanceSpeed] call _addSlider;
-    ["Muzzle classnames", _muzzleContentLabelIdc, _muzzleContentControlIdc, "", format ["%1MuzzleContent", _prefix]] call _addEdit;
+    ["Muzzle randomization", _muzzleRandomLabelIdc, _muzzleRandomControlIdc, false, format ["%1MuzzleRandom", _prefix], "Enable randomizing muzzle attachments for this weapon."] call _addCheckbox;
+    ["Muzzle empty chance", _muzzleChanceLabelIdc, _muzzleChanceControlIdc, _chanceRange, 0, format ["%1MuzzleChance", _prefix], _chanceSpeed, "Chance from 0 to 1 that no muzzle attachment is added."] call _addSlider;
+    ["Muzzle classnames", _muzzleContentLabelIdc, _muzzleContentControlIdc, "", format ["%1MuzzleContent", _prefix], "Comma-separated muzzle attachment classnames to choose from."] call _addEdit;
 
-    ["Bipod randomization", _bipodRandomLabelIdc, _bipodRandomControlIdc, false, format ["%1BipodRandom", _prefix]] call _addCheckbox;
-    ["Bipod empty chance", _bipodChanceLabelIdc, _bipodChanceControlIdc, _chanceRange, 0, format ["%1BipodChance", _prefix], _chanceSpeed] call _addSlider;
-    ["Bipod classnames", _bipodContentLabelIdc, _bipodContentControlIdc, "", format ["%1BipodContent", _prefix]] call _addEdit;
+    ["Bipod randomization", _bipodRandomLabelIdc, _bipodRandomControlIdc, false, format ["%1BipodRandom", _prefix], "Enable randomizing bipod attachments for this weapon."] call _addCheckbox;
+    ["Bipod empty chance", _bipodChanceLabelIdc, _bipodChanceControlIdc, _chanceRange, 0, format ["%1BipodChance", _prefix], _chanceSpeed, "Chance from 0 to 1 that no bipod is added."] call _addSlider;
+    ["Bipod classnames", _bipodContentLabelIdc, _bipodContentControlIdc, "", format ["%1BipodContent", _prefix], "Comma-separated bipod classnames to choose from."] call _addEdit;
 };
 
-["Apply to group", IDC_RANDOMIZE_GROUP_LABEL, IDC_RANDOMIZE_GROUP_CHECK, false, "Group"] call _addCheckbox;
+["Apply to group", IDC_RANDOMIZE_GROUP_LABEL, IDC_RANDOMIZE_GROUP_CHECK, false, "Group", "Apply the selected randomization settings to the whole selected group instead of only one unit."] call _addCheckbox;
 
 [
     "Backpacks", "Backpacks",
@@ -242,10 +248,12 @@ private _addWeaponBlock = {
     "Secondary weapon classnames"
 ] call _addWeaponBlock;
 
+call _finalizeCategoryBody;
+
 _display setVariable [QGVAR(onConfirm), QEFUNC(modules,onConfirm_randomizeGear)];
 _display setVariable [QGVAR(saveKey), _saveKey];
 _display setVariable [QGVAR(importExportEnabled), true];
 
 _display setVariable [QGVAR(controls), _controls];
 _display setVariable [QGVAR(fields), _fields];
-_display setVariable [QGVAR(contentHeight), _y];
+_display setVariable [QGVAR(contentHeight), _y + _contentPaddingY];

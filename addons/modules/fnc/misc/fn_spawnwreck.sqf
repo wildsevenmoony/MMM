@@ -25,21 +25,13 @@ private _cookOff = _logic getVariable [QGVAR(spawnWreckACECookingOff), _logic ge
 private _explosionEffect = _logic getVariable [QGVAR(spawnWreckDestroyEffect), _logic getVariable ["MMM_MODULES_Module_SpawnWreck_Destroy_Effect", 0]];
 
 if (_activated) then {
-  {
-    switch (_cookOff) do {
-      case 0: {
-        _x setVariable ["ace_cookoff_enable", false, true];
-        _x setVariable ["ace_cookoff_enableAmmoCookoff", false, true];
-      };
-      case 1: { 
-        _x setVariable ["ace_cookoff_enable", true, true];
-        _x setVariable ["ace_cookoff_enableAmmoCookoff", true, true];
-      };
-    };
+  // Module combo values are 0 = No and 1 = Yes; the engine calls below need booleans.
+  private _enableCookOff = _cookOff == 1;
+  private _useExplosionEffect = _explosionEffect == 1;
 
-    switch (_explosionEffect) do {
-      case 0: {_x setDamage [1, false];};
-      case 1: {_x setDamage [1, true];};
-    };
+  {
+    _x setVariable ["ace_cookoff_enable", _enableCookOff, true];
+    _x setVariable ["ace_cookoff_enableAmmoCookoff", _enableCookOff, true];
+    _x setDamage [1, _useExplosionEffect];
   } forEach _vehicle;
 };

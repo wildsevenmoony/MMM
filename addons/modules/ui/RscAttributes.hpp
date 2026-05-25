@@ -76,6 +76,8 @@ class GVAR(RscBaseDisplay): RscDisplay {
             class VScrollbar {
                 width = 0.021;
                 autoScrollEnabled = 0;
+                arrowEmpty = "\z\mmm\addons\modules\icons\arrow_up.paa";
+                arrowFull = "\z\mmm\addons\modules\icons\arrow_up.paa";
             };
 
             class Controls {};
@@ -134,4 +136,9 @@ class GVAR(RscDisplayExample): GVAR(RscBaseDisplay) {};
 class GVAR(RscDisplayRandomizeGear): GVAR(RscBaseDisplay) {
     idd = IDD_RANDOMIZE_GEAR;
     onLoad = "(_this select 0) setVariable ['mmm_modules_populateFunction', 'mmm_modules_fnc_gui_randomizeGear']; call mmm_modules_fnc_initDisplay";
+};
+
+class GVAR(RscDisplayAceDamage): GVAR(RscBaseDisplay) {
+    idd = IDD_ACE_DAMAGE;
+    onLoad = "(_this select 0) setVariable ['mmm_modules_populateFunction', 'mmm_modules_fnc_gui_aceDamage']; call mmm_modules_fnc_initDisplay";
 };

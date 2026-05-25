@@ -1,6 +1,6 @@
 /*
  * Author: Moony
- * Enables AIs Pathing capabilities and gives a status variable to the unit
+ * Enables AI pathing and clears the stationary marker on the unit.
  *
  * Arguments:
  * 0: AI <OBJECT>
@@ -9,23 +9,26 @@
  * None
  *
  * Example:
- * [someAI] call mmm_modules_fnc_stationaryAIMoving.sqf
+ * [someAI] call mmm_modules_fnc_stationaryAIMoving
  *
  * Public: No
  */
 
 #include "\z\mmm\addons\modules\script_component.hpp"
 
-params ["_unit"];
+params [["_unit", objNull, [objNull]]];
+
+if (isNull _unit) exitWith {};
 
 [_unit, "PATH"] remoteExec ["enableAI", 0, true];
 _unit setVariable [QGVAR(aiStationary), false, true];
 
-// Checking if WBKs Simple Civilian Behaivour is already disabled on that unit
-_wbkCivisLoaded = ["WBK_Civies"] call ace_common_fnc_isModLoaded;
+// Only restore WBK civilian behaviour when stationary mode disabled it earlier.
+private _wbkCivisLoaded = ["WBK_Civies"] call ace_common_fnc_isModLoaded;
 if (_wbkCivisLoaded) then {
-    _checkIfDisabled = _unit getVariable [QGVAR(WBK_DisableCivBehaviourDisableCheck), true];
+    private _checkIfDisabled = _unit getVariable [QGVAR(wbkCivBehaviourWasDisabled), true];
     if (!_checkIfDisabled) then {
-        _unit setVariable ["WBK_DisableCivBehaviour",false]; 
+        _unit setVariable ["WBK_DisableCivBehaviour", false, true];
+        _unit setVariable [QGVAR(wbkCivBehaviourWasDisabled), nil, true];
     };
 };

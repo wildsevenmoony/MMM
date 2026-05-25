@@ -66,6 +66,14 @@ private _imported = [];
                             _rawValue
                         }
                     };
+                    case "combo": {
+                        if ((_rawValue select [0, 1]) in ["""", "'"]) then {
+                            private _parsed = parseSimpleArray format ["[%1]", _rawValue];
+                            _parsed param [0, "", [""]]
+                        } else {
+                            _rawValue
+                        }
+                    };
                     default {
                         nil
                     };
@@ -76,12 +84,34 @@ private _imported = [];
                     switch (_type) do {
                         case "checkbox": {
                             _control cbSetChecked _value;
+
+                            private _toggleControls = _control getVariable [QGVAR(toggleControls), []];
+                            if (_toggleControls isNotEqualTo []) then {
+                                _toggleControls params ["_buttonNo", "_buttonYes"];
+                                private _setToggleVisuals = _control getVariable QGVAR(setToggleVisuals);
+                                [_control, _buttonNo, _buttonYes, _value] call _setToggleVisuals;
+                            };
                         };
                         case "slider": {
                             _control sliderSetPosition _value;
+
+                            private _valueEdit = _control getVariable [QGVAR(valueEdit), controlNull];
+                            if (!isNull _valueEdit) then {
+                                private _formatSliderValue = _control getVariable QGVAR(formatSliderValue);
+                                _valueEdit ctrlSetText ([_value] call _formatSliderValue);
+                            };
                         };
                         case "edit": {
                             _control ctrlSetText _value;
+                        };
+                        case "combo": {
+                            private _index = 0;
+                            for "_i" from 0 to ((lbSize _control) - 1) do {
+                                if ((_control lbData _i) isEqualTo _value) exitWith {
+                                    _index = _i;
+                                };
+                            };
+                            _control lbSetCurSel _index;
                         };
                     };
                 };

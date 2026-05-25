@@ -12,7 +12,7 @@
  * None
  *
  * Example:
- * [player, true, true, "B_AssaultPack_blk,B_Bergen_blk,B_Carryall_blk"] call mmm_modules_fnc_randomizeGearBackpacks.sqf
+ * [player, true, true, "B_AssaultPack_blk,B_Bergen_blk,B_Carryall_blk"] call mmm_modules_fnc_randomizeGearBackpacks
  *
  * Public: Yes
  */
@@ -29,11 +29,7 @@ params [
 
 // Randomizes Backpacks if enabled
 if (_randomizeBackpacks && ((_forceBackpacks) || (!_forceBackpacks && (backpack _unit) != ""))) then {
-	private _backpacksArray = [""];
-
-	if (_contentBackpacks isNotEqualTo "" && {_contentBackpacks isNotEqualTo "[]"}) then {
-		_backpacksArray = ([_contentBackpacks] call CBA_fnc_removeWhitespace) splitString ",";
-	};
+	private _backpacksArray = [_contentBackpacks] call EFUNC(modules,parseClassnameList);
 	private _selectedBackpacks = selectRandom _backpacksArray;
 
 	// Save Content of Backpack

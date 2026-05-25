@@ -1,9 +1,24 @@
-// Get all the passed parameters
+/*
+ * Author: Moony
+ * Opens a ZEN dialog to randomize weapons and attachments for one unit or its group.
+ *
+ * Arguments:
+ * 0: Module position <ARRAY>
+ * 1: Object under cursor <OBJECT>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [position player, cursorObject] call mmm_modules_fnc_randomizeGearWeaponsGroupZeus
+ *
+ * Public: No
+ */
 #include "\z\mmm\addons\modules\script_component.hpp"
 
 params [
-	"_position",
-	"_objectUnderCursor"
+	["_position", [], [[]]],
+	["_objectUnderCursor", objNull, [objNull]]
 ];
 
 #include "..\checks\fn_notNullUnit.hpp"

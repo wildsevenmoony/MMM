@@ -12,7 +12,7 @@
  * None
  *
  * Example:
- * [basemedic, "Suit yourself", "Help them out", {!Alive otherbasemedic}] call mmm_modules_fnc_baseMedic.sqf
+ * [basemedic, "Suit yourself", "Help them out", {!Alive otherbasemedic}] call mmm_modules_fnc_baseMedic
  *
  * Public: No
  */
@@ -53,7 +53,7 @@ if (!(isServer) && {_medic getVariable [QGVAR(baseMedic), false]}) exitWith {};
 	]
 ] remoteExec ["addAction", 0, true];
 
-// Adds Heal everyone
+// Adds "Heal everyone"
 [
 	_medic,
 	[
@@ -62,18 +62,16 @@ if (!(isServer) && {_medic getVariable [QGVAR(baseMedic), false]}) exitWith {};
 			params ["_target", "_caller", "_actionId", "_arguments"];
 
 			private _radiusUnits = _target nearEntities ["Man", 10];
-			private _healedUnits = _radiusUnits - [_caller];
+			private _healedPlayers = allPlayers select {_x in _radiusUnits && {_x != _caller}};
 
 			// Heal everyone
 			{
 				_x call ace_medical_treatment_fnc_fullHealLocal;
 			} forEach _radiusUnits;
 
-			// Notify the caller (the one who used the action)
+			// Notify the caller separately so they do not also get the "healed by someone" message.
 			["mmm_notification_sombodyhealed", []] call bis_fnc_showNotification;
-
-			// Notify each healed unit — but only once, per unit
-			["mmm_notification_healedbysomeone", []] remoteExecCall ["bis_fnc_showNotification", _healedUnits];
+			["mmm_notification_healedbysomeone", []] remoteExecCall ["bis_fnc_showNotification", _healedPlayers];
 		},
 		[],
 		8.5,

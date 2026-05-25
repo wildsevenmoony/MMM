@@ -41,12 +41,10 @@ private _contentHeight = _display getVariable [QGVAR(contentHeight), 0];
 // consistent on different aspect ratios while safeZone centering happens here.
 private _dialogW = 28 * GUI_GRID_W;
 private _titleH = 1 * GUI_GRID_H;
-private _paddingX = 0.5 * GUI_GRID_W;
-private _gapY = 0.25 * GUI_GRID_H;
+private _gapY = 0.08 * GUI_GRID_H;
 private _buttonH = 1 * GUI_GRID_H;
 private _buttonW = 5 * GUI_GRID_W;
-private _buttonGapTop = 0.5 * GUI_GRID_H;
-private _contentBottomPad = 0.5 * GUI_GRID_H;
+private _buttonGapTop = _gapY;
 
 // Cap the visible content area. If content is taller than this, the controls
 // group remains shorter than its children and Arma's vertical scrollbar works.
@@ -54,30 +52,30 @@ private _maxContentH = 18 * GUI_GRID_H;
 private _minContentH = 4 * GUI_GRID_H;
 private _visibleContentH = ((_contentHeight max _minContentH) min _maxContentH);
 
-private _bodyH = _titleH + _gapY + _visibleContentH + _contentBottomPad;
-private _dialogH = _bodyH + _buttonGapTop + _buttonH;
+private _dialogH = _titleH + _gapY + _visibleContentH + _buttonGapTop + _buttonH;
 private _dialogX = safeZoneX + ((safeZoneW - _dialogW) / 2);
 private _dialogY = safeZoneY + ((safeZoneH - _dialogH) / 2);
 
-private _contentX = _dialogX + _paddingX;
+private _contentX = _dialogX;
 private _contentY = _dialogY + _titleH + _gapY;
-private _contentW = _dialogW - (2 * _paddingX);
-private _buttonY = _dialogY + _bodyH + _buttonGapTop;
+private _contentW = _dialogW;
+private _buttonY = _contentY + _visibleContentH + _buttonGapTop;
 
-// The background frames only the actual dialog body. The buttons sit below it,
-// matching the visual layout used by ZEN module dialogs.
-_background ctrlSetPosition [_dialogX, _dialogY, _dialogW, _bodyH];
-_title ctrlSetPosition [_dialogX, _dialogY, _dialogW, _titleH];
+// The title, content box, and buttons are separate blocks. This mirrors the
+// ZEN module layout: a tiny gap above and below the content, with the buttons
+// aligned to the content box edges.
+_title ctrlSetPosition [_contentX, _dialogY, _contentW, _titleH];
+_background ctrlSetPosition [_contentX, _contentY, _contentW, _visibleContentH];
 _content ctrlSetPosition [_contentX, _contentY, _contentW, _visibleContentH];
 _buttonCancel ctrlSetPosition [_contentX, _buttonY, _buttonW, _buttonH];
-_buttonOK ctrlSetPosition [_dialogX + _dialogW - _paddingX - _buttonW, _buttonY, _buttonW, _buttonH];
+_buttonOK ctrlSetPosition [_contentX + _contentW - _buttonW, _buttonY, _buttonW, _buttonH];
 
 if (!isNull _buttonExport) then {
-    _buttonExport ctrlSetPosition [_contentX + (7 * GUI_GRID_W), _buttonY, _buttonW, _buttonH];
+    _buttonExport ctrlSetPosition [_contentX + ((_contentW - (2 * _buttonW) - (0.5 * GUI_GRID_W)) / 2), _buttonY, _buttonW, _buttonH];
 };
 
 if (!isNull _buttonImport) then {
-    _buttonImport ctrlSetPosition [_contentX + (14 * GUI_GRID_W), _buttonY, _buttonW, _buttonH];
+    _buttonImport ctrlSetPosition [_contentX + ((_contentW - (2 * _buttonW) - (0.5 * GUI_GRID_W)) / 2) + _buttonW + (0.5 * GUI_GRID_W), _buttonY, _buttonW, _buttonH];
 };
 
 {

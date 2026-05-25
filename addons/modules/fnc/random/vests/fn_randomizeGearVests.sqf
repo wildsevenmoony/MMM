@@ -12,7 +12,7 @@
  * None
  *
  * Example:
- * [player, true, true, "V_BandollierB_blk,V_Chestrig_blk,V_PlateCarrier1_blk"] call mmm_modules_fnc_randomizeGearVests.sqf
+ * [player, true, true, "V_BandollierB_blk,V_Chestrig_blk,V_PlateCarrier1_blk"] call mmm_modules_fnc_randomizeGearVests
  *
  * Public: Yes
  */
@@ -31,11 +31,7 @@ _unit setVariable [QGVAR(randomizationVestsDone), false];
 
 // Randomizes Vests if enabled
 if (_randomizeVests && ((_forceVests) || (!_forceVests && (vest _unit) != ""))) then {
-	private _vestsArray = [""];
-
-	if (_contentVests isNotEqualTo "" && {_contentVests isNotEqualTo "[]"}) then {
-		_vestsArray = ([_contentVests] call CBA_fnc_removeWhitespace) splitString ",";
-	};
+	private _vestsArray = [_contentVests] call EFUNC(modules,parseClassnameList);
 	private _selectedVests = selectRandom _vestsArray;
 
 	// Save Content of Vest

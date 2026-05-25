@@ -32,7 +32,7 @@ if (!hasInterface) exitWith {};
 
 		private _mmmMain = [
 			["Toggle Carryable (ACE)",{_this call EFUNC(modules,aceCarryable)}],
-			["Toggle Dragable (ACE)",{_this call EFUNC(modules,aceDragable)}],
+			["Toggle Draggable (ACE)",{_this call EFUNC(modules,aceDraggable)}],
 			["Destroy without Explosion",{_this call EFUNC(modules,destroyWithoutExplosion)}],
 			["Set Respawn Time",{_this call EFUNC(modules,respawnTimer)}],
 			["Remove Crater Decal",{_this call EFUNC(modules,removeCrater)}],
@@ -41,7 +41,8 @@ if (!hasInterface) exitWith {};
 		];
 
 		private _mmmMedical = [
-			["Base Medic",{_this call EFUNC(modules,baseMedicZeus)}]
+			["Base Medic",{_this call EFUNC(modules,baseMedicZeus)}],
+			["Apply ACE Damage",{_this call EFUNC(modules,aceDamageZeus)}]
 		];
 
 		private _mmmRandom = [
@@ -59,56 +60,23 @@ if (!hasInterface) exitWith {};
 			["Dialog Demo",{_this call EFUNC(modules,moduleExample)}]
 		];*/
 
-		private _combinedArr = [_mmmMain, _mmmAI, _mmmFun, _mmmMedical, _mmmRandom/*, _mmmTest*/];
+		private _combinedArr = [
+			["Moonys Magnificent", _mmmMain],
+			["Moonys Magnificent AI", _mmmAI],
+			["Moonys Magnificent Fun", _mmmFun],
+			["Moonys Magnificent Medical", _mmmMedical],
+			["Moonys Magnificent Random", _mmmRandom]
+			// ["Moonys Magnificent TEST", _mmmTest]
+		];
 		_combinedArr;
 	};	
 
 	//registering ZEN custom modules
 	{
-		[
-			"Moonys Magnificent", 
-			(_x select 0), 
-			(_x select 1)
-		] call zen_custom_modules_fnc_register;
-	} forEach (_moduleList select 0);
-
-	{
-		[
-			"Moonys Magnificent AI", 
-			(_x select 0), 
-			(_x select 1)
-		] call zen_custom_modules_fnc_register;
-	} forEach (_moduleList select 1);
-
-	{
-		[
-			"Moonys Magnificent Fun", 
-			(_x select 0), 
-			(_x select 1)
-		] call zen_custom_modules_fnc_register;
-	} forEach (_moduleList select 2);
-
-	{
-		[
-			"Moonys Magnificent Medical", 
-			(_x select 0), 
-			(_x select 1)
-		] call zen_custom_modules_fnc_register;
-	} forEach (_moduleList select 3);
-
-	{
-		[
-			"Moonys Magnificent Random", 
-			(_x select 0), 
-			(_x select 1)
-		] call zen_custom_modules_fnc_register;
-	} forEach (_moduleList select 4);
-
-	/*{
-		[
-			"Moonys Magnificent TEST",
-			(_x select 0),
-			(_x select 1)
-		] call zen_custom_modules_fnc_register;
-	} forEach (_moduleList select 5);*/
+		_x params ["_category", "_modules"];
+		{
+			_x params ["_displayName", "_statement"];
+			[_category, _displayName, _statement] call zen_custom_modules_fnc_register;
+		} forEach _modules;
+	} forEach _moduleList;
 };

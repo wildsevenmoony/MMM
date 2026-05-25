@@ -1,3 +1,19 @@
+/*
+ * Author: Moony
+ * Template for a ZEN custom module registration with a dialog.
+ *
+ * Arguments:
+ * None
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [] execVM "\z\mmm\addons\modules\fnc\zenmodule\template_with_dialog.sqf"
+ *
+ * Public: No
+ */
+
 ["STAF", "NAME",
 {
 	// Get all the passed parameters

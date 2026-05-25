@@ -1,9 +1,24 @@
-// Get all the passed parameters
+/*
+ * Author: Moony
+ * Opens a ZEN dialog to randomize goggles for one unit or its group.
+ *
+ * Arguments:
+ * 0: Module position <ARRAY>
+ * 1: Object under cursor <OBJECT>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [position player, cursorObject] call mmm_modules_fnc_randomizeGearGogglesGroupZeus
+ *
+ * Public: No
+ */
 #include "\z\mmm\addons\modules\script_component.hpp"
 
 params [
-	"_position",
-	"_objectUnderCursor"
+	["_position", [], [[]]],
+	["_objectUnderCursor", objNull, [objNull]]
 ];
 
 #include "..\checks\fn_notNullUnit.hpp"
@@ -78,24 +93,16 @@ params [
 			"_chanceGoggles",
 			"_contentGoggles"];
 
-		switch (_randomizeGroup) do {
-			case true: {
-				{
-					if (_randomizeGoggles) then {
-						[_x,_randomizeGoggles,_forceGoggles,_chanceGoggles,_contentGoggles] call EFUNC(modules,randomizeGearGoggles);
-					};
-				} forEach units group _objectUnderCursor;
+		private _targets = if (_randomizeGroup) then {units group _objectUnderCursor} else {[_objectUnderCursor]};
 
-				[objNull, "GROUPS GEAR RANDOMIZED"] call BIS_fnc_showCuratorFeedbackMessage;
-			};
-			case false: {
-				if (_randomizeGoggles) then {
-					[_objectUnderCursor,_randomizeGoggles,_forceGoggles,_chanceGoggles,_contentGoggles] call EFUNC(modules,randomizeGearGoggles);
-				};
-
-				[objNull, "UNITS GEAR RANDOMIZED"] call BIS_fnc_showCuratorFeedbackMessage;
-			};
+		if (_randomizeGoggles) then {
+			{
+				[_x,_randomizeGoggles,_forceGoggles,_chanceGoggles,_contentGoggles] call EFUNC(modules,randomizeGearGoggles);
+			} forEach _targets;
 		};
+
+		private _message = ["UNITS GEAR RANDOMIZED", "GROUPS GEAR RANDOMIZED"] select _randomizeGroup;
+		[objNull, _message] call BIS_fnc_showCuratorFeedbackMessage;
 	}, // On Confirm
 	{
 		[objNull, " RANDOMIZATION ABORTED"] call BIS_fnc_showCuratorFeedbackMessage;

@@ -22,7 +22,7 @@ class CfgVehicles
 	class MMM_MODULES_Module_SpawnWreck_F: EGVAR(modules,spawnWreck)
 	{
 		// Optional: Override displayName to make it clear it's a legacy class
-		displayName = "[Deprecated] Spawen Vehicle as Wreck (Compat)";
+		displayName = "[Deprecated] Spawn Vehicle as Wreck (Compat)";
 		scope = 1; // Hide from 3DEN placement but still usable if it exists in a mission
 
 		class Attributes
@@ -179,17 +179,17 @@ class CfgVehicles
 						class Injured_Bed_1 {name = "Injured Bed 01"; value = 23;};
 						class Injured_Bed_2 {name = "Injured Bed 02"; value = 24;};
 						class Injured_Bed_3 {name = "Injured Bed 03"; value = 25;};
-						class Injured_lying_5 {name = "Lying Insured"; value = 26;};
-						class Injured_lyingarm_1 {name = "Lying Insured Arm"; value = 27;};
-						class Injured_lyingchest_2 {name = "Lying Insured Chest"; value = 28;};
-						class Injured_lyinghead_3 {name = "Lying Insured Head"; value = 29;};
-						class Injured_lyingleg_4 {name = "Lying Insured Leg"; value = 30;};
-						class Injured_Weapon_Arm {name = "Lying Insured Arm (Weapon)"; value = 31;};
-						class Injured_Weapon_Chest {name = "Lying Insured Chest (Weapon)"; value = 32;};
-						class Injured_Weapon_Head {name = "Lying Insured Head (Weapon)"; value = 33;};
-						class Injured_Weapon_Leg {name = "Lying Insured Leg (Weapon)"; value = 34;};
-						class Injured_Weapon_Angry {name = "Lying Insured Angry"; value = 35;};
-						class Injured_Weapon_Coughing {name = "Lying Insured Coughing (Weapon)"; value = 36;};
+						class Injured_lying_5 {name = "Lying Injured"; value = 26;};
+						class Injured_lyingarm_1 {name = "Lying Injured Arm"; value = 27;};
+						class Injured_lyingchest_2 {name = "Lying Injured Chest"; value = 28;};
+						class Injured_lyinghead_3 {name = "Lying Injured Head"; value = 29;};
+						class Injured_lyingleg_4 {name = "Lying Injured Leg"; value = 30;};
+						class Injured_Weapon_Arm {name = "Lying Injured Arm (Weapon)"; value = 31;};
+						class Injured_Weapon_Chest {name = "Lying Injured Chest (Weapon)"; value = 32;};
+						class Injured_Weapon_Head {name = "Lying Injured Head (Weapon)"; value = 33;};
+						class Injured_Weapon_Leg {name = "Lying Injured Leg (Weapon)"; value = 34;};
+						class Injured_Weapon_Angry {name = "Lying Injured Angry"; value = 35;};
+						class Injured_Weapon_Coughing {name = "Lying Injured Coughing (Weapon)"; value = 36;};
 						class Injured_Weapon_1 {name = "Injured_Weapon_1"; value = 37;};
 						class Injured_Weapon_2 {name = "Injured_Weapon_2"; value = 38;};
 						class Injured_Weapon_3 {name = "Injured_Weapon_3"; value = 39;};

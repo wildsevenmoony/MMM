@@ -1,39 +1,36 @@
-// Get all the passed parameters
+/*
+ * Author: Moony
+ * Toggles stationary mode for the group of the unit under the Zeus cursor.
+ *
+ * Arguments:
+ * 0: Module position <ARRAY>
+ * 1: Object under cursor <OBJECT>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [position player, cursorObject] call mmm_modules_fnc_stationaryGroup
+ *
+ * Public: No
+ */
 #include "\z\mmm\addons\modules\script_component.hpp"
 
 params [
-	"_position",
-	"_objectUnderCursor"
+	["_position", [], [[]]],
+	["_objectUnderCursor", objNull, [objNull]]
 ];
 
 #include "..\checks\fn_notNullUnit.hpp"
 #include "..\checks\fn_placeOnUnit.hpp"
 
-// Toggle Group Stationary
-if (_objectUnderCursor getVariable [QGVAR(aiStationary),false]) then {
-	{
-		[_x] remoteExec [QEFUNC(modules,stationaryAIMoving), _x];
-	} forEach units group _objectUnderCursor;
-	[objNull, "GROUP CAN MOVE AGAIN"] call BIS_fnc_showCuratorFeedbackMessage;
-} else {
-	{
-		[_x] remoteExec [QEFUNC(modules,stationaryAIStationary), _x];
-	} forEach units group _objectUnderCursor;
-	[objNull, "GROUP IS STATIONARY"] call BIS_fnc_showCuratorFeedbackMessage;
-};
+private _isStationary = _objectUnderCursor getVariable [QGVAR(aiStationary), false];
+private _function = [QEFUNC(modules,stationaryAIStationary), QEFUNC(modules,stationaryAIMoving)] select _isStationary;
+private _message = ["GROUP IS STATIONARY", "GROUP CAN MOVE AGAIN"] select _isStationary;
 
+{
+	[_x] remoteExec [_function, _x];
+} forEach units group _objectUnderCursor;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+[objNull, _message] call BIS_fnc_showCuratorFeedbackMessage;
 	

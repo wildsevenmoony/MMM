@@ -11,20 +11,21 @@ class CfgPatches {
             "zen_main",
             "zen_modules"
         };
-        units[] = {
-			QGVAR(baseMedic),
-			QGVAR(spawnWreck),
+		units[] = {
+			QGVAR(aceDamage),
+			QGVAR(aiStationary),
 			QGVAR(ambientAnimationMP),
 			QGVAR(animation),
 			QGVAR(playMoveAnimation),
-			QGVAR(aiStationary),
+			QGVAR(baseMedic),
+			QGVAR(randomizeGear),
 			QGVAR(randomizeGearBackpacks),
 			QGVAR(randomizeGearGoggles),
 			QGVAR(randomizeGearHeadgear),
 			QGVAR(randomizeGearUniforms),
 			QGVAR(randomizeGearVests),
 			QGVAR(randomizeGearWeapons),
-			QGVAR(randomizeGear)
+			QGVAR(spawnWreck)
 			//QGVAR(moduleDialogDemo)
 		};
         weapons[] = {};

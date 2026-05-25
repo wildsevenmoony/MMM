@@ -1,3 +1,19 @@
+/*
+ * Author: Moony
+ * Template for a simple ZEN custom module registration.
+ *
+ * Arguments:
+ * None
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [] execVM "\z\mmm\addons\modules\fnc\zenmodule\template.sqf"
+ *
+ * Public: No
+ */
+
 ["STAF", "NAME",
 {
 	// Get all the passed parameters

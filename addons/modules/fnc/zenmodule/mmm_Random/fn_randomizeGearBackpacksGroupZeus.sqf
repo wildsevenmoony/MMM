@@ -1,9 +1,24 @@
-// Get all the passed parameters
+/*
+ * Author: Moony
+ * Opens a ZEN dialog to randomize backpacks for one unit or its group.
+ *
+ * Arguments:
+ * 0: Module position <ARRAY>
+ * 1: Object under cursor <OBJECT>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [position player, cursorObject] call mmm_modules_fnc_randomizeGearBackpacksGroupZeus
+ *
+ * Public: No
+ */
 #include "\z\mmm\addons\modules\script_component.hpp"
 
 params [
-	"_position",
-	"_objectUnderCursor"
+	["_position", [], [[]]],
+	["_objectUnderCursor", objNull, [objNull]]
 ];
 
 #include "..\checks\fn_notNullUnit.hpp"
@@ -78,24 +93,16 @@ params [
 			"_chanceBackpacks",
 			"_contentBackpacks"];
 
-		switch (_randomizeGroup) do {
-			case true: {
-				{
-					if (_randomizeBackpacks) then {
-						[_x,_randomizeBackpacks,_forceBackpacks,_chanceBackpacks,_contentBackpacks] call EFUNC(modules,randomizeGearBackpacks);
-					};
-				} forEach units group _objectUnderCursor;
+		private _targets = if (_randomizeGroup) then {units group _objectUnderCursor} else {[_objectUnderCursor]};
 
-				[objNull, "GROUPS BACKPACK RANDOMIZED"] call BIS_fnc_showCuratorFeedbackMessage;
-			};
-			case false: {
-				if (_randomizeBackpacks) then {
-					[_objectUnderCursor,_randomizeBackpacks,_forceBackpacks,_chanceBackpacks,_contentBackpacks] call EFUNC(modules,randomizeGearBackpacks);
-				};
-
-				[objNull, "UNITS BACKPACK RANDOMIZED"] call BIS_fnc_showCuratorFeedbackMessage;
-			};
+		if (_randomizeBackpacks) then {
+			{
+				[_x,_randomizeBackpacks,_forceBackpacks,_chanceBackpacks,_contentBackpacks] call EFUNC(modules,randomizeGearBackpacks);
+			} forEach _targets;
 		};
+
+		private _message = ["UNITS BACKPACK RANDOMIZED", "GROUPS BACKPACK RANDOMIZED"] select _randomizeGroup;
+		[objNull, _message] call BIS_fnc_showCuratorFeedbackMessage;
 	}, // On Confirm
 	{
 		[objNull, "RANDOMIZATION ABORTED"] call BIS_fnc_showCuratorFeedbackMessage;

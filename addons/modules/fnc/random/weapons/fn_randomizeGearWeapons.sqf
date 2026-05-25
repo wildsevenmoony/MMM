@@ -58,7 +58,7 @@
  * None
  *
  * Example:
- * [player, true, true,"arifle_MX_khk_F,srifle_DMR_07_blk_F,arifle_MSBS65_black_F", true,0,"optic_SOS,optic_NVS,ACE_optic_LRPS_2D", true,0,"acc_pointer_IR,EF_acc_pointer_IR_coy,saber_light_ir_khaki_lxWS", true,0,"muzzle_snds_H_khk_F,muzzle_snds_65_TI_ghex_F,suppressor_65_sand_RF", true,0,"bipod_02_F_arid,bipod_01_F_snd", true, true, "hgun_Pistol_heavy_01_F,hgun_Pistol_heavy_01_green_F,hgun_Glock19_RF", true,0,"optic_MRD_black,ef_optic_microsight_pistol_coy,optic_MRD_tan_RF", true,0,"acc_flashlight_pistol,acc_pointer_IR_pistol_RF", true,0,"muzzle_snds_L", true,0,"", true, true, "launch_NLAW_F,launch_PSRL1_black_RF,launch_RPG32_F", true,0,"optic_SOS,optic_NVS,ACE_optic_LRPS_2D", true,0,"", true,0,"", true,0,""] call mmm_modules_fnc_randomizeGearWeapons.sqf
+ * [player, true, true,"arifle_MX_khk_F,srifle_DMR_07_blk_F,arifle_MSBS65_black_F", true,0,"optic_SOS,optic_NVS,ACE_optic_LRPS_2D", true,0,"acc_pointer_IR,EF_acc_pointer_IR_coy,saber_light_ir_khaki_lxWS", true,0,"muzzle_snds_H_khk_F,muzzle_snds_65_TI_ghex_F,suppressor_65_sand_RF", true,0,"bipod_02_F_arid,bipod_01_F_snd", true, true, "hgun_Pistol_heavy_01_F,hgun_Pistol_heavy_01_green_F,hgun_Glock19_RF", true,0,"optic_MRD_black,ef_optic_microsight_pistol_coy,optic_MRD_tan_RF", true,0,"acc_flashlight_pistol,acc_pointer_IR_pistol_RF", true,0,"muzzle_snds_L", true,0,"", true, true, "launch_NLAW_F,launch_PSRL1_black_RF,launch_RPG32_F", true,0,"optic_SOS,optic_NVS,ACE_optic_LRPS_2D", true,0,"", true,0,"", true,0,""] call mmm_modules_fnc_randomizeGearWeapons
  *
  * (See, its not made for calling it like this!)
  *
@@ -139,11 +139,7 @@ waitUntil {
 
 // Randomizes Primary Weapon if enabled
 if (_randomizePrimary && ((_forcePrimary) || (!_forcePrimary && (primaryWeapon _unit) != ""))) then {
-	private _weaponPrimaryArray = [""];
-
-	if (_contentPrimary isNotEqualTo "" && {_contentPrimary isNotEqualTo "[]"}) then {
-		_weaponPrimaryArray = ([_contentPrimary] call CBA_fnc_removeWhitespace) splitString ",";
-	};
+	private _weaponPrimaryArray = [_contentPrimary] call EFUNC(modules,parseClassnameList);
 
 	private _weaponPrimary = selectRandom _weaponPrimaryArray;
 	private _compatibleAmmoPrimary = compatibleMagazines [_weaponPrimary, "this"];
@@ -157,10 +153,10 @@ if (_randomizePrimary && ((_forcePrimary) || (!_forcePrimary && (primaryWeapon _
 	
 
 	//Remove all magazines (not underbarrel) from the unit that fit into the primary weapon
-	private _compatiblePrimaryMagazinesInvewntory = (magazines _unit) arrayIntersect (compatibleMagazines [primaryWeapon _unit, "this"]);
+	private _compatiblePrimaryMagazinesInventory = (magazines _unit) arrayIntersect (compatibleMagazines [primaryWeapon _unit, "this"]);
 	{
 		_unit removeMagazines _x;
-	} forEach _compatiblePrimaryMagazinesInvewntory;
+	} forEach _compatiblePrimaryMagazinesInventory;
 
 	// Remove Primary weapon
 	_unit removeWeapon (primaryWeapon _unit);
@@ -254,11 +250,7 @@ if (_randomizePrimary && ((_forcePrimary) || (!_forcePrimary && (primaryWeapon _
 
 // Randomizes Sidearm Weapon if enabled
 if (_randomizeSidearm && ((_forceSidearm) || (!_forceSidearm && (handgunWeapon _unit) != ""))) then {
-	private _weaponSidearmArray = [""];
-
-	if (_contentSidearm isNotEqualTo "" && {_contentSidearm isNotEqualTo "[]"}) then {
-		_weaponSidearmArray = ([_contentSidearm] call CBA_fnc_removeWhitespace) splitString ",";
-	};
+	private _weaponSidearmArray = [_contentSidearm] call EFUNC(modules,parseClassnameList);
 	private _weaponSidearm = selectRandom _weaponSidearmArray;
 	private _compatibleAmmoSidearm = compatibleMagazines [_weaponSidearm, "this"];
 	private _ammoSidearm = if (_compatibleAmmoSidearm isEqualTo []) then {""} else {_compatibleAmmoSidearm select 0};
@@ -270,11 +262,11 @@ if (_randomizeSidearm && ((_forceSidearm) || (!_forceSidearm && (handgunWeapon _
 	private _getSidearmAmmoCount = {_x in compatibleMagazines [handgunWeapon _unit, "this"]} count magazines _unit;
 	
 
-	//Remove all magazines (not underbarrel) from the unit that fit into the primary weapon
-	private _compatibleSidearmMagazinesInvewntory = (magazines _unit) arrayIntersect (compatibleMagazines [handgunWeapon _unit, "this"]);
+	//Remove all magazines (not underbarrel) from the unit that fit into the sidearm weapon
+	private _compatibleSidearmMagazinesInventory = (magazines _unit) arrayIntersect (compatibleMagazines [handgunWeapon _unit, "this"]);
 	{
 		_unit removeMagazines _x;
-	} forEach _compatibleSidearmMagazinesInvewntory;
+	} forEach _compatibleSidearmMagazinesInventory;
 	// Remove Sidearm weapon
 	_unit removeWeapon (handgunWeapon _unit);
 
@@ -367,11 +359,7 @@ if (_randomizeSidearm && ((_forceSidearm) || (!_forceSidearm && (handgunWeapon _
 
 // Randomizes Secondary Weapon if enabled
 if (_randomizeSecondary && ((_forceSecondary) || (!_forceSecondary && (secondaryWeapon _unit) != ""))) then {
-	private _weaponSecondaryArray = [""];
-
-	if (_contentSecondary isNotEqualTo "" && {_contentSecondary isNotEqualTo "[]"}) then {
-		_weaponSecondaryArray = ([_contentSecondary] call CBA_fnc_removeWhitespace) splitString ",";
-	};
+	private _weaponSecondaryArray = [_contentSecondary] call EFUNC(modules,parseClassnameList);
 	private _weaponSecondary = selectRandom _weaponSecondaryArray;
 	private _compatibleAmmoSecondary = compatibleMagazines [_weaponSecondary, "this"];
 	private _ammoSecondary = if (_compatibleAmmoSecondary isEqualTo []) then {""} else {_compatibleAmmoSecondary select 0};
@@ -384,10 +372,10 @@ if (_randomizeSecondary && ((_forceSecondary) || (!_forceSecondary && (secondary
 	
 
 	//Remove all magazines (not underbarrel) from the unit that fit into the secondary weapon
-	private _compatibleSecondaryMagazinesInvewntory = (magazines _unit) arrayIntersect (compatibleMagazines [secondaryWeapon _unit, "this"]);
+	private _compatibleSecondaryMagazinesInventory = (magazines _unit) arrayIntersect (compatibleMagazines [secondaryWeapon _unit, "this"]);
 	{
 		_unit removeMagazines _x;
-	} forEach _compatibleSecondaryMagazinesInvewntory;
+	} forEach _compatibleSecondaryMagazinesInventory;
 	// Remove Secondary weapon
 	_unit removeWeapon (secondaryWeapon _unit);
 

@@ -12,7 +12,7 @@
  * None
  *
  * Example:
- * [player, true, true, "H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo"] call mmm_modules_fnc_randomizeGearHeadgear.sqf
+ * [player, true, true, "H_Bandanna_blu,H_Booniehat_dirty,H_Hat_camo"] call mmm_modules_fnc_randomizeGearHeadgear
  *
  * Public: Yes
  */
@@ -31,11 +31,7 @@ _unit setVariable [QGVAR(randomizationHeadgearDone), false];
 
 // Randomizes Headgear if enabled
 if (_randomizeHeadgear && ((_forceHeadgear) || (!_forceHeadgear && (headgear _unit) != ""))) then {
-	private _headgearArray = [""];
-
-	if (_contentHeadgear isNotEqualTo "" && {_contentHeadgear isNotEqualTo "[]"}) then {
-		_headgearArray = ([_contentHeadgear] call CBA_fnc_removeWhitespace) splitString ",";
-	};
+	private _headgearArray = [_contentHeadgear] call EFUNC(modules,parseClassnameList);
 	private _selectedHeadgear = selectRandom _headgearArray;
 
 	// Remove Headgear

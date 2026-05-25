@@ -17,21 +17,25 @@ params ["_display", "_content"];
 private _controls = [];
 private _fields = [];
 
-private _xLabel = 0.5 * GUI_GRID_W;
-private _xField = 12 * GUI_GRID_W;
+private _contentPaddingY = 0.45 * GUI_GRID_H;
+private _xField = 12.5 * GUI_GRID_W;
 private _rowWLabel = 11 * GUI_GRID_W;
-private _rowWField = 14 * GUI_GRID_W;
-private _categoryW = 25.5 * GUI_GRID_W;
+private _rowWField = 13.5 * GUI_GRID_W;
+private _categoryBodyX = 0.35 * GUI_GRID_W;
+private _categoryBodyW = 26.9 * GUI_GRID_W;
+private _rowBackgroundX = 1.55 * GUI_GRID_W;
+private _columnGapW = 0.16 * GUI_GRID_W;
+private _sliderEditW = 2.3 * GUI_GRID_W;
+private _sliderGapW = 0.25 * GUI_GRID_W;
+private _toggleGapW = 0;
+private _sectionPadY = 0.16 * GUI_GRID_H;
 private _rowH = 1 * GUI_GRID_H;
 private _categoryH = 1 * GUI_GRID_H;
-private _rowGap = 0.25 * GUI_GRID_H;
-private _categoryGapTop = 0.35 * GUI_GRID_H;
-private _categoryGapBottom = 0.2 * GUI_GRID_H;
-private _chanceRange = [0, 1];
-private _chanceSpeed = [0.01, 0.1];
+private _rowGap = 0.16 * GUI_GRID_H;
+private _categoryGapTop = 0.32 * GUI_GRID_H;
 private _saveKey = QGVAR(randomizeGearDialogValues);
 private _savedValues = profileNamespace getVariable [_saveKey, []];
-private _y = 0;
+private _y = _contentPaddingY;
 
 // Adds _addCategory, _addEdit, _addCheckbox, and _addSlider helper closures.
 #include "\z\mmm\addons\modules\fnc\zenmodule\gui\script_guiHelpers.hpp"
@@ -58,6 +62,8 @@ private _y = 0;
 ["Label 5.2", IDC_LABEL_5_2, IDC_EDIT_5_2] call _addEdit;
 ["Label 5.3", IDC_LABEL_5_3, IDC_CHECK_5_3] call _addCheckbox;
 
+call _finalizeCategoryBody;
+
 // This tells the reusable OK handler which module-specific function should run
 // after it has collected the field values.
 _display setVariable [QGVAR(onConfirm), QEFUNC(modules,onConfirm_exampleModule)];
@@ -66,4 +72,4 @@ _display setVariable [QGVAR(importExportEnabled), true];
 
 _display setVariable [QGVAR(controls), _controls];
 _display setVariable [QGVAR(fields), _fields];
-_display setVariable [QGVAR(contentHeight), _y];
+_display setVariable [QGVAR(contentHeight), _y + _contentPaddingY];

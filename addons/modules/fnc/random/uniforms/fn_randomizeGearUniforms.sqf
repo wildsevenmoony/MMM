@@ -12,7 +12,7 @@
  * None
  *
  * Example:
- * [player, true, true, "U_BG_Guerilla1_1,U_B_CombatUniform_mcam_tshirt,U_B_GEN_Commander_F"] call mmm_modules_fnc_randomizeGearUniform.sqf
+ * [player, true, true, "U_BG_Guerilla1_1,U_B_CombatUniform_mcam_tshirt,U_B_GEN_Commander_F"] call mmm_modules_fnc_randomizeGearUniforms
  *
  * Public: Yes
  */
@@ -31,11 +31,7 @@ _unit setVariable [QGVAR(randomizationUniformsDone), false];
 
 // Randomizes Uniforms if enabled
 if (_randomizeUniforms && ((_forceUniforms) || (!_forceUniforms && (uniform _unit) != ""))) then {
-	private _uniformsArray = [""];
-
-	if (_contentUniforms isNotEqualTo "" && {_contentUniforms isNotEqualTo "[]"}) then {
-		_uniformsArray = ([_contentUniforms] call CBA_fnc_removeWhitespace) splitString ",";
-	};
+	private _uniformsArray = [_contentUniforms] call EFUNC(modules,parseClassnameList);
 	private _selectedUniforms = selectRandom _uniformsArray;
 
 	// Save Content of Uniform

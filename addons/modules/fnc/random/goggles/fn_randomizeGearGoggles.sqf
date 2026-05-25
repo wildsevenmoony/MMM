@@ -12,7 +12,7 @@
  * None
  *
  * Example:
- * [player, true, true, "G_Balaclava_blk,G_Bandanna_blk,G_Shades_Black"] call mmm_modules_fnc_randomizeGearGoggles.sqf
+ * [player, true, true, "G_Balaclava_blk,G_Bandanna_blk,G_Shades_Black"] call mmm_modules_fnc_randomizeGearGoggles
  *
  * Public: Yes
  */
@@ -31,11 +31,7 @@ _unit setVariable [QGVAR(randomizationGogglesDone), false];
 
 // Randomizes Goggles if enabled
 if (_randomizeGoggles && ((_forceGoggles) || (!_forceGoggles && (goggles _unit) != ""))) then {
-	private _gogglesArray = [""];
-
-	if (_contentGoggles isNotEqualTo "" && {_contentGoggles isNotEqualTo "[]"}) then {
-		_gogglesArray = ([_contentGoggles] call CBA_fnc_removeWhitespace) splitString ",";
-	};
+	private _gogglesArray = [_contentGoggles] call EFUNC(modules,parseClassnameList);
 	private _selectedGoggles = selectRandom _gogglesArray;
 
 	// Remove Goggles

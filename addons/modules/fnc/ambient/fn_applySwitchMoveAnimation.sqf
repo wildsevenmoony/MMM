@@ -44,11 +44,11 @@ if (_preview) then {
 _unit setDir _dir;
 _unit setPosATL _posATL;
 
-if (!_preview) then {
-  if (_allowDamage == 0) then {
-    _unit allowDamage false;
-  };
+if (!_preview && {_allowDamage == 0}) then {
+  _unit allowDamage false;
+};
 
+if (!_preview) then {
   _unit disableAI "ALL";
   _unit setBehaviour "CARELESS";
 };

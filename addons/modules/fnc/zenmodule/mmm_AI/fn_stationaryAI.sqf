@@ -1,19 +1,32 @@
-// Get all the passed parameters
+/*
+ * Author: Moony
+ * Toggles stationary mode for the unit under the Zeus cursor.
+ *
+ * Arguments:
+ * 0: Module position <ARRAY>
+ * 1: Object under cursor <OBJECT>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [position player, cursorObject] call mmm_modules_fnc_stationaryAI
+ *
+ * Public: No
+ */
 #include "\z\mmm\addons\modules\script_component.hpp"
 
 params [
-	"_position",
-	"_objectUnderCursor"
+	["_position", [], [[]]],
+	["_objectUnderCursor", objNull, [objNull]]
 ];
 
 #include "..\checks\fn_notNullUnit.hpp"
 #include "..\checks\fn_placeOnUnit.hpp"
 
-// Toggle AI Stationary
-if (_objectUnderCursor getVariable [QGVAR(aiStationary),false]) then {
-	[_objectUnderCursor] remoteExec [QEFUNC(modules,stationaryAIMoving), _objectUnderCursor];
-	[objNull, "AI CAN MOVE AGAIN"] call BIS_fnc_showCuratorFeedbackMessage;
-} else {
-	[_objectUnderCursor] remoteExec [QEFUNC(modules,stationaryAIStationary), _objectUnderCursor];
-	[objNull, "AI IS STATIONARY"] call BIS_fnc_showCuratorFeedbackMessage;
-};
+private _isStationary = _objectUnderCursor getVariable [QGVAR(aiStationary), false];
+private _function = [QEFUNC(modules,stationaryAIStationary), QEFUNC(modules,stationaryAIMoving)] select _isStationary;
+private _message = ["AI IS STATIONARY", "AI CAN MOVE AGAIN"] select _isStationary;
+
+[_objectUnderCursor] remoteExec [_function, _objectUnderCursor];
+[objNull, _message] call BIS_fnc_showCuratorFeedbackMessage;

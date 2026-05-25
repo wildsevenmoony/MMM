@@ -1,15 +1,29 @@
-// Get all the passed parameters
+/*
+ * Author: Moony
+ * Toggles ACE carryability for the object under the Zeus cursor.
+ *
+ * Arguments:
+ * 0: Module position <ARRAY>
+ * 1: Object under cursor <OBJECT>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [position player, cursorObject] call mmm_modules_fnc_aceCarryable
+ *
+ * Public: No
+ */
 #include "\z\mmm\addons\modules\script_component.hpp"
 
 params [
-	"_position",
-	"_objectUnderCursor"
+	["_position", [], [[]]],
+	["_objectUnderCursor", objNull, [objNull]]
 ];
 
 #include "..\checks\fn_notNullObject.hpp"
 #include "..\checks\fn_placeOnObject.hpp"
 
-// Code
 private _canCarry = _objectUnderCursor getVariable [QGVAR(canCarry), false];
 
 if (_canCarry) then {

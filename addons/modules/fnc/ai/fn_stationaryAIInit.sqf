@@ -1,6 +1,6 @@
 /*
  * Author: Moony
- * Module: Initializes the Stationary AI Script
+ * Eden module entry point for stationary AI.
  *
  * Arguments:
  * 0: Logic Object <OBJECT>
@@ -9,6 +9,9 @@
  *
  * Return Value:
  * None
+ *
+ * Example:
+ * [logic, synchronizedObjects, true] call mmm_modules_fnc_stationaryAIInit
  *
  * Public: No
  */
@@ -21,19 +24,21 @@ params [
 	["_activated",true ,[true]]
 ];
 
-private _condition = _logic getVariable [QGVAR(aiStationaryGroup), _logic getVariable ["MMM_MODULES_Module_AI_Stationary", 0]];
+if (!_activated || {isNull _logic}) exitWith {};
 
-switch (_condition) do {
-	case 0: {
-		{
-			{
-				[_x] remoteExec [QEFUNC(modules,stationaryAIStationary), _x];
-			} forEach units group _x;
-		} forEach _ai;
-	};
-	case 1: {
-		{
-			[_x] remoteExec [QEFUNC(modules,stationaryAIStationary), _x];
-		} forEach _ai;
-	};
+private _condition = _logic getVariable [QGVAR(aiStationaryGroup), _logic getVariable ["MMM_MODULES_Module_AI_Stationary", 0]];
+private _units = if (_condition == 0) then {
+	private _groupUnits = [];
+
+	{
+		_groupUnits append (units group _x);
+	} forEach _ai;
+
+	_groupUnits arrayIntersect _groupUnits
+} else {
+	_ai
 };
+
+{
+	[_x] remoteExec [QEFUNC(modules,stationaryAIStationary), _x];
+} forEach _units;
