@@ -3,8 +3,13 @@ author = "Moony"
 prefix = "mmm"
 mainprefix = "z"
 
+[files]
+include = [
+    "mmm.paa",
+]
+
 [version]
 major = 1
 minor = 6
-patch = 0
+patch = 1
 build = 0

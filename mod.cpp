@@ -1,0 +1,12 @@
+name = "Moony's Magnificent Modules";
+picture = "mmm.paa";
+logo = "mmm.paa";
+logoOver = "mmm.paa";
+tooltip = "Moony's Magnificent Modules";
+tooltipOwned = "Moony's Magnificent Modules";
+overview = "Utility modules for Eden, Zeus, and mission-making workflows.";
+author = "Moony";
+overviewPicture = "mmm.paa";
+overviewText = "Moony's Magnificent Modules";
+hideName = 0;
+hidePicture = 0;
