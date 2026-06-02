@@ -23,7 +23,19 @@ The mod was built for the groups I play with, so some behavior and wording is in
 - Vehicle utility:
   - Spawn synced vehicles as wrecks.
   - Optional ACE cookoff and explosion behavior.
+- Mobile HQ support:
+  - Mark synced objects, units, or vehicles as Mobile HQs.
+  - Configure respawn side, respawn name, deployment behavior, and teleport actions.
 - Extra small utilities and compatibility classes for older module names.
+- Zeus utilities:
+  - Toggle ACE carryable/draggable state.
+  - Destroy without explosion.
+  - Set respawn time.
+  - Remove crater decals.
+  - Enable unlimited ammo or fuel.
+  - Manage Mobile HQs during live missions.
+- Infection Zeus helpers when the related infection systems are loaded:
+  - Infect, cure, set infection value, toggle immunity, kill infected units, and create toxic areas.
 - Custom medic insignia.
 
 ## Requirements
@@ -34,6 +46,7 @@ MMM is built around the Arma 3 modding stack used by the modules:
 - CBA
 - ACE
 - ZEN
+- Moony's Magnificent Base
 
 Some functionality depends on ACE medical, ACE interactions, or ZEN module behavior being available in the loaded modset.
 

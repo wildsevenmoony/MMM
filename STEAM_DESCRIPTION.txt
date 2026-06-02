@@ -1,0 +1,48 @@
+[h1]Moony's Magnificent Modules[/h1]
+
+[b]Moony's Magnificent Modules[/b], or [b]MMM[/b], is an Arma 3 utility mod for mission makers, Zeus operators, and unit scenarios.
+
+It adds a collection of practical Eden and Zeus modules for faster mission setup, live Zeus control, medical staging, ambient scenes, AI handling, vehicle wrecks, and configurable gear randomization.
+
+[b]Features[/b]
+[list]
+[*] Eden modules for mission setup
+[*] Zeus modules with ZEN integration
+[*] Apply configurable ACE medical damage to units
+[*] Add base medic healing actions to synced objects
+[*] Turn individual AI or whole groups stationary
+[*] Apply ambient animations, switchMove, and playMove animations
+[*] Preview supported animations in Eden
+[*] Spawn vehicles as wrecks with optional ACE cookoff/explosion behavior
+[*] Mark vehicles or objects as Mobile HQs with respawn/teleport support
+[*] Randomize full gear or specific categories:
+[list]
+[*] Backpacks
+[*] Goggles
+[*] Headgear
+[*] Uniforms
+[*] Vests
+[*] Weapons and attachments
+[/list]
+[*] Small Zeus utility modules for ammo, fuel, dragging/carrying, crater cleanup, and more
+[*] Optional infection Zeus helpers when the matching Moony infection systems are loaded
+[*] Custom medic insignia
+[/list]
+
+[b]Requirements[/b]
+[list]
+[*] CBA
+[*] ACE
+[*] ZEN
+[*] Moony's Magnificent Base
+[/list]
+
+[b]Usage[/b]
+In Eden, look for modules under [b]Moony's Magnificent Modules[/b]. Place a module, configure its attributes, and synchronize it to the relevant units, vehicles, or objects.
+
+In Zeus, the ZEN modules provide quick live-mission tools for medical effects, AI behavior, object utilities, gear randomization, and other mission-control tasks.
+
+[b]Notes[/b]
+MMM was built for my own unit [url=https://discord.gg/Ju8FqJ3bpN]STAF[/url] and workflow, so some behavior is intentionally practical, specific, and occasionally a little rough around the edges. It should still be useful for other groups that want a compact toolbox of Eden and Zeus helpers.
+
+If you think I could add something: [b]Leave a comment![/b]
