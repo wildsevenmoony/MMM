@@ -31,7 +31,7 @@ _unit setVariable [QGVAR(randomizationVestsDone), false];
 
 // Randomizes Vests if enabled
 if (_randomizeVests && ((_forceVests) || (!_forceVests && (vest _unit) != ""))) then {
-	private _vestsArray = [_contentVests] call EFUNC(modules,parseClassnameList);
+	private _vestsArray = [_contentVests] call MMB_fnc_parseClassnameList;
 	private _selectedVests = selectRandom _vestsArray;
 
 	// Save Content of Vest

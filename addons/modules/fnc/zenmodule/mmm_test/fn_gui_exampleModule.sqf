@@ -38,7 +38,7 @@ private _savedValues = profileNamespace getVariable [_saveKey, []];
 private _y = _contentPaddingY;
 
 // Adds _addCategory, _addEdit, _addCheckbox, and _addSlider helper closures.
-#include "\z\mmm\addons\modules\fnc\zenmodule\gui\script_guiHelpers.hpp"
+#include "\z\mmb\addons\main\fnc\dialog\script_dialogHelpers.hpp"
 
 ["Category Label 1", IDC_CATEGORY1_TEXT] call _addCategory;
 ["Label 1.1", IDC_LABEL_1_1, IDC_EDIT_1_1] call _addEdit;
@@ -66,10 +66,10 @@ call _finalizeCategoryBody;
 
 // This tells the reusable OK handler which module-specific function should run
 // after it has collected the field values.
-_display setVariable [QGVAR(onConfirm), QEFUNC(modules,onConfirm_exampleModule)];
-_display setVariable [QGVAR(saveKey), _saveKey];
-_display setVariable [QGVAR(importExportEnabled), true];
+_display setVariable ["MMB_main_onConfirm", QEFUNC(modules,onConfirm_exampleModule)];
+_display setVariable ["MMB_main_saveKey", _saveKey];
+_display setVariable ["MMB_main_importExportEnabled", true];
 
-_display setVariable [QGVAR(controls), _controls];
-_display setVariable [QGVAR(fields), _fields];
-_display setVariable [QGVAR(contentHeight), _y + _contentPaddingY];
+_display setVariable ["MMB_main_controls", _controls];
+_display setVariable ["MMB_main_fields", _fields];
+_display setVariable ["MMB_main_contentHeight", _y + _contentPaddingY];

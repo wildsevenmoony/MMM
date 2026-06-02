@@ -89,7 +89,7 @@ class CfgVehicles
 			{
 				property = QGVAR(aceDamageCustomProjectiles);
 				displayName = "Custom Projectiles";
-				tooltip = "Comma-separated projectile damage types. Random projectile can pick from these too.";
+				tooltip = "Comma-separated custom projectile damage types. Random projectile can pick from these too.";
 				typeName = "STRING";
 				defaultValue = "''";
 			};
@@ -100,6 +100,15 @@ class CfgVehicles
 				displayName = "Random Projectile";
 				typeName = "BOOL";
 				defaultValue = "false";
+			};
+
+			class GVAR(aceDamageRandomProjectiles): Edit
+			{
+				property = QGVAR(aceDamageRandomProjectiles);
+				displayName = "Random Projectile Pool";
+				tooltip = "Optional comma-separated projectile types used by Random Projectile. Leave empty to use all known projectile types plus custom projectiles.";
+				typeName = "STRING";
+				defaultValue = "''";
 			};
 
 			class GVAR(aceDamageWoundsCategory)
@@ -128,13 +137,33 @@ class CfgVehicles
 				defaultValue = "false";
 			};
 
+			class GVAR(aceDamageWoundCountMin): Edit
+			{
+				property = QGVAR(aceDamageWoundCountMin);
+				displayName = "Min Random Wounds";
+				tooltip = "Lower limit for randomized wound count.";
+				typeName = "NUMBER";
+				defaultValue = "1";
+				validate = "number";
+			};
+
 			class GVAR(aceDamageWoundCountMax): Edit
 			{
 				property = QGVAR(aceDamageWoundCountMax);
 				displayName = "Max Random Wounds";
-				tooltip = "Random wound count rolls from 1 to this number.";
+				tooltip = "Random wound count rolls from Min Random Wounds to this number.";
 				typeName = "NUMBER";
 				defaultValue = "3";
+				validate = "number";
+			};
+
+			class GVAR(aceDamageRandomBodyPartMin): Edit
+			{
+				property = QGVAR(aceDamageRandomBodyPartMin);
+				displayName = "Min Random Body Parts";
+				tooltip = "Lower limit for randomized body part count. Ignored when Max Random Body Parts is 0.";
+				typeName = "NUMBER";
+				defaultValue = "1";
 				validate = "number";
 			};
 
@@ -142,9 +171,19 @@ class CfgVehicles
 			{
 				property = QGVAR(aceDamageRandomBodyPartMax);
 				displayName = "Max Random Body Parts";
-				tooltip = "Only used by Random damage to random body parts. 0 means all enabled body parts.";
+				tooltip = "Only used by Random damage to random body parts. 0 means all enabled body parts and ignores Min Random Body Parts.";
 				typeName = "NUMBER";
 				defaultValue = "1";
+				validate = "number";
+			};
+
+			class GVAR(aceDamageRandomDamageMin): Edit
+			{
+				property = QGVAR(aceDamageRandomDamageMin);
+				displayName = "Min Random Damage";
+				tooltip = "Lower limit used when randomizing damage values.";
+				typeName = "NUMBER";
+				defaultValue = "0";
 				validate = "number";
 			};
 
@@ -152,7 +191,7 @@ class CfgVehicles
 			{
 				property = QGVAR(aceDamageRandomDamageMax);
 				displayName = "Max Random Damage";
-				tooltip = "Random damage rolls from 0 to this number.";
+				tooltip = "Random damage rolls from Min Random Damage to this number.";
 				typeName = "NUMBER";
 				defaultValue = "0.8";
 				validate = "number";
@@ -208,6 +247,7 @@ class CfgVehicles
 			{
 				property = QGVAR(aceDamageApplyForce);
 				displayName = "Apply Force";
+				tooltip = "Enables the physical ragdoll shove after damage. Useful when forcing death so units do not all fall into the same static pose.";
 				typeName = "BOOL";
 				defaultValue = "false";
 			};
@@ -224,16 +264,26 @@ class CfgVehicles
 			{
 				property = QGVAR(aceDamageForceVector);
 				displayName = "Force Vector";
-				tooltip = "Array applied as velocity kick, e.g. [0,3,4].";
+				tooltip = "Array applied as velocity kick, e.g. [0,3,4]. Leave empty for a modest random infantry ragdoll shove.";
 				typeName = "STRING";
 				defaultValue = "'[0,3,4]'";
+			};
+
+			class GVAR(aceDamageForceMin): Edit
+			{
+				property = QGVAR(aceDamageForceMin);
+				displayName = "Min Random Force";
+				tooltip = "Minimum random force magnitude when random force is enabled.";
+				typeName = "NUMBER";
+				defaultValue = "0";
+				validate = "number";
 			};
 
 			class GVAR(aceDamageForceMax): Edit
 			{
 				property = QGVAR(aceDamageForceMax);
 				displayName = "Max Random Force";
-				tooltip = "Random force rolls X/Y from -this to +this and Z from 0 to this.";
+				tooltip = "Random force rolls each axis between the min and max magnitudes.";
 				typeName = "NUMBER";
 				defaultValue = "4";
 				validate = "number";
@@ -665,6 +715,75 @@ class CfgVehicles
 				optional = 0;
 				duplicate = 0;
 				synced[] = {"AnyAI"};
+			};
+		};
+	};
+
+	class GVAR(mobileHQ): Module_F
+	{
+		category = QGVAR(Modules);
+		displayName = "Mobile HQ";
+		function = QEFUNC(modules,mobileHQInit);
+		functionPriority = 10;
+		isDisposable = 0;
+		is3DEN = 0;
+		isGlobal = 0;
+		isTriggerActivated = 0;
+		scope = 2;
+
+		class Attributes: AttributesBase
+		{
+			class GVAR(mobileHQName): Edit
+			{
+				property = QGVAR(mobileHQName);
+				displayName = "Respawn Name";
+				tooltip = "Optional custom name for the MHQ respawn position. Leave empty for Mobile HQ 1, Mobile HQ 2, ...";
+				typeName = "STRING";
+				defaultValue = "''";
+			};
+
+			class GVAR(mobileHQSide): Combo
+			{
+				property = QGVAR(mobileHQSide);
+				displayName = "Respawn Side";
+				tooltip = "Side that receives this MHQ respawn position.";
+				typeName = "STRING";
+				defaultValue = "'west'";
+
+				class Values
+				{
+					class West {name = "BLUFOR"; value = "west";};
+					class East {name = "OPFOR"; value = "east";};
+					class Independent {name = "Independent"; value = "independent";};
+					class Civilian {name = "Civilian"; value = "civilian";};
+				};
+			};
+
+			class GVAR(mobileHQAlwaysDeployed): Checkbox
+			{
+				property = QGVAR(mobileHQAlwaysDeployed);
+				displayName = "Always Deployed";
+				tooltip = "This MHQ is always deployed, regardless of the global deployment setting.";
+				typeName = "BOOL";
+				defaultValue = "false";
+			};
+
+			class ModuleDescription: ModuleDescription{};
+		};
+
+		class ModuleDescription: ModuleDescription
+		{
+			description = "Sync an object, unit, or vehicle to make it a Mobile HQ.";
+			sync[] = {"LocationArea_F"};
+
+			class LocationArea_F
+			{
+				description[] =	{"Synchronise any object, unit, or vehicle to this module."};
+				position = 0;
+				direction = 0;
+				optional = 0;
+				duplicate = 0;
+				synced[] = {"AnyStaticObject", "AnyVehicle", "AnyBrain"};
 			};
 		};
 	};
@@ -2263,33 +2382,4 @@ class CfgVehicles
 			};
 		};
 	};
-
-	// Zeus Modules
-
-	class GVAR(moduleBase): Module_F {
-		author = "Moony";
-        category = QGVAR(Modules);
-        function = QEFUNC(main,dummy);
-        functionPriority = 1;
-        isGlobal = 1;
-        isTriggerActivated = 0;
-        scope = 1;
-        scopeCurator = 2;
-    };
-
-	/*class GVAR(moduleDialogDemo): GVAR(moduleBase) {
-		scope = 2;
-		scopeCurator = 2;
-		category = QGVAR(modulesTest);
-		displayName = "Demo: Dynamic Dialog";
-		icon = "\a3\Modules_F_Curator\Data\portraitModule_ca.paa";
-		portrait = "\a3\Modules_F_Curator\Data\portraitModule_ca.paa";
-
-		// Opens the same display as createDialog QGVAR(RscDisplayExample).
-		// This is useful for testing the dialog from the vanilla Zeus module
-		// list, while your normal workflow can use the ZEN custom module below.
-		curatorInfoType = QGVAR(RscDisplayExample);
-		function = QEFUNC(modules,moduleExample);
-		isGlobal = 0;
-    };*/
 };

@@ -1,6 +1,6 @@
 class CfgPatches {
 	class mmm_deprecated {
-		name = "Moonys Magnificent Modules - Deprecated Stuff";
+		name = "Moony's Magnificent Modules - Deprecated Stuff";
 		author = "Moony";
 		requiredAddons[] = {
 			"mmm_main",

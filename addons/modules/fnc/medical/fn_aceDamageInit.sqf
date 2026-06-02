@@ -71,7 +71,13 @@ private _settings = [
     _logic getVariable [QGVAR(aceDamageForceVector), "[0,3,4]"],
     _logic getVariable [QGVAR(aceDamageForceMax), 4],
     _logic getVariable [QGVAR(aceDamageOverrideInvulnerability), true],
-    _logic getVariable [QGVAR(aceDamageForceDeath), false]
+    _logic getVariable [QGVAR(aceDamageForceDeath), false],
+    _logic getVariable [QGVAR(aceDamageRandomProjectiles), ""],
+    _logic getVariable [QGVAR(aceDamageRandomDamageMin), 0],
+    _logic getVariable [QGVAR(aceDamageWoundCountMin), 1],
+    _logic getVariable [QGVAR(aceDamageRandomBodyPartMin), 1],
+    _logic getVariable [QGVAR(aceDamageForceMin), 0],
+    true
 ];
 
 [_objs, _settings] call EFUNC(modules,aceDamage);

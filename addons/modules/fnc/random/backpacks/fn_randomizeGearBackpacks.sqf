@@ -29,7 +29,7 @@ params [
 
 // Randomizes Backpacks if enabled
 if (_randomizeBackpacks && ((_forceBackpacks) || (!_forceBackpacks && (backpack _unit) != ""))) then {
-	private _backpacksArray = [_contentBackpacks] call EFUNC(modules,parseClassnameList);
+	private _backpacksArray = [_contentBackpacks] call MMB_fnc_parseClassnameList;
 	private _selectedBackpacks = selectRandom _backpacksArray;
 
 	// Save Content of Backpack

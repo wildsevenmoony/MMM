@@ -139,7 +139,7 @@ waitUntil {
 
 // Randomizes Primary Weapon if enabled
 if (_randomizePrimary && ((_forcePrimary) || (!_forcePrimary && (primaryWeapon _unit) != ""))) then {
-	private _weaponPrimaryArray = [_contentPrimary] call EFUNC(modules,parseClassnameList);
+	private _weaponPrimaryArray = [_contentPrimary] call MMB_fnc_parseClassnameList;
 
 	private _weaponPrimary = selectRandom _weaponPrimaryArray;
 	private _compatibleAmmoPrimary = compatibleMagazines [_weaponPrimary, "this"];
@@ -250,7 +250,7 @@ if (_randomizePrimary && ((_forcePrimary) || (!_forcePrimary && (primaryWeapon _
 
 // Randomizes Sidearm Weapon if enabled
 if (_randomizeSidearm && ((_forceSidearm) || (!_forceSidearm && (handgunWeapon _unit) != ""))) then {
-	private _weaponSidearmArray = [_contentSidearm] call EFUNC(modules,parseClassnameList);
+	private _weaponSidearmArray = [_contentSidearm] call MMB_fnc_parseClassnameList;
 	private _weaponSidearm = selectRandom _weaponSidearmArray;
 	private _compatibleAmmoSidearm = compatibleMagazines [_weaponSidearm, "this"];
 	private _ammoSidearm = if (_compatibleAmmoSidearm isEqualTo []) then {""} else {_compatibleAmmoSidearm select 0};
@@ -359,7 +359,7 @@ if (_randomizeSidearm && ((_forceSidearm) || (!_forceSidearm && (handgunWeapon _
 
 // Randomizes Secondary Weapon if enabled
 if (_randomizeSecondary && ((_forceSecondary) || (!_forceSecondary && (secondaryWeapon _unit) != ""))) then {
-	private _weaponSecondaryArray = [_contentSecondary] call EFUNC(modules,parseClassnameList);
+	private _weaponSecondaryArray = [_contentSecondary] call MMB_fnc_parseClassnameList;
 	private _weaponSecondary = selectRandom _weaponSecondaryArray;
 	private _compatibleAmmoSecondary = compatibleMagazines [_weaponSecondary, "this"];
 	private _ammoSecondary = if (_compatibleAmmoSecondary isEqualTo []) then {""} else {_compatibleAmmoSecondary select 0};

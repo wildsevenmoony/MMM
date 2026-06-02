@@ -23,6 +23,10 @@ if (isNull _unit) exitWith {};
 [_unit, "PATH"] remoteExec ["enableAI", 0, true];
 _unit setVariable [QGVAR(aiStationary), false, true];
 
+if (missionNamespace getVariable [QGVAR(debugLogging), false]) then {
+    diag_log format ["[%1] Stationary AI disabled for %2", QADDON, _unit];
+};
+
 // Only restore WBK civilian behaviour when stationary mode disabled it earlier.
 private _wbkCivisLoaded = ["WBK_Civies"] call ace_common_fnc_isModLoaded;
 if (_wbkCivisLoaded) then {
@@ -30,5 +34,8 @@ if (_wbkCivisLoaded) then {
     if (!_checkIfDisabled) then {
         _unit setVariable ["WBK_DisableCivBehaviour", false, true];
         _unit setVariable [QGVAR(wbkCivBehaviourWasDisabled), nil, true];
+        if (missionNamespace getVariable [QGVAR(debugLogging), false]) then {
+            diag_log format ["[%1] Restored WBK civilian behaviour for %2", QADDON, _unit];
+        };
     };
 };

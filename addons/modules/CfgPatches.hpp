@@ -1,12 +1,19 @@
 class CfgPatches {
 	class mmm_modules {
-		name = "Moonys Magnificent Modules - Modules";
+		name = "Moony's Magnificent Modules - Modules";
 		author = "Moony";
 		requiredAddons[] = {
+			"mma_main",
+			"mmb_main",
 			"mmm_main",
+			"A3_Modules_F",
             "cba_main",
+            "cba_settings",
             "ace_main",
             "ace_common",
+            "ace_interact_menu",
+            "ace_medical",
+            "ace_medical_treatment",
             "3DEN",
             "zen_main",
             "zen_modules"
@@ -17,6 +24,7 @@ class CfgPatches {
 			QGVAR(ambientAnimationMP),
 			QGVAR(animation),
 			QGVAR(playMoveAnimation),
+			QGVAR(mobileHQ),
 			QGVAR(baseMedic),
 			QGVAR(randomizeGear),
 			QGVAR(randomizeGearBackpacks),
@@ -29,7 +37,7 @@ class CfgPatches {
 			//QGVAR(moduleDialogDemo)
 		};
         weapons[] = {};
-        requiredVersion = 1.0;
+        requiredVersion = 1.56;
 		version = "1.3.0";
 	};
 };

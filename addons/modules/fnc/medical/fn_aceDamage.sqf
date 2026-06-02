@@ -30,6 +30,10 @@ if !(["ace_medical"] call ace_common_fnc_isModLoaded) exitWith {
     diag_log "[MMM] ACE Damage module ignored because ace_medical is not loaded.";
 };
 
+if (missionNamespace getVariable [QGVAR(debugLogging), false]) then {
+    diag_log format ["[%1] ACE damage requested for %2 target(s)", QADDON, count _targets];
+};
+
 {
     if (!isNull _x && {_x isKindOf "CAManBase"} && {alive _x}) then {
         [_x, _settings] remoteExecCall [QEFUNC(modules,aceDamageLocal), _x];

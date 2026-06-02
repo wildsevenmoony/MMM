@@ -34,6 +34,7 @@ if (!hasInterface) exitWith {};
 			["Toggle Carryable (ACE)",{_this call EFUNC(modules,aceCarryable)}],
 			["Toggle Draggable (ACE)",{_this call EFUNC(modules,aceDraggable)}],
 			["Destroy without Explosion",{_this call EFUNC(modules,destroyWithoutExplosion)}],
+			["Mobile HQ",{_this call EFUNC(modules,mobileHQZeus)}],
 			["Set Respawn Time",{_this call EFUNC(modules,respawnTimer)}],
 			["Remove Crater Decal",{_this call EFUNC(modules,removeCrater)}],
 			["Unlimited Ammo",{_this call EFUNC(modules,unlimitedAmmoZeus)}],
@@ -44,6 +45,18 @@ if (!hasInterface) exitWith {};
 			["Base Medic",{_this call EFUNC(modules,baseMedicZeus)}],
 			["Apply ACE Damage",{_this call EFUNC(modules,aceDamageZeus)}]
 		];
+
+		private _mmmInfection = [];
+		if (isClass (configFile >> "CfgPatches" >> "MMB_main")) then {
+			_mmmInfection = [
+				["Infect",{_this call EFUNC(modules,infectionInfectZeus)}],
+				["Set Infection Value",{_this call EFUNC(modules,infectionSetValueZeus)}],
+				["Cure",{_this call EFUNC(modules,infectionCureZeus)}],
+				["Kill Infected",{_this call EFUNC(modules,infectionKillInfectedZeus)}],
+				["Toggle Immunity",{_this call EFUNC(modules,infectionImmunityZeus)}],
+				["Toxic Area",{_this call EFUNC(modules,toxicAreaZeus)}]
+			];
+		};
 
 		private _mmmRandom = [
 			["Full Gear Randomization",{_this call EFUNC(modules,randomizeGearZeus)}],
@@ -61,13 +74,14 @@ if (!hasInterface) exitWith {};
 		];*/
 
 		private _combinedArr = [
-			["Moonys Magnificent", _mmmMain],
-			["Moonys Magnificent AI", _mmmAI],
-			["Moonys Magnificent Fun", _mmmFun],
-			["Moonys Magnificent Medical", _mmmMedical],
-			["Moonys Magnificent Random", _mmmRandom]
-			// ["Moonys Magnificent TEST", _mmmTest]
-		];
+			["Moony's Magnificent", _mmmMain],
+			["Moony's Magnificent AI", _mmmAI],
+			["Moony's Magnificent Fun", _mmmFun],
+			["Moony's Magnificent Infection", _mmmInfection],
+			["Moony's Magnificent Medical", _mmmMedical],
+			["Moony's Magnificent Random", _mmmRandom]
+			// ["Moony's Magnificent TEST", _mmmTest]
+		] select {(_x select 1) isNotEqualTo []};
 		_combinedArr;
 	};	
 

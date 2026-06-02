@@ -48,7 +48,7 @@ private _saveKey = QGVAR(randomizeGearDialogValues);
 private _savedValues = profileNamespace getVariable [_saveKey, []];
 private _y = _contentPaddingY;
 
-#include "\z\mmm\addons\modules\fnc\zenmodule\gui\script_guiHelpers.hpp"
+#include "\z\mmb\addons\main\fnc\dialog\script_dialogHelpers.hpp"
 
 private _addEquipmentBlock = {
     params [
@@ -250,10 +250,10 @@ private _addWeaponBlock = {
 
 call _finalizeCategoryBody;
 
-_display setVariable [QGVAR(onConfirm), QEFUNC(modules,onConfirm_randomizeGear)];
-_display setVariable [QGVAR(saveKey), _saveKey];
-_display setVariable [QGVAR(importExportEnabled), true];
+_display setVariable ["MMB_main_onConfirm", QEFUNC(modules,onConfirm_randomizeGear)];
+_display setVariable ["MMB_main_saveKey", _saveKey];
+_display setVariable ["MMB_main_importExportEnabled", true];
 
-_display setVariable [QGVAR(controls), _controls];
-_display setVariable [QGVAR(fields), _fields];
-_display setVariable [QGVAR(contentHeight), _y + _contentPaddingY];
+_display setVariable ["MMB_main_controls", _controls];
+_display setVariable ["MMB_main_fields", _fields];
+_display setVariable ["MMB_main_contentHeight", _y + _contentPaddingY];

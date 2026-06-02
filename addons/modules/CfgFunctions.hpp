@@ -31,10 +31,23 @@ class CfgFunctions
 			class baseMedic{};
 			class baseMedicInit{};
 		};
+		class MHQ
+		{
+			file = PATHTOF(fnc\mhq);
+			class mobileHQAddActions{};
+			class mobileHQApplyFeatures{};
+			class mobileHQCanRespawn{};
+			class mobileHQHandleRespawn{};
+			class mobileHQInit{};
+			class mobileHQMonitor{};
+			class mobileHQParseArsenalItems{};
+			class mobileHQSetDeployed{};
+			class mobileHQSetup{};
+			class mobileHQTeleport{};
+		};
 		class Misc
 		{
 			file = PATHTOF(fnc\misc);
-			class parseClassnameList{};
 			class spawnWreck{};
 		};
 		class Random_Backpacks
@@ -84,17 +97,6 @@ class CfgFunctions
 
 			class zenInit{postinit = 1;};
 		};
-		class Zenmodule_mmm_GUI
-		{
-			file = PATHTOF(fnc\zenmodule\gui);
-
-			class collectDisplayValues{};
-			class confirmDisplay{};
-			class exportDisplayValues{};
-			class importDisplayValues{};
-			class initDisplay{};
-			class initDisplayPositioning{};
-		};
 		class Zenmodule_mmm_Test
 		{
 			file = PATHTOF(fnc\zenmodule\mmm_test);
@@ -111,6 +113,7 @@ class CfgFunctions
 			class aceDragable{};
 			class aceDraggable{};
 			class destroyWithoutExplosion{};
+			class mobileHQZeus{};
 			class removeCrater{};
 			class respawnTimer{};
 			class unlimitedAmmoZeus{};
@@ -129,6 +132,18 @@ class CfgFunctions
 			class warcrimesNotification{};
 			class zeusHatesArma{};
 			class zeusHatesPlayerbase{};
+		};
+		class Zenmodule_mmm_Infection
+		{
+			file = PATHTOF(fnc\zenmodule\mmm_Infection);
+
+			class infectionCureZeus{};
+			class infectionImmunitySet{};
+			class infectionImmunityZeus{};
+			class infectionInfectZeus{};
+			class infectionKillInfectedZeus{};
+			class infectionSetValueZeus{};
+			class toxicAreaZeus{};
 		};
 		class Zenmodule_mmm_Medical
 		{

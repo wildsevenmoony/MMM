@@ -18,6 +18,6 @@ params ["_position", "_objectUnderCursor"];
 #include "..\checks\fn_placeOnUnit.hpp"
 #include "..\checks\fn_isAlive.hpp"
 
-uiNamespace setVariable [QGVAR(pendingDialogArguments), [_objectUnderCursor]];
+uiNamespace setVariable ["MMB_main_pendingDialogArguments", [_objectUnderCursor]];
 
 createDialog QGVAR(RscDisplayAceDamage)

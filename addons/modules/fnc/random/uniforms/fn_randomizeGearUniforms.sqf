@@ -31,7 +31,7 @@ _unit setVariable [QGVAR(randomizationUniformsDone), false];
 
 // Randomizes Uniforms if enabled
 if (_randomizeUniforms && ((_forceUniforms) || (!_forceUniforms && (uniform _unit) != ""))) then {
-	private _uniformsArray = [_contentUniforms] call EFUNC(modules,parseClassnameList);
+	private _uniformsArray = [_contentUniforms] call MMB_fnc_parseClassnameList;
 	private _selectedUniforms = selectRandom _uniformsArray;
 
 	// Save Content of Uniform

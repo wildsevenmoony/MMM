@@ -31,7 +31,7 @@ _unit setVariable [QGVAR(randomizationHeadgearDone), false];
 
 // Randomizes Headgear if enabled
 if (_randomizeHeadgear && ((_forceHeadgear) || (!_forceHeadgear && (headgear _unit) != ""))) then {
-	private _headgearArray = [_contentHeadgear] call EFUNC(modules,parseClassnameList);
+	private _headgearArray = [_contentHeadgear] call MMB_fnc_parseClassnameList;
 	private _selectedHeadgear = selectRandom _headgearArray;
 
 	// Remove Headgear

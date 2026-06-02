@@ -20,6 +20,6 @@ params ["_position", "_objectUnderCursor"];
 
 // fn_initDisplay.sqf reads this once and stores it on the display. This keeps
 // the selected Zeus target available when OK is pressed later.
-uiNamespace setVariable [QGVAR(pendingDialogArguments), [_objectUnderCursor]];
+uiNamespace setVariable ["MMB_main_pendingDialogArguments", [_objectUnderCursor]];
 
 createDialog QGVAR(RscDisplayRandomizeGear)

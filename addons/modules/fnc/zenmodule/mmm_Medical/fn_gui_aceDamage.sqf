@@ -42,7 +42,7 @@ private _saveKey = QGVAR(aceDamageDialogValues);
 private _savedValues = profileNamespace getVariable [_saveKey, []];
 private _y = _contentPaddingY;
 
-#include "\z\mmm\addons\modules\fnc\zenmodule\gui\script_guiHelpers.hpp"
+#include "\z\mmb\addons\main\fnc\dialog\script_dialogHelpers.hpp"
 
 private _addCombo = {
     params ["_label", "_labelIdc", "_comboIdc", "_items", ["_default", ""], ["_key", ""], ["_tooltip", ""]];
@@ -118,14 +118,18 @@ if (["kat_main"] call ace_common_fnc_isModLoaded) then {
 ] call _addCombo;
 
 ["Projectile", IDC_ACE_DAMAGE_PROJECTILE_LABEL, IDC_ACE_DAMAGE_PROJECTILE_COMBO, _projectiles, "bullet", "Projectile", "Damage source type passed into ACE medical damage handling."] call _addCombo;
-["Custom projectiles", IDC_ACE_DAMAGE_CUSTOM_PROJECTILES_LABEL, IDC_ACE_DAMAGE_CUSTOM_PROJECTILES_EDIT, "", "CustomProjectiles", "Comma-separated custom projectile type names used when random projectile is enabled."] call _addEdit;
+["Custom projectiles", IDC_ACE_DAMAGE_CUSTOM_PROJECTILES_LABEL, IDC_ACE_DAMAGE_CUSTOM_PROJECTILES_EDIT, "", "CustomProjectiles", "Comma-separated custom projectile type names."] call _addEdit;
 ["Random projectile", IDC_ACE_DAMAGE_RANDOM_PROJECTILE_LABEL, IDC_ACE_DAMAGE_RANDOM_PROJECTILE_CHECK, false, "RandomProjectile", "Pick a random projectile type instead of using the selected projectile."] call _addCheckbox;
+["Random projectile pool", IDC_ACE_DAMAGE_RANDOM_PROJECTILE_POOL_LABEL, IDC_ACE_DAMAGE_RANDOM_PROJECTILE_POOL_EDIT, "", "RandomProjectiles", "Optional comma-separated projectile types used by Random Projectile. Leave empty to use all known projectile types plus custom projectiles."] call _addEdit;
 
 ["Wounds", IDC_ACE_DAMAGE_WOUNDS_CATEGORY] call _addCategory;
 ["Wound count", IDC_ACE_DAMAGE_WOUND_COUNT_LABEL, IDC_ACE_DAMAGE_WOUND_COUNT_EDIT, "1", "WoundCount", "Number of wounds applied when random wound count is disabled."] call _addEdit;
 ["Random wound count", IDC_ACE_DAMAGE_RANDOM_WOUNDS_LABEL, IDC_ACE_DAMAGE_RANDOM_WOUNDS_CHECK, false, "RandomWounds", "Randomize how many wounds are applied."] call _addCheckbox;
+["Min random wounds", IDC_ACE_DAMAGE_MIN_WOUNDS_LABEL, IDC_ACE_DAMAGE_MIN_WOUNDS_EDIT, "1", "MinWounds", "Lower limit for randomized wound count."] call _addEdit;
 ["Max random wounds", IDC_ACE_DAMAGE_MAX_WOUNDS_LABEL, IDC_ACE_DAMAGE_MAX_WOUNDS_EDIT, "3", "MaxWounds", "Upper limit for randomized wound count."] call _addEdit;
-["Max random body parts", IDC_ACE_DAMAGE_RANDOM_PART_MAX_LABEL, IDC_ACE_DAMAGE_RANDOM_PART_MAX_EDIT, "1", "RandomPartMax", "Maximum number of body parts selected when the mode randomizes body parts."] call _addEdit;
+["Min random body parts", IDC_ACE_DAMAGE_RANDOM_PART_MIN_LABEL, IDC_ACE_DAMAGE_RANDOM_PART_MIN_EDIT, "1", "RandomPartMin", "Lower limit for randomized body part count. Ignored when Max random body parts is 0."] call _addEdit;
+["Max random body parts", IDC_ACE_DAMAGE_RANDOM_PART_MAX_LABEL, IDC_ACE_DAMAGE_RANDOM_PART_MAX_EDIT, "1", "RandomPartMax", "Maximum number of body parts selected when the mode randomizes body parts. 0 means all enabled body parts."] call _addEdit;
+["Min random damage", IDC_ACE_DAMAGE_RANDOM_DAMAGE_MIN_LABEL, IDC_ACE_DAMAGE_RANDOM_DAMAGE_MIN_EDIT, [0, 2], 0, "RandomDamageMin", [0.05, 0.2], "Lower limit used when randomizing damage values."] call _addSlider;
 ["Max random damage", IDC_ACE_DAMAGE_RANDOM_DAMAGE_MAX_LABEL, IDC_ACE_DAMAGE_RANDOM_DAMAGE_MAX_EDIT, [0, 2], 0.8, "RandomDamageMax", [0.05, 0.2], "Upper limit used when randomizing damage values."] call _addSlider;
 ["Override invulnerability", IDC_ACE_DAMAGE_OVERRIDE_LABEL, IDC_ACE_DAMAGE_OVERRIDE_CHECK, true, "OverrideInvulnerability", "Temporarily allows damage even if the target is protected from damage."] call _addCheckbox;
 ["Force death", IDC_ACE_DAMAGE_FORCE_DEATH_LABEL, IDC_ACE_DAMAGE_FORCE_DEATH_CHECK, false, "ForceDeath", "Force the target to die after applying the configured damage."] call _addCheckbox;
@@ -145,17 +149,18 @@ if (["kat_main"] call ace_common_fnc_isModLoaded) then {
 ["Right Leg damage", IDC_ACE_DAMAGE_RIGHT_LEG_LABEL, IDC_ACE_DAMAGE_RIGHT_LEG_EDIT, "0.4", "RightLegDamage", "Damage value used for the right leg when not randomized."] call _addEdit;
 
 ["Force", IDC_ACE_DAMAGE_FORCE_CATEGORY] call _addCategory;
-["Apply force", IDC_ACE_DAMAGE_APPLY_FORCE_LABEL, IDC_ACE_DAMAGE_APPLY_FORCE_CHECK, false, "ApplyForce", "Apply a physical force vector after damage is added."] call _addCheckbox;
+["Apply force", IDC_ACE_DAMAGE_APPLY_FORCE_LABEL, IDC_ACE_DAMAGE_APPLY_FORCE_CHECK, false, "ApplyForce", "Enables the physical ragdoll shove after damage. Useful when forcing death so units do not all fall into the same static pose."] call _addCheckbox;
 ["Random force", IDC_ACE_DAMAGE_RANDOM_FORCE_LABEL, IDC_ACE_DAMAGE_RANDOM_FORCE_CHECK, false, "RandomForce", "Randomize the force vector instead of using the fixed vector."] call _addCheckbox;
-["Force vector", IDC_ACE_DAMAGE_FORCE_VECTOR_LABEL, IDC_ACE_DAMAGE_FORCE_VECTOR_EDIT, "[0,3,4]", "ForceVector", "Fixed force vector in SQF array format, e.g. [0,3,4]."] call _addEdit;
+["Force vector", IDC_ACE_DAMAGE_FORCE_VECTOR_LABEL, IDC_ACE_DAMAGE_FORCE_VECTOR_EDIT, "[0,3,4]", "ForceVector", "Fixed force vector in SQF array format, e.g. [0,3,4]. Leave empty for a modest random infantry ragdoll shove."] call _addEdit;
+["Min random force", IDC_ACE_DAMAGE_FORCE_MIN_LABEL, IDC_ACE_DAMAGE_FORCE_MIN_EDIT, [0, 10], 0, "ForceMin", [0.25, 1], "Minimum force magnitude used when random force is enabled."] call _addSlider;
 ["Max random force", IDC_ACE_DAMAGE_FORCE_MAX_LABEL, IDC_ACE_DAMAGE_FORCE_MAX_EDIT, [0, 10], 4, "ForceMax", [0.25, 1], "Maximum force magnitude used when random force is enabled."] call _addSlider;
 
 call _finalizeCategoryBody;
 
-_display setVariable [QGVAR(onConfirm), QEFUNC(modules,onConfirm_aceDamage)];
-_display setVariable [QGVAR(saveKey), _saveKey];
-_display setVariable [QGVAR(importExportEnabled), true];
+_display setVariable ["MMB_main_onConfirm", QEFUNC(modules,onConfirm_aceDamage)];
+_display setVariable ["MMB_main_saveKey", _saveKey];
+_display setVariable ["MMB_main_importExportEnabled", true];
 
-_display setVariable [QGVAR(controls), _controls];
-_display setVariable [QGVAR(fields), _fields];
-_display setVariable [QGVAR(contentHeight), _y + _contentPaddingY];
+_display setVariable ["MMB_main_controls", _controls];
+_display setVariable ["MMB_main_fields", _fields];
+_display setVariable ["MMB_main_contentHeight", _y + _contentPaddingY];

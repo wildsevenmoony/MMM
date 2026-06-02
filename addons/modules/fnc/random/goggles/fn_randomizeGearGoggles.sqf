@@ -31,7 +31,7 @@ _unit setVariable [QGVAR(randomizationGogglesDone), false];
 
 // Randomizes Goggles if enabled
 if (_randomizeGoggles && ((_forceGoggles) || (!_forceGoggles && (goggles _unit) != ""))) then {
-	private _gogglesArray = [_contentGoggles] call EFUNC(modules,parseClassnameList);
+	private _gogglesArray = [_contentGoggles] call MMB_fnc_parseClassnameList;
 	private _selectedGoggles = selectRandom _gogglesArray;
 
 	// Remove Goggles

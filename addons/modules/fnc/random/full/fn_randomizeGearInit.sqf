@@ -21,6 +21,10 @@ params [
 	["_activated",true ,[true]]
 ];
 
+if (missionNamespace getVariable [QGVAR(debugLogging), false]) then {
+    diag_log format ["[%1] Full gear randomization init for %2 unit(s). Activated: %3", QADDON, count _unit, _activated];
+};
+
 // Get values
 private _randomizeBackpacks = _logic getVariable [QGVAR(randomizeGearBackpacksRandomize), _logic getVariable ["MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize", false]];
 private _forceBackpacks = _logic getVariable [QGVAR(randomizeGearBackpacksForce), _logic getVariable ["MMM_MODULES_Module_Randomize_Gear_Backpacks_Force", false]];

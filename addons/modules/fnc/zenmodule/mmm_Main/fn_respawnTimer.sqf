@@ -24,6 +24,11 @@ params [
 #include "..\checks\fn_notNullUnit.hpp"
 #include "..\checks\fn_placeOnUnit.hpp"
 
+private _defaultTime = missionNamespace getVariable [QGVAR(respawnTimerDefault), 2];
+private _maxTime = missionNamespace getVariable [QGVAR(respawnTimerMax), 120];
+_maxTime = 1 max _maxTime;
+_defaultTime = (_defaultTime max 1) min _maxTime;
+
 // Dialog
 [
 	"Set Respawn Time",
@@ -36,8 +41,8 @@ params [
 			],
 			[
 				1, // Min. Value
-				120, // Max. Value
-				2, // Default Value
+				_maxTime, // Max. Value
+				_defaultTime, // Default Value
 				0 // Number of Decimals
 			]
 		],
@@ -71,6 +76,9 @@ params [
 		};
 
 		private _text = format ["PLAYERS RESPAWN TIME HAS BEEN SET TO %1 SECONDS", _time];
+		if (missionNamespace getVariable [QGVAR(debugLogging), false]) then {
+			diag_log format ["[%1] Respawn timer for %2 set to %3 seconds. Keep after respawn: %4", QADDON, _objectUnderCursor, _time, _remember];
+		};
 		[objNull, _text] call BIS_fnc_showCuratorFeedbackMessage;
 	},
 	{},

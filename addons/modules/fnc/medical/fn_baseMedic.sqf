@@ -26,7 +26,14 @@ params [
 	["_condition", "true", [""]]
 ];
 
-if (!(isServer) && {_medic getVariable [QGVAR(baseMedic), false]}) exitWith {};
+if (!isServer || {_medic getVariable [QGVAR(baseMedic), false]}) exitWith {};
+
+private _actionDistance = missionNamespace getVariable [QGVAR(baseMedicActionDistance), 3];
+private _healRadius = missionNamespace getVariable [QGVAR(baseMedicHealRadius), 10];
+
+if (missionNamespace getVariable [QGVAR(debugLogging), false]) then {
+	diag_log format ["[%1] Adding base medic actions to %2 with action distance %3 and heal radius %4", QADDON, _medic, _actionDistance, _healRadius];
+};
 
 // Adds "Heal me"
 [
@@ -46,8 +53,9 @@ if (!(isServer) && {_medic getVariable [QGVAR(baseMedic), false]}) exitWith {};
 		"",
 		(
 			format [
-				"(_this distance _target < 3) && {%1} && ([_target] call ace_common_fnc_isAwake)",
-				_condition
+				"(_this distance _target < (missionNamespace getVariable ['%2', 3])) && {%1} && {!(_target isKindOf 'CAManBase') || {[_target] call ace_common_fnc_isAwake}}",
+				_condition,
+				QGVAR(baseMedicActionDistance)
 			]
 		)
 	]
@@ -61,12 +69,12 @@ if (!(isServer) && {_medic getVariable [QGVAR(baseMedic), false]}) exitWith {};
 		{
 			params ["_target", "_caller", "_actionId", "_arguments"];
 
-			private _radiusUnits = _target nearEntities ["Man", 10];
+			private _healRadius = missionNamespace getVariable [QGVAR(baseMedicHealRadius), 10];
+			private _radiusUnits = _target nearEntities ["Man", _healRadius];
 			private _healedPlayers = allPlayers select {_x in _radiusUnits && {_x != _caller}};
 
-			// Heal everyone
 			{
-				_x call ace_medical_treatment_fnc_fullHealLocal;
+				[_x] remoteExecCall ["ace_medical_treatment_fnc_fullHealLocal", _x];
 			} forEach _radiusUnits;
 
 			// Notify the caller separately so they do not also get the "healed by someone" message.
@@ -80,8 +88,9 @@ if (!(isServer) && {_medic getVariable [QGVAR(baseMedic), false]}) exitWith {};
 		"",
 		(
 			format [
-				"(_this distance _target < 3) && {%1} && ([_target] call ace_common_fnc_isAwake)",
-				_condition
+				"(_this distance _target < (missionNamespace getVariable ['%2', 3])) && {%1} && {!(_target isKindOf 'CAManBase') || {[_target] call ace_common_fnc_isAwake}}",
+				_condition,
+				QGVAR(baseMedicActionDistance)
 			]
 		)
 	]

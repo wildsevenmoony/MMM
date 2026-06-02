@@ -69,7 +69,12 @@ private _settings = [
     ["ForceVector", "[0,3,4]"] call _getValue,
     ["ForceMax", "4"] call _getNumber,
     ["OverrideInvulnerability", true] call _getValue,
-    ["ForceDeath", false] call _getValue
+    ["ForceDeath", false] call _getValue,
+    ["RandomProjectiles", ""] call _getValue,
+    ["RandomDamageMin", "0"] call _getNumber,
+    ["MinWounds", "1"] call _getNumber,
+    ["RandomPartMin", "1"] call _getNumber,
+    ["ForceMin", "0"] call _getNumber
 ];
 
 [[_target], _settings] call EFUNC(modules,aceDamage);
