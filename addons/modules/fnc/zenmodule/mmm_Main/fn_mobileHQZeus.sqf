@@ -88,5 +88,28 @@ private _defaultStartDeployed = _objectUnderCursor getVariable [QGVAR(mhqDeploye
         [objNull, _text] call BIS_fnc_showCuratorFeedbackMessage;
     },
     {},
-    _objectUnderCursor
+    _objectUnderCursor,
+    format [QGVAR(mobileHQZeus_%1_%2), netId _objectUnderCursor, diag_tickTime]
 ] call zen_dialog_fnc_create;
+
+[
+    _objectUnderCursor,
+    _isExisting,
+    _defaultName,
+    _defaultSide,
+    _defaultAlwaysDeployed,
+    _defaultStartDeployed
+] spawn {
+    params ["_target", "_isExisting", "_name", "_side", "_alwaysDeployed", "_startDeployed"];
+
+    private _timeout = diag_tickTime + 2;
+    waitUntil {
+        sleep 0.01;
+        !isNull (uiNamespace getVariable ["zen_common_display", displayNull]) || {diag_tickTime > _timeout}
+    };
+
+    if (diag_tickTime > _timeout) exitWith {};
+
+    [_target, _isExisting, _name, _side, _alwaysDeployed, _startDeployed] call EFUNC(modules,mobileHQZeusApplyDefaults);
+    [_target, clientOwner] remoteExecCall [QEFUNC(modules,mobileHQZeusRequestDefaults), 2];
+};
