@@ -47,7 +47,7 @@ private _defaultStartDeployed = _objectUnderCursor getVariable [QGVAR(mhqDeploye
             "EDIT",
             ["Respawn Name", "Leave empty for Mobile HQ 1, Mobile HQ 2, ..."],
             _defaultName,
-            true
+            false
         ],
         [
             "COMBO",
@@ -57,19 +57,19 @@ private _defaultStartDeployed = _objectUnderCursor getVariable [QGVAR(mhqDeploye
                 _sideNames,
                 _defaultSideIndex
             ],
-            true
+            false
         ],
         [
             "CHECKBOX",
             ["Always Deployed", "This MHQ is always deployed, regardless of the global deployment setting."],
             _defaultAlwaysDeployed,
-            true
+            false
         ],
         [
             "CHECKBOX",
             ["Start Deployed", "Initial deployed state for new MHQs. When editing an existing MHQ, this updates its current deployed state. Ignored when Always Deployed is enabled."],
             _defaultStartDeployed,
-            true
+            false
         ]
     ],
     {
@@ -88,28 +88,5 @@ private _defaultStartDeployed = _objectUnderCursor getVariable [QGVAR(mhqDeploye
         [objNull, _text] call BIS_fnc_showCuratorFeedbackMessage;
     },
     {},
-    _objectUnderCursor,
-    format [QGVAR(mobileHQZeus_%1_%2), netId _objectUnderCursor, diag_tickTime]
+    _objectUnderCursor
 ] call zen_dialog_fnc_create;
-
-[
-    _objectUnderCursor,
-    _isExisting,
-    _defaultName,
-    _defaultSide,
-    _defaultAlwaysDeployed,
-    _defaultStartDeployed
-] spawn {
-    params ["_target", "_isExisting", "_name", "_side", "_alwaysDeployed", "_startDeployed"];
-
-    private _timeout = diag_tickTime + 2;
-    waitUntil {
-        sleep 0.01;
-        !isNull (uiNamespace getVariable ["zen_common_display", displayNull]) || {diag_tickTime > _timeout}
-    };
-
-    if (diag_tickTime > _timeout) exitWith {};
-
-    [_target, _isExisting, _name, _side, _alwaysDeployed, _startDeployed] call EFUNC(modules,mobileHQZeusApplyDefaults);
-    [_target, clientOwner] remoteExecCall [QEFUNC(modules,mobileHQZeusRequestDefaults), 2];
-};

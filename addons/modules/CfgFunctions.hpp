@@ -113,8 +113,6 @@ class CfgFunctions
 			class aceDragable{};
 			class aceDraggable{};
 			class destroyWithoutExplosion{};
-			class mobileHQZeusApplyDefaults{};
-			class mobileHQZeusRequestDefaults{};
 			class mobileHQZeus{};
 			class removeCrater{};
 			class respawnTimer{};
