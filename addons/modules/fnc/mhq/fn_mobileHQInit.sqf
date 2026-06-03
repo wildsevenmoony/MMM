@@ -24,7 +24,8 @@ if (!isServer) exitWith {};
 private _side = _logic getVariable [QGVAR(mobileHQSide), "west"];
 private _name = _logic getVariable [QGVAR(mobileHQName), ""];
 private _alwaysDeployed = _logic getVariable [QGVAR(mobileHQAlwaysDeployed), false];
+private _startDeployed = _logic getVariable [QGVAR(mobileHQStartDeployed), false];
 
 {
-    [_x, _side, _name, _alwaysDeployed] call EFUNC(modules,mobileHQSetup);
+    [_x, _side, _name, _alwaysDeployed, _startDeployed] call EFUNC(modules,mobileHQSetup);
 } forEach (_objects select {!isNull _x});

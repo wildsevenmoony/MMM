@@ -38,6 +38,7 @@ if (_defaultSideIndex < 0) then {
     _defaultSideIndex = 0;
 };
 private _defaultAlwaysDeployed = _objectUnderCursor getVariable [QGVAR(mhqAlwaysDeployed), false];
+private _defaultStartDeployed = _objectUnderCursor getVariable [QGVAR(mhqDeployed), false];
 
 [
     "Mobile HQ",
@@ -46,7 +47,7 @@ private _defaultAlwaysDeployed = _objectUnderCursor getVariable [QGVAR(mhqAlways
             "EDIT",
             ["Respawn Name", "Leave empty for Mobile HQ 1, Mobile HQ 2, ..."],
             _defaultName,
-            false
+            true
         ],
         [
             "COMBO",
@@ -56,21 +57,27 @@ private _defaultAlwaysDeployed = _objectUnderCursor getVariable [QGVAR(mhqAlways
                 _sideNames,
                 _defaultSideIndex
             ],
-            false
+            true
         ],
         [
             "CHECKBOX",
             ["Always Deployed", "This MHQ is always deployed, regardless of the global deployment setting."],
             _defaultAlwaysDeployed,
-            false
+            true
+        ],
+        [
+            "CHECKBOX",
+            ["Start Deployed", "Initial deployed state for new MHQs. When editing an existing MHQ, this updates its current deployed state. Ignored when Always Deployed is enabled."],
+            _defaultStartDeployed,
+            true
         ]
     ],
     {
         params ["_dialogValues", "_objectUnderCursor"];
-        _dialogValues params ["_name", "_side", "_alwaysDeployed"];
+        _dialogValues params ["_name", "_side", "_alwaysDeployed", "_startDeployed"];
 
         private _wasExisting = _objectUnderCursor getVariable [QGVAR(mhqInitialized), false];
-        [_objectUnderCursor, _side, _name, _alwaysDeployed] remoteExecCall [QEFUNC(modules,mobileHQSetup), 2];
+        [_objectUnderCursor, _side, _name, _alwaysDeployed, _startDeployed] remoteExecCall [QEFUNC(modules,mobileHQSetup), 2];
 
         private _text = if (_name isEqualTo "") then {
             ["MOBILE HQ CREATED", "MOBILE HQ UPDATED"] select _wasExisting

@@ -768,6 +768,15 @@ class CfgVehicles
 				defaultValue = "false";
 			};
 
+			class GVAR(mobileHQStartDeployed): Checkbox
+			{
+				property = QGVAR(mobileHQStartDeployed);
+				displayName = "Start Deployed";
+				tooltip = "Initial deployed state for this MHQ. Ignored when Always Deployed is enabled.";
+				typeName = "BOOL";
+				defaultValue = "false";
+			};
+
 			class ModuleDescription: ModuleDescription{};
 		};
 

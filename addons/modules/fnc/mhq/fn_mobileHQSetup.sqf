@@ -7,6 +7,7 @@
  * 1: Respawn side <STRING>
  * 2: Respawn name <STRING>
  * 3: Always deployed <BOOL>
+ * 4: Start deployed <BOOL>
  *
  * Return Value:
  * None
@@ -23,7 +24,8 @@ params [
     ["_mhq", objNull, [objNull]],
     ["_side", "west", [""]],
     ["_name", "", [""]],
-    ["_alwaysDeployed", false, [false]]
+    ["_alwaysDeployed", false, [false]],
+    ["_startDeployed", !(missionNamespace getVariable [QGVAR(mhqEnableDeployment), true]), [false]]
 ];
 
 if (!isServer || {isNull _mhq}) exitWith {};
@@ -70,16 +72,9 @@ _mhq setVariable [QGVAR(mhqInitialized), true, true];
 _mhq setVariable [QGVAR(mhqSide), _sideNormalized, true];
 _mhq setVariable [QGVAR(mhqName), _name, true];
 _mhq setVariable [QGVAR(mhqAlwaysDeployed), _alwaysDeployed, true];
+_mhq setVariable [QGVAR(mhqStartDeployed), _startDeployed, true];
 
-private _deployed = if (_alwaysDeployed) then {
-    true
-} else {
-    if (_initialized) then {
-        _mhq getVariable [QGVAR(mhqDeployed), false]
-    } else {
-        !(missionNamespace getVariable [QGVAR(mhqEnableDeployment), true])
-    };
-};
+private _deployed = [_startDeployed, true] select _alwaysDeployed;
 
 _mhq setVariable [QGVAR(mhqDeployed), _deployed, true];
 
