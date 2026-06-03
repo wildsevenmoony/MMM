@@ -40,26 +40,20 @@ if (isNull _source) then {
         ],
         [
             "CHECKBOX",
-            ["Source Mist", "Creates thicker toxic mist directly around the source object."],
-            true,
-            false
-        ],
-        [
-            "CHECKBOX",
-            ["Area Mist", "Creates lower toxic mist distributed across the configured radius."],
+            ["Source Mist", "Creates light toxic leakage mist directly around the source object."],
             true,
             false
         ]
     ],
     {
         params ["_dialogValues", "_source"];
-        _dialogValues params ["_radius", "_customRadius", "_sourceMist", "_areaMist"];
+        _dialogValues params ["_radius", "_customRadius", "_sourceMist"];
         private _radiusOverride = parseNumber _customRadius;
         if (_radiusOverride > 0) then {
             _radius = _radiusOverride;
         };
 
-        [_source, _radius, _sourceMist, _areaMist] remoteExecCall ["MMA_fnc_toxicAreaCreate", 2];
+        [_source, _radius, _sourceMist] remoteExecCall ["MMA_fnc_toxicAreaCreate", 2];
 
         [objNull, format ["TOXIC AREA CREATED (%1M)", round _radius]] call BIS_fnc_showCuratorFeedbackMessage;
     },
