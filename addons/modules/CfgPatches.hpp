@@ -23,6 +23,7 @@ class CfgPatches {
 			QGVAR(aiStationary),
 			QGVAR(ambientAnimationMP),
 			QGVAR(animation),
+			QGVAR(aceArsenal),
 			QGVAR(playMoveAnimation),
 			QGVAR(mobileHQ),
 			QGVAR(baseMedic),

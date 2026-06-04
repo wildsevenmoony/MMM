@@ -601,6 +601,94 @@ class CfgVehicles
 		};
 	};
 
+	class GVAR(aceArsenal): Module_F
+	{
+		category = QGVAR(Modules);
+		displayName = "Add ACE Arsenal";
+		function = QEFUNC(modules,aceArsenalInit);
+		functionPriority = 10;
+		isDisposable = 0;
+		is3DEN = 1;
+		isGlobal = 0;
+		isTriggerActivated = 0;
+		scope = 2;
+
+		class Attributes: AttributesBase
+		{
+			class GVAR(arsenalScrollAction): Checkbox
+  			{
+				property = QGVAR(aceArsenalScrollAction);
+				displayName = "Add Scroll Action";
+				tooltip = "Adds a scroll-wheel action alongside the ACE interaction to open the ACE Arsenal.";
+				typeName = "BOOL";
+				defaultValue = "false";
+				expression = "_this setVariable ['%s', _value, true];";
+			};
+			class GVAR(arsenalBlacklist): Edit
+  			{
+				property = QGVAR(aceArsenalBlacklist);
+				displayName = "Blacklist";
+				tooltip = "Comma-separated item classnames to remove from this ACE Arsenal. Quotes are optional, e.g. arifle_MX_F, ACE_fieldDressing.";
+				typeName = "STRING";
+				defaultValue = "''";
+				expression = "_this setVariable ['%s', _value, true];";
+			};
+			class GVAR(aceArsenalLimited): Checkbox
+  			{
+				property = QGVAR(aceArsenalLimited);
+				displayName = "Limited Arsenal";
+				tooltip = "If checked, the arsenal starts empty and only contains the classnames from Limited Arsenal Items.";
+				typeName = "BOOL";
+				defaultValue = "false";
+				expression = "_this setVariable ['%s', _value, true];";
+			};
+			class GVAR(aceArsenalLimitedItems): Edit
+  			{
+				property = QGVAR(aceArsenalLimitedItems);
+				displayName = "Limited Arsenal Items";
+				tooltip = "Comma-separated item classnames to include when Limited Arsenal is enabled. Quotes are optional.";
+				typeName = "STRING";
+				defaultValue = "''";
+				expression = "_this setVariable ['%s', _value, true];";
+			};
+			class GVAR(aceArsenalAddCompatibleMagazines): Checkbox
+  			{
+				property = QGVAR(aceArsenalAddCompatibleMagazines);
+				displayName = "Add Compatible Magazines";
+				tooltip = "When Limited Arsenal is enabled, adds all CBA-compatible magazines for weapons listed in Limited Arsenal Items.";
+				typeName = "BOOL";
+				defaultValue = "false";
+				expression = "_this setVariable ['%s', _value, true];";
+			};
+			class GVAR(aceArsenalAddCompatibleAttachments): Checkbox
+  			{
+				property = QGVAR(aceArsenalAddCompatibleAttachments);
+				displayName = "Add Compatible Attachments";
+				tooltip = "When Limited Arsenal is enabled, adds all CBA-compatible attachments for weapons listed in Limited Arsenal Items.";
+				typeName = "BOOL";
+				defaultValue = "false";
+				expression = "_this setVariable ['%s', _value, true];";
+			};
+			class ModuleDescription: ModuleDescription{};
+		};
+
+		class ModuleDescription: ModuleDescription
+		{
+			description = "Sync an Object to add an ACE Arsenal action to it.";
+			sync[] = {"LocationArea_F"};
+
+			class LocationArea_F
+			{
+				description[] =	{"Synchronise any object to this module"};
+				position = 0;
+				direction = 0;
+				optional = 0;
+				duplicate = 0;
+				synced[] = {"AnyStaticObject", "AnyVehicle", "AnyAI"};
+			};
+		};
+	};
+
 	class GVAR(baseMedic): Module_F
 	{
 		category = QGVAR(Modules);

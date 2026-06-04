@@ -48,6 +48,9 @@ class CfgFunctions
 		class Misc
 		{
 			file = PATHTOF(fnc\misc);
+			class aceArsenalInit{};
+			class aceArsenal{};
+			class aceArsenalScrollActionLocal{};
 			class spawnWreck{};
 		};
 		class Random_Backpacks
