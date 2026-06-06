@@ -115,6 +115,7 @@ class CfgFunctions
 			class aceCarryable{};
 			class aceDragable{};
 			class aceDraggable{};
+			class aceArsenalZeus{};
 			class destroyWithoutExplosion{};
 			class mobileHQZeus{};
 			class removeCrater{};

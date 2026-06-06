@@ -93,6 +93,14 @@ private _arsenalItems = [true, _limitedItems] select _limited;
 {
 	private _object = _x;
 	if (!isNull _object && {!(_object isKindOf "Logic")}) then {
+		_object setVariable [QGVAR(aceArsenalInitialized), true, true];
+		_object setVariable [QGVAR(aceArsenalScrollAction), _addScrollAction, true];
+		_object setVariable [QGVAR(aceArsenalBlacklist), _blacklistRaw, true];
+		_object setVariable [QGVAR(aceArsenalLimited), _limited, true];
+		_object setVariable [QGVAR(aceArsenalLimitedItems), _limitedItemsRaw, true];
+		_object setVariable [QGVAR(aceArsenalAddCompatibleMagazines), _addCompatibleMagazines, true];
+		_object setVariable [QGVAR(aceArsenalAddCompatibleAttachments), _addCompatibleAttachments, true];
+
 		if (_limited && {_limitedItems isEqualTo []}) then {
 			diag_log format ["[%1] Limited ACE Arsenal on %2 has no whitelist items. ACE interaction is added but the arsenal may not open until items are added.", QADDON, _object];
 		};

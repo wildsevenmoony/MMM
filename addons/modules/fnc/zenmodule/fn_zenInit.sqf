@@ -33,6 +33,7 @@ if (!hasInterface) exitWith {};
 		private _mmmMain = [
 			["Toggle Carryable (ACE)",{_this call EFUNC(modules,aceCarryable)}],
 			["Toggle Draggable (ACE)",{_this call EFUNC(modules,aceDraggable)}],
+			["Add ACE Arsenal",{_this call EFUNC(modules,aceArsenalZeus)}],
 			["Destroy without Explosion",{_this call EFUNC(modules,destroyWithoutExplosion)}],
 			["Mobile HQ",{_this call EFUNC(modules,mobileHQZeus)}],
 			["Set Respawn Time",{_this call EFUNC(modules,respawnTimer)}],
