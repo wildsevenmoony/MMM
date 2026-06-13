@@ -21,6 +21,14 @@ params [
 	["_activated",true ,[true]]
 ];
 
+private _usePreset = _logic getVariable [QGVAR(randomizeGearUsePreset), false];
+private _presetId = _logic getVariable [QGVAR(randomizeGearPreset), ""];
+
+if (_usePreset && {_presetId isNotEqualTo ""} && {!isNil "MMA_fnc_randomizationApplyPreset"}) exitWith {
+    {
+        [_x, _presetId, ["primary", "sidearm", "secondary"]] call MMA_fnc_randomizationApplyPreset;
+    } forEach _unit;
+};
 
 private _randomizePrimary = _logic getVariable [QGVAR(randomizeGearWeaponsPrimaryRandomize), _logic getVariable ["MMM_MODULES_Module_Randomize_Gear_Weapons_Randomize_Primary", false]];
 private _forcePrimary = _logic getVariable [QGVAR(randomizeGearWeaponsPrimaryForce), _logic getVariable ["MMM_MODULES_Module_Randomize_Gear_Weapons_Force_Primary", false]];

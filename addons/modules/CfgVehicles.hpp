@@ -369,6 +369,16 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
+			class GVAR(animationPreview3DEN): Checkbox
+			{
+				property = QGVAR(animationPreview3DEN);
+				displayName = "Preview in Eden";
+				tooltip = "Shows the selected animation on synced units while editing. This only affects the Eden preview and does not change the in-game animation.";
+				typeName = "BOOL";
+				defaultValue = "true";
+				expression = "_this setVariable ['%s', _value]; if (is3DEN) then {[_this] call mmm_modules_fnc_refreshAnimationPreview3DEN;};";
+			};
+
 			class GVAR(ambientAnimationMPSelection): Combo
   			{
 				property = QGVAR(ambientAnimationMPSelectionCombo);
@@ -485,6 +495,16 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
+			class GVAR(animationPreview3DEN): Checkbox
+			{
+				property = QGVAR(animationPreview3DEN);
+				displayName = "Preview in Eden";
+				tooltip = "Shows the selected animation on synced units while editing. This only affects the Eden preview and does not change the in-game animation.";
+				typeName = "BOOL";
+				defaultValue = "true";
+				expression = "_this setVariable ['%s', _value]; if (is3DEN) then {[_this] call mmm_modules_fnc_refreshAnimationPreview3DEN;};";
+			};
+
 			class GVAR(animationSelection): Combo
   			{
 					property = QGVAR(animationSelectionCombo);
@@ -737,6 +757,16 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
+			class GVAR(animationPreview3DEN): Checkbox
+			{
+				property = QGVAR(animationPreview3DEN);
+				displayName = "Preview in Eden";
+				tooltip = "Shows the selected animation on synced units while editing. This only affects the Eden preview and does not change the in-game animation.";
+				typeName = "BOOL";
+				defaultValue = "true";
+				expression = "_this setVariable ['%s', _value]; if (is3DEN) then {[_this] call mmm_modules_fnc_refreshAnimationPreview3DEN;};";
+			};
+
 			class GVAR(playMoveAnimationSelection): Combo
   			{
 				property = QGVAR(playMoveAnimationSelectionCombo);
@@ -899,6 +929,32 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
+			class GVAR(randomizeGearPresetCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Preset";
+				description = "";
+			};
+
+			class GVAR(randomizeGearUsePreset): Checkbox
+			{
+				property = QGVAR(randomizeGearUsePreset);
+				displayName = "Use Preset";
+				tooltip = "Uses an MMA gear randomization preset instead of the module fields below. Presets can be registered through config, description.ext, or script.";
+				typeName = "BOOL";
+				defaultValue = "false";
+			};
+
+			class GVAR(randomizeGearPreset): Edit
+			{
+				property = QGVAR(randomizeGearPreset);
+				displayName = "Preset ID";
+				tooltip = "ID of the MMA gear randomization preset to use.";
+				typeName = "STRING";
+				defaultValue = "''";
+			};
+
 			// Backpacks
 			class GVAR(backpacksCategory) 
 			{
@@ -1584,6 +1640,32 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
+			class GVAR(randomizeGearPresetCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Preset";
+				description = "";
+			};
+
+			class GVAR(randomizeGearUsePreset): Checkbox
+			{
+				property = QGVAR(randomizeGearUsePreset);
+				displayName = "Use Preset";
+				tooltip = "Uses the backpack part of an MMA gear randomization preset instead of the module fields below.";
+				typeName = "BOOL";
+				defaultValue = "false";
+			};
+
+			class GVAR(randomizeGearPreset): Edit
+			{
+				property = QGVAR(randomizeGearPreset);
+				displayName = "Preset ID";
+				tooltip = "ID of the MMA gear randomization preset to use.";
+				typeName = "STRING";
+				defaultValue = "''";
+			};
+
 			class GVAR(backpacksCategory) 
 			{
 				data = "AttributeSystemSubcategory";
@@ -1662,6 +1744,32 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
+			class GVAR(randomizeGearPresetCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Preset";
+				description = "";
+			};
+
+			class GVAR(randomizeGearUsePreset): Checkbox
+			{
+				property = QGVAR(randomizeGearUsePreset);
+				displayName = "Use Preset";
+				tooltip = "Uses the goggles part of an MMA gear randomization preset instead of the module fields below.";
+				typeName = "BOOL";
+				defaultValue = "false";
+			};
+
+			class GVAR(randomizeGearPreset): Edit
+			{
+				property = QGVAR(randomizeGearPreset);
+				displayName = "Preset ID";
+				tooltip = "ID of the MMA gear randomization preset to use.";
+				typeName = "STRING";
+				defaultValue = "''";
+			};
+
 			class GVAR(gogglesCategory) 
 			{
 				data = "AttributeSystemSubcategory";
@@ -1740,6 +1848,32 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
+			class GVAR(randomizeGearPresetCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Preset";
+				description = "";
+			};
+
+			class GVAR(randomizeGearUsePreset): Checkbox
+			{
+				property = QGVAR(randomizeGearUsePreset);
+				displayName = "Use Preset";
+				tooltip = "Uses the headgear part of an MMA gear randomization preset instead of the module fields below.";
+				typeName = "BOOL";
+				defaultValue = "false";
+			};
+
+			class GVAR(randomizeGearPreset): Edit
+			{
+				property = QGVAR(randomizeGearPreset);
+				displayName = "Preset ID";
+				tooltip = "ID of the MMA gear randomization preset to use.";
+				typeName = "STRING";
+				defaultValue = "''";
+			};
+
 			class GVAR(headgearCategory) 
 			{
 				data = "AttributeSystemSubcategory";
@@ -1818,6 +1952,32 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
+			class GVAR(randomizeGearPresetCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Preset";
+				description = "";
+			};
+
+			class GVAR(randomizeGearUsePreset): Checkbox
+			{
+				property = QGVAR(randomizeGearUsePreset);
+				displayName = "Use Preset";
+				tooltip = "Uses the uniform part of an MMA gear randomization preset instead of the module fields below.";
+				typeName = "BOOL";
+				defaultValue = "false";
+			};
+
+			class GVAR(randomizeGearPreset): Edit
+			{
+				property = QGVAR(randomizeGearPreset);
+				displayName = "Preset ID";
+				tooltip = "ID of the MMA gear randomization preset to use.";
+				typeName = "STRING";
+				defaultValue = "''";
+			};
+
 			class GVAR(uniformsCategory) 
 			{
 				data = "AttributeSystemSubcategory";
@@ -1896,6 +2056,32 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
+			class GVAR(randomizeGearPresetCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Preset";
+				description = "";
+			};
+
+			class GVAR(randomizeGearUsePreset): Checkbox
+			{
+				property = QGVAR(randomizeGearUsePreset);
+				displayName = "Use Preset";
+				tooltip = "Uses the vest part of an MMA gear randomization preset instead of the module fields below.";
+				typeName = "BOOL";
+				defaultValue = "false";
+			};
+
+			class GVAR(randomizeGearPreset): Edit
+			{
+				property = QGVAR(randomizeGearPreset);
+				displayName = "Preset ID";
+				tooltip = "ID of the MMA gear randomization preset to use.";
+				typeName = "STRING";
+				defaultValue = "''";
+			};
+
 			class GVAR(vestsCategory) 
 			{
 				data = "AttributeSystemSubcategory";
@@ -1974,6 +2160,32 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
+			class GVAR(randomizeGearPresetCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Preset";
+				description = "";
+			};
+
+			class GVAR(randomizeGearUsePreset): Checkbox
+			{
+				property = QGVAR(randomizeGearUsePreset);
+				displayName = "Use Preset";
+				tooltip = "Uses the weapon parts of an MMA gear randomization preset instead of the module fields below.";
+				typeName = "BOOL";
+				defaultValue = "false";
+			};
+
+			class GVAR(randomizeGearPreset): Edit
+			{
+				property = QGVAR(randomizeGearPreset);
+				displayName = "Preset ID";
+				tooltip = "ID of the MMA gear randomization preset to use.";
+				typeName = "STRING";
+				defaultValue = "''";
+			};
+
 			// Primary Weapon
 				class GVAR(primaryCategory) {
 					data = "AttributeSystemSubcategory";

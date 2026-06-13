@@ -42,6 +42,31 @@ private _units = if (_randomizeGroup) then {
     [_target]
 };
 
+if (["UsePreset", false] call _getValue) exitWith {
+    if (isNil "MMA_fnc_randomizationApplyPreset") exitWith {
+        [objNull, "MMA RANDOMIZATION PRESETS NOT AVAILABLE"] call BIS_fnc_showCuratorFeedbackMessage;
+        false
+    };
+
+    private _presetId = ["Preset", ""] call _getValue;
+    if (_presetId isEqualTo "") exitWith {
+        [objNull, "NO PRESET ID ENTERED"] call BIS_fnc_showCuratorFeedbackMessage;
+        false
+    };
+
+    {
+        [_x, _presetId] call MMA_fnc_randomizationApplyPreset;
+    } forEach _units;
+
+    if (_randomizeGroup) then {
+        [objNull, "GROUP PRESET RANDOMIZATION APPLIED"] call BIS_fnc_showCuratorFeedbackMessage;
+    } else {
+        [objNull, "UNIT PRESET RANDOMIZATION APPLIED"] call BIS_fnc_showCuratorFeedbackMessage;
+    };
+
+    true
+};
+
 {
     private _unit = _x;
 

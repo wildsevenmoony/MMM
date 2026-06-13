@@ -134,6 +134,8 @@ private _addWeaponBlock = {
 };
 
 ["Apply to group", IDC_RANDOMIZE_GROUP_LABEL, IDC_RANDOMIZE_GROUP_CHECK, false, "Group", "Apply the selected randomization settings to the whole selected group instead of only one unit."] call _addCheckbox;
+["Use preset", IDC_RANDOMIZE_PRESET_USE_LABEL, IDC_RANDOMIZE_PRESET_USE_CHECK, false, "UsePreset", "Use an MMA gear randomization preset instead of the manual values below."] call _addCheckbox;
+["Preset ID", IDC_RANDOMIZE_PRESET_ID_LABEL, IDC_RANDOMIZE_PRESET_ID_EDIT, "", "Preset", "Preset ID registered through CfgMMARandomizationPresets, description.ext, or script."] call _addEdit;
 
 [
     "Backpacks", "Backpacks",

@@ -122,6 +122,7 @@ class CfgFunctions
 			class respawnTimer{};
 			class unlimitedAmmoZeus{};
 			class unlimitedFuelZeus{};
+			class zeusActionEligibilityZeus{};
 		};
 		class Zenmodule_mmm_AI
 		{

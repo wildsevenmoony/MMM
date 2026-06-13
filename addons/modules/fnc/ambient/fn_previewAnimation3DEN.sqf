@@ -42,6 +42,29 @@ if (_units isEqualTo []) then {
 
 if (_units isEqualTo []) exitWith {};
 
+private _previewEnabledRaw = (_logic get3DENAttribute QGVAR(animationPreview3DEN)) param [0, _logic getVariable [QGVAR(animationPreview3DEN), true]];
+private _previewEnabled = true;
+
+switch (typeName _previewEnabledRaw) do {
+  case "BOOL": {
+    _previewEnabled = _previewEnabledRaw;
+  };
+  case "SCALAR": {
+    _previewEnabled = _previewEnabledRaw > 0;
+  };
+  case "STRING": {
+    private _previewEnabledString = toLower _previewEnabledRaw;
+    _previewEnabled = _previewEnabledString in ["1", "true", "yes"];
+  };
+};
+
+if (!_previewEnabled) exitWith {
+  {
+    _x call BIS_fnc_ambientAnim__terminate;
+    _x switchMove "";
+  } forEach _units;
+};
+
 switch (_mode) do {
   case "ambient": {
     private _index = (_logic get3DENAttribute QGVAR(ambientAnimationMPSelectionCombo)) param [0, _logic getVariable [QGVAR(ambientAnimationMPSelection), _logic getVariable ["MMM_MODULES_Module_AmbientAnimationMP", 0]]];

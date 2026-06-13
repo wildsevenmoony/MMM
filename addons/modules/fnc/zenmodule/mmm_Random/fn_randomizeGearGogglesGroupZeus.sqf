@@ -39,6 +39,26 @@ params [
 				false, // Default State
 				false // Force Default
 			],
+			[
+				"CHECKBOX",
+				[
+					"Use Preset",
+					"Use the Goggles section of an MMA gear randomization preset instead of the manual values below."
+				],
+				false,
+				false
+			],
+			[
+				"EDIT",
+				[
+					"Preset ID",
+					"Preset ID registered through CfgMMARandomizationPresets, description.ext, or script."
+				],
+				[
+					""
+				],
+				false
+			],
 		// Goggles
 			[
 				"CHECKBOX", // Type
@@ -88,12 +108,30 @@ params [
 		params ["_dialogValues", "_objectUnderCursor"];
 		_dialogValues params [
 			"_randomizeGroup",
+			"_usePreset",
+			"_presetId",
 			"_randomizeGoggles",
 			"_forceGoggles",
 			"_chanceGoggles",
 			"_contentGoggles"];
 
 		private _targets = if (_randomizeGroup) then {units group _objectUnderCursor} else {[_objectUnderCursor]};
+
+		if (_usePreset) exitWith {
+			if (isNil "MMA_fnc_randomizationApplyPreset") exitWith {
+				[objNull, "MMA RANDOMIZATION PRESETS NOT AVAILABLE"] call BIS_fnc_showCuratorFeedbackMessage;
+			};
+			if (_presetId isEqualTo "") exitWith {
+				[objNull, "NO PRESET ID ENTERED"] call BIS_fnc_showCuratorFeedbackMessage;
+			};
+
+			{
+				[_x, _presetId, ["goggles"]] call MMA_fnc_randomizationApplyPreset;
+			} forEach _targets;
+
+			private _message = ["UNIT GOGGLE PRESET APPLIED", "GROUP GOGGLE PRESET APPLIED"] select _randomizeGroup;
+			[objNull, _message] call BIS_fnc_showCuratorFeedbackMessage;
+		};
 
 		if (_randomizeGoggles) then {
 			{

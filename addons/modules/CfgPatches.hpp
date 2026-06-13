@@ -3,7 +3,6 @@ class CfgPatches {
 		name = "Moony's Magnificent Modules - Modules";
 		author = "Moony";
 		requiredAddons[] = {
-			"mma_main",
 			"mmb_main",
 			"mmm_main",
 			"A3_Modules_F",

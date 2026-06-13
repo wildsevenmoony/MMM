@@ -42,13 +42,17 @@ if (!hasInterface) exitWith {};
 			["Unlimited Fuel",{_this call EFUNC(modules,unlimitedFuelZeus)}]
 		];
 
+		if (isClass (configFile >> "CfgPatches" >> "mma_main")) then {
+			_mmmMain pushBack ["Add Zeus Action Eligibility",{_this call EFUNC(modules,zeusActionEligibilityZeus)}];
+		};
+
 		private _mmmMedical = [
 			["Base Medic",{_this call EFUNC(modules,baseMedicZeus)}],
 			["Apply ACE Damage",{_this call EFUNC(modules,aceDamageZeus)}]
 		];
 
 		private _mmmInfection = [];
-		if (isClass (configFile >> "CfgPatches" >> "MMB_main")) then {
+		if (isClass (configFile >> "CfgPatches" >> "mma_main")) then {
 			_mmmInfection = [
 				["Infect",{_this call EFUNC(modules,infectionInfectZeus)}],
 				["Set Infection Value",{_this call EFUNC(modules,infectionSetValueZeus)}],

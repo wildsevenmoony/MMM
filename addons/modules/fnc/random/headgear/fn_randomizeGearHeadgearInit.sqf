@@ -21,6 +21,14 @@ params [
 	["_activated",true ,[true]]
 ];
 
+private _usePreset = _logic getVariable [QGVAR(randomizeGearUsePreset), false];
+private _presetId = _logic getVariable [QGVAR(randomizeGearPreset), ""];
+
+if (_usePreset && {_presetId isNotEqualTo ""} && {!isNil "MMA_fnc_randomizationApplyPreset"}) exitWith {
+    {
+        [_x, _presetId, ["headgear"]] call MMA_fnc_randomizationApplyPreset;
+    } forEach _unit;
+};
 
 private _randomizeHeadgear = _logic getVariable [QGVAR(randomizeGearHeadgearRandomize), _logic getVariable ["MMM_MODULES_Module_Randomize_Gear_Headgear_Randomize", false]];
 private _forceHeadgear = _logic getVariable [QGVAR(randomizeGearHeadgearForce), _logic getVariable ["MMM_MODULES_Module_Randomize_Gear_Headgear_Force", false]];

@@ -21,6 +21,14 @@ params [
 	["_activated",true ,[true]]
 ];
 
+private _usePreset = _logic getVariable [QGVAR(randomizeGearUsePreset), false];
+private _presetId = _logic getVariable [QGVAR(randomizeGearPreset), ""];
+
+if (_usePreset && {_presetId isNotEqualTo ""} && {!isNil "MMA_fnc_randomizationApplyPreset"}) exitWith {
+    {
+        [_x, _presetId, ["backpacks"]] call MMA_fnc_randomizationApplyPreset;
+    } forEach _unit;
+};
 
 private _randomizeBackpacks = _logic getVariable [QGVAR(randomizeGearBackpacksRandomize), _logic getVariable ["MMM_MODULES_Module_Randomize_Gear_Backpacks_Randomize", false]];
 private _forceBackpacks = _logic getVariable [QGVAR(randomizeGearBackpacksForce), _logic getVariable ["MMM_MODULES_Module_Randomize_Gear_Backpacks_Force", false]];

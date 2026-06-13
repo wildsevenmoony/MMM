@@ -13,8 +13,11 @@ It adds a collection of practical Eden and Zeus modules for faster mission setup
 [*] Turn individual AI or whole groups stationary
 [*] Apply ambient animations, switchMove, and playMove animations
 [*] Preview supported animations in Eden
+[*] Disable Eden animation preview per module when needed
+[*] Add ACE Arsenal actions to objects
+[*] Configure ACE arsenals with optional scroll action, blacklist, limited whitelist, compatible magazines, and compatible attachments
 [*] Spawn vehicles as wrecks with optional ACE cookoff/explosion behavior
-[*] Mark vehicles or objects as Mobile HQs with respawn/teleport support
+[*] Mark vehicles or objects as Mobile HQs with respawn/teleport support and initial deployment control
 [*] Randomize full gear or specific categories:
 [list]
 [*] Backpacks
@@ -24,7 +27,9 @@ It adds a collection of practical Eden and Zeus modules for faster mission setup
 [*] Vests
 [*] Weapons and attachments
 [/list]
-[*] Small Zeus utility modules for ammo, fuel, dragging/carrying, crater cleanup, and more
+[*] Use MMA gear randomization presets from Eden or Zeus randomization modules
+[*] Small Zeus utility modules for ammo, fuel, dragging/carrying, crater cleanup, ACE arsenals, Mobile HQs, and more
+[*] Optional Zeus module to add MMA Zeus self-action eligibility when Moony's Magnificent Additions is loaded
 [*] Optional infection Zeus helpers when the matching Moony infection systems are loaded
 [*] Custom medic insignia
 [/list]
@@ -37,10 +42,19 @@ It adds a collection of practical Eden and Zeus modules for faster mission setup
 [*] Moony's Magnificent Base
 [/list]
 
+[b]Optional Dependencies[/b]
+[list]
+[*] Moony's Magnificent Additions, for gear randomization presets and infection Zeus helpers
+[/list]
+
 [b]Usage[/b]
 In Eden, look for modules under [b]Moony's Magnificent Modules[/b]. Place a module, configure its attributes, and synchronize it to the relevant units, vehicles, or objects.
 
 In Zeus, the ZEN modules provide quick live-mission tools for medical effects, AI behavior, object utilities, gear randomization, and other mission-control tasks.
+
+The Add ACE Arsenal module is available in Eden and Zeus. It can create a normal ACE arsenal, a blacklisted arsenal, or a limited arsenal that automatically expands weapon entries with compatible magazines and attachments.
+
+Gear randomization modules can use their normal manual fields, or apply a preset ID registered by Moony's Magnificent Additions through config, mission description.ext, or script.
 
 [b]Notes[/b]
 MMM was built for my own unit [url=https://discord.gg/Ju8FqJ3bpN]STAF[/url] and workflow, so some behavior is intentionally practical, specific, and occasionally a little rough around the edges. It should still be useful for other groups that want a compact toolbox of Eden and Zeus helpers.

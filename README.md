@@ -15,25 +15,34 @@ The mod was built for the groups I play with, so some behavior and wording is in
   - Turn individual AI or whole groups stationary.
   - Apply `ambientAnim`, `switchMove`, or `playMove` animations.
   - Preview supported animations in Eden.
+  - Disable Eden animation preview per module when an animation would move the unit while editing.
   - Use custom animation class names where supported.
+- ACE Arsenal module:
+  - Add an ACE Arsenal action to synced objects.
+  - Optionally add a scroll-wheel action as well.
+  - Apply a blacklist, or make a limited arsenal from a whitelist.
+  - Optionally add all compatible magazines and attachments for whitelisted weapons.
 - Gear randomizer modules:
   - Full gear randomization.
   - Separate modules for backpacks, goggles, headgear, uniforms, vests, and weapons.
   - Classname lists, forced equipment, empty chances, and weapon attachment options.
+  - Optional MMA preset support through Eden and Zeus modules when Moony's Magnificent Additions is loaded.
 - Vehicle utility:
   - Spawn synced vehicles as wrecks.
   - Optional ACE cookoff and explosion behavior.
 - Mobile HQ support:
   - Mark synced objects, units, or vehicles as Mobile HQs.
-  - Configure respawn side, respawn name, deployment behavior, and teleport actions.
+  - Configure respawn side, respawn name, always-deployed state, initial deployed state, and teleport actions.
 - Extra small utilities and compatibility classes for older module names.
 - Zeus utilities:
+  - Add ACE Arsenal to objects during live missions.
   - Toggle ACE carryable/draggable state.
   - Destroy without explosion.
   - Set respawn time.
   - Remove crater decals.
   - Enable unlimited ammo or fuel.
   - Manage Mobile HQs during live missions.
+  - Add MMA Zeus self-action eligibility to a unit when Moony's Magnificent Additions is loaded.
 - Infection Zeus helpers when the related infection systems are loaded:
   - Infect, cure, set infection value, toggle immunity, kill infected units, and create toxic areas.
 - Custom medic insignia.
@@ -48,13 +57,17 @@ MMM is built around the Arma 3 modding stack used by the modules:
 - ZEN
 - Moony's Magnificent Base
 
-Some functionality depends on ACE medical, ACE interactions, or ZEN module behavior being available in the loaded modset.
+Some functionality depends on ACE medical, ACE interactions, or ZEN module behavior being available in the loaded modset. MMA preset randomization, infection Zeus helpers, and the Zeus-action eligibility helper are available when Moony's Magnificent Additions is loaded.
 
 ## Usage
 
 In Eden, look for the modules under `Moony's Magnificent Modules`. Place a module, configure its attributes, and synchronize it to the relevant units, vehicles, or objects.
 
 In Zeus, the ZEN modules expose the same kind of utility for live mission management. This is especially useful for quickly adjusting AI behavior, applying medical states, randomizing units, or handling vehicles during an active operation.
+
+The Add ACE Arsenal module works in Eden and Zeus. It can add only an ACE interaction, or also a scroll action, and can be configured as a normal arsenal with blacklist or a limited arsenal with optional compatible magazine and attachment expansion.
+
+Gear randomization modules can either use their normal manual fields or an MMA preset ID. Presets are defined in MMA through addon config, mission `description.ext`, or script; the MMM modules simply apply the matching preset or category to the selected units.
 
 ## Building
 
