@@ -120,6 +120,7 @@ class CfgFunctions
 			class mobileHQZeus{};
 			class removeCrater{};
 			class respawnTimer{};
+			class respawnTimerApplyLocal{};
 			class unlimitedAmmoZeus{};
 			class unlimitedFuelZeus{};
 			class zeusActionEligibilityZeus{};

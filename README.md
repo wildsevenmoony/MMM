@@ -38,7 +38,7 @@ The mod was built for the groups I play with, so some behavior and wording is in
   - Add ACE Arsenal to objects during live missions.
   - Toggle ACE carryable/draggable state.
   - Destroy without explosion.
-  - Set respawn time.
+  - Set respawn time for one player or selected sides, groups, and players.
   - Remove crater decals.
   - Enable unlimited ammo or fuel.
   - Manage Mobile HQs during live missions.
@@ -64,6 +64,8 @@ Some functionality depends on ACE medical, ACE interactions, or ZEN module behav
 In Eden, look for the modules under `Moony's Magnificent Modules`. Place a module, configure its attributes, and synchronize it to the relevant units, vehicles, or objects.
 
 In Zeus, the ZEN modules expose the same kind of utility for live mission management. This is especially useful for quickly adjusting AI behavior, applying medical states, randomizing units, or handling vehicles during an active operation.
+
+The Set Respawn Time Zeus module targets the player it is placed on. If it is not placed on a player, it opens an owner-style selector for sides, groups, and players. The timer can be applied only to the current respawn instance, or kept after future respawns.
 
 The Add ACE Arsenal module works in Eden and Zeus. It can add only an ACE interaction, or also a scroll action, and can be configured as a normal arsenal with blacklist or a limited arsenal with optional compatible magazine and attachment expansion.
 

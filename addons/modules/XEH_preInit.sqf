@@ -34,13 +34,13 @@ if (isNil "cba_settings_fnc_init") exitWith {};
 [QGVAR(respawnTimerDefault), "SLIDER",
     ["Respawn timer default", "Default value shown in the Zeus respawn timer dialog."],
     ["Moony's Magnificent Modules", "Zeus"],
-    [1, 600, 2, 0], 1
+    [1, 600, 120, 0], 1
 ] call cba_settings_fnc_init;
 
 [QGVAR(respawnTimerMax), "SLIDER",
     ["Respawn timer maximum", "Maximum value shown in the Zeus respawn timer dialog."],
     ["Moony's Magnificent Modules", "Zeus"],
-    [1, 3600, 120, 0], 1
+    [1, 3600, 300, 0], 1
 ] call cba_settings_fnc_init;
 
 [QGVAR(mhqEnableDeployment), "CHECKBOX",

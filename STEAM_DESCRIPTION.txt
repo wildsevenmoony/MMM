@@ -28,7 +28,7 @@ It adds a collection of practical Eden and Zeus modules for faster mission setup
 [*] Weapons and attachments
 [/list]
 [*] Use MMA gear randomization presets from Eden or Zeus randomization modules
-[*] Small Zeus utility modules for ammo, fuel, dragging/carrying, crater cleanup, ACE arsenals, Mobile HQs, and more
+[*] Small Zeus utility modules for ammo, fuel, dragging/carrying, crater cleanup, respawn timers, ACE arsenals, Mobile HQs, and more
 [*] Optional Zeus module to add MMA Zeus self-action eligibility when Moony's Magnificent Additions is loaded
 [*] Optional infection Zeus helpers when the matching Moony infection systems are loaded
 [*] Custom medic insignia
@@ -51,6 +51,8 @@ It adds a collection of practical Eden and Zeus modules for faster mission setup
 In Eden, look for modules under [b]Moony's Magnificent Modules[/b]. Place a module, configure its attributes, and synchronize it to the relevant units, vehicles, or objects.
 
 In Zeus, the ZEN modules provide quick live-mission tools for medical effects, AI behavior, object utilities, gear randomization, and other mission-control tasks.
+
+The Set Respawn Time Zeus module can target one player, or open an owner-style selector for sides, groups, and players when it is not placed on a player. Timers can be one-time or kept after future respawns.
 
 The Add ACE Arsenal module is available in Eden and Zeus. It can create a normal ACE arsenal, a blacklisted arsenal, or a limited arsenal that automatically expands weapon entries with compatible magazines and attachments.
 
