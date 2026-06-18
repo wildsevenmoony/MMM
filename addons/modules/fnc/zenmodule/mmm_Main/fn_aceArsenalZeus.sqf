@@ -24,7 +24,6 @@ params [
 
 #include "..\checks\fn_notNullObject.hpp"
 
-private _isExisting = _objectUnderCursor getVariable [QGVAR(aceArsenalInitialized), false];
 private _defaultScrollAction = _objectUnderCursor getVariable [QGVAR(aceArsenalScrollAction), false];
 private _defaultBlacklist = _objectUnderCursor getVariable [QGVAR(aceArsenalBlacklist), ""];
 private _defaultLimited = _objectUnderCursor getVariable [QGVAR(aceArsenalLimited), false];

@@ -34,7 +34,7 @@ while {!isNull _mhq && {alive _mhq}} do {
         _mhq setVariable [QGVAR(mhqRespawnActive), true, true];
     };
 
-    if (!_canRespawn && {_active}) then {
+    if (!_canRespawn && _active) then {
         private _handle = _mhq getVariable [QGVAR(mhqRespawnHandle), []];
 
         if (_handle isNotEqualTo []) then {

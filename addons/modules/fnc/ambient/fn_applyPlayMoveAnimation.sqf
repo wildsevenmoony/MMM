@@ -29,7 +29,7 @@ params [
 
 if (isNull _unit || {_animation isEqualTo ""} || {!(_unit isKindOf "CAManBase")}) exitWith {};
 
-if (!_preview && {!_visualOnly} && {_broadcastVisual}) then {
+if (!_preview && {!_visualOnly} && _broadcastVisual) then {
   [_unit, _animation, _allowDamage, false, true, false] remoteExecCall [QEFUNC(modules,applyPlayMoveAnimation), 0, _unit];
 };
 

@@ -46,14 +46,14 @@ if (_arsenalShouldBeActive && {!_arsenalActive}) then {
     _mhq setVariable [QGVAR(mhqArsenalActive), true, true];
 };
 
-if (!_arsenalShouldBeActive && {_arsenalActive}) then {
-    if !(isNil "ace_arsenal_fnc_removeBox") then {
-        [_mhq] call ace_arsenal_fnc_removeBox;
-    } else {
+if (!_arsenalShouldBeActive && _arsenalActive) then {
+    if (isNil "ace_arsenal_fnc_removeBox") then {
         _mhq setVariable ["ace_arsenal_virtualItems", nil, true];
         _mhq setVariable ["ace_arsenal_virtualBackpacks", nil, true];
         _mhq setVariable ["ace_arsenal_virtualMagazines", nil, true];
         _mhq setVariable ["ace_arsenal_virtualWeapons", nil, true];
+    } else {
+        [_mhq] call ace_arsenal_fnc_removeBox;
     };
 
     _mhq setVariable [QGVAR(mhqArsenalActive), false, true];

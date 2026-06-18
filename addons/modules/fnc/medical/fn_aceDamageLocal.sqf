@@ -233,7 +233,7 @@ private _nearEnoughForPhysics = {
     allPlayers findIf {_x distance _unit < 300} != -1
 };
 
-if (_delayUntilPlayerNear && {(_applyDeathForce || {_forceDeath})} && {!([_unit] call _nearEnoughForPhysics)}) exitWith {
+if (_delayUntilPlayerNear && {(_applyDeathForce || _forceDeath)} && {!([_unit] call _nearEnoughForPhysics)}) exitWith {
     private _freezeFeatures = ["PATH", "MOVE", "FSM", "ANIM", "TARGET", "AUTOTARGET", "WEAPONAIM", "SUPPRESSION", "COVER", "AUTOCOMBAT"];
     private _frozenFeatures = _freezeFeatures select {_unit checkAIFeature _x};
 
@@ -317,7 +317,7 @@ if (_selectedPartIndexes isNotEqualTo []) then {
     };
 };
 
-if (_applyDeathForce || {_forceDeath}) then {
+if (_applyDeathForce || _forceDeath) then {
     private _deathDelay = if (time < 1) then {1 + random 1} else {0.2};
 
     [
