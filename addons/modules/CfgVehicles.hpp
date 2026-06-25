@@ -709,6 +709,131 @@ class CfgVehicles
 		};
 	};
 
+	class GVAR(zenIntel): Module_F
+	{
+		category = QGVAR(Modules);
+		displayName = "Add ZEN Intel";
+		function = QEFUNC(modules,zenIntelInit);
+		functionPriority = 10;
+		isDisposable = 0;
+		is3DEN = 1;
+		isGlobal = 0;
+		isTriggerActivated = 0;
+		scope = 2;
+
+		class Attributes: AttributesBase
+		{
+			class GVAR(zenIntelShare): Combo
+			{
+				property = QGVAR(zenIntelShare);
+				displayName = "Share With";
+				tooltip = "Who receives the diary intel when a player completes the action.";
+				typeName = "NUMBER";
+				defaultValue = "0";
+				expression = "_this setVariable ['%s', _value, true];";
+				class Values
+				{
+					class Side {name = "Side"; value = 0;};
+					class Group {name = "Group"; value = 1;};
+					class FinderOnly {name = "Finder Only"; value = 2;};
+				};
+			};
+			class GVAR(zenIntelDelete): Checkbox
+			{
+				property = QGVAR(zenIntelDelete);
+				displayName = "Delete On Completion";
+				tooltip = "Deletes the synced object after the intel action has completed.";
+				typeName = "BOOL";
+				defaultValue = "true";
+				expression = "_this setVariable ['%s', _value, true];";
+			};
+			class GVAR(zenIntelActionType): Combo
+			{
+				property = QGVAR(zenIntelActionType);
+				displayName = "Action Type";
+				tooltip = "Use a vanilla hold action or an ACE interaction menu action. This mirrors the Zeus Enhanced Create/Edit Intel module.";
+				typeName = "NUMBER";
+				defaultValue = "0";
+				expression = "_this setVariable ['%s', _value, true];";
+				class Values
+				{
+					class HoldAction {name = "Hold Action"; value = 0;};
+					class AceInteraction {name = "ACE Interaction Menu"; value = 1;};
+				};
+			};
+			class GVAR(zenIntelActionText): Edit
+			{
+				property = QGVAR(zenIntelActionText);
+				displayName = "Action Text";
+				tooltip = "Text shown on the hold action or ACE interaction.";
+				typeName = "STRING";
+				defaultValue = "'Pick Up Intel'";
+				expression = "_this setVariable ['%s', _value, true];";
+			};
+			class GVAR(zenIntelActionSound): Combo
+			{
+				property = QGVAR(zenIntelActionSound);
+				displayName = "Action Sound";
+				tooltip = "Sound set played while the intel action is in progress.";
+				typeName = "NUMBER";
+				defaultValue = "0";
+				expression = "_this setVariable ['%s', _value, true];";
+				class Values
+				{
+					class None {name = "None"; value = 0;};
+					class LaptopKeyboard {name = "Laptop Keyboard"; value = 1;};
+					class PCKeyboard {name = "PC Keyboard"; value = 2;};
+					class SearchBody {name = "Search Body"; value = 3;};
+				};
+			};
+			class GVAR(zenIntelDuration): Edit
+			{
+				property = QGVAR(zenIntelDuration);
+				displayName = "Action Duration";
+				tooltip = "How long the action takes in seconds.";
+				typeName = "NUMBER";
+				defaultValue = "1";
+				expression = "_this setVariable ['%s', _value, true];";
+			};
+			class GVAR(zenIntelTitle): Edit
+			{
+				property = QGVAR(zenIntelTitle);
+				displayName = "Intel Title";
+				tooltip = "Diary record title created when the intel is collected.";
+				typeName = "STRING";
+				defaultValue = "'Intel'";
+				expression = "_this setVariable ['%s', _value, true];";
+			};
+			class GVAR(zenIntelText): Edit
+			{
+				property = QGVAR(zenIntelText);
+				displayName = "Intel Text";
+				tooltip = "Diary record text created when the intel is collected. Line breaks are preserved.";
+				control = "EditMulti5";
+				typeName = "STRING";
+				defaultValue = "''";
+				expression = "_this setVariable ['%s', _value, true];";
+			};
+			class ModuleDescription: ModuleDescription{};
+		};
+
+		class ModuleDescription: ModuleDescription
+		{
+			description = "Sync any object to add Zeus Enhanced style intel to it.";
+			sync[] = {"LocationArea_F"};
+
+			class LocationArea_F
+			{
+				description[] =	{"Synchronise any object to this module."};
+				position = 0;
+				direction = 0;
+				optional = 0;
+				duplicate = 0;
+				synced[] = {"AnyStaticObject", "AnyVehicle", "AnyAI"};
+			};
+		};
+	};
+
 	class GVAR(baseMedic): Module_F
 	{
 		category = QGVAR(Modules);

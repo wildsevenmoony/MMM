@@ -52,6 +52,8 @@ class CfgFunctions
 			class aceArsenal{};
 			class aceArsenalScrollActionLocal{};
 			class spawnWreck{};
+			class zenIntel{};
+			class zenIntelInit{};
 		};
 		class Random_Backpacks
 		{

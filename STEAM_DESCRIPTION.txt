@@ -16,6 +16,7 @@ It adds a collection of practical Eden and Zeus modules for faster mission setup
 [*] Disable Eden animation preview per module when needed
 [*] Add ACE Arsenal actions to objects
 [*] Configure ACE arsenals with optional scroll action, blacklist, limited whitelist, compatible magazines, and compatible attachments
+[*] Add Zeus Enhanced style diary intel to objects directly from Eden
 [*] Spawn vehicles as wrecks with optional ACE cookoff/explosion behavior
 [*] Mark vehicles or objects as Mobile HQs with respawn/teleport support and initial deployment control
 [*] Randomize full gear or specific categories:
@@ -55,6 +56,8 @@ In Zeus, the ZEN modules provide quick live-mission tools for medical effects, A
 The Set Respawn Time Zeus module can target one player, or open an owner-style selector for sides, groups, and players when it is not placed on a player. Timers can be one-time or kept after future respawns.
 
 The Add ACE Arsenal module is available in Eden and Zeus. It can create a normal ACE arsenal, a blacklisted arsenal, or a limited arsenal that automatically expands weapon entries with compatible magazines and attachments.
+
+The Add ZEN Intel module is available in Eden and mirrors Zeus Enhanced's Create/Edit Intel behavior, including sharing target, delete-on-completion, action type, sound, duration, title, and text. Zeus does not need a duplicate MMM module because Zeus Enhanced already has the live intel module.
 
 Gear randomization modules can use their normal manual fields, or apply a preset ID registered by Moony's Magnificent Additions through config, mission description.ext, or script.
 

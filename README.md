@@ -22,6 +22,9 @@ The mod was built for the groups I play with, so some behavior and wording is in
   - Optionally add a scroll-wheel action as well.
   - Apply a blacklist, or make a limited arsenal from a whitelist.
   - Optionally add all compatible magazines and attachments for whitelisted weapons.
+- ZEN Intel module:
+  - Add Zeus Enhanced style diary intel to any synced object from Eden.
+  - Configure sharing target, delete-on-completion, hold action or ACE interaction, action sound, duration, title, and text.
 - Gear randomizer modules:
   - Full gear randomization.
   - Separate modules for backpacks, goggles, headgear, uniforms, vests, and weapons.
@@ -68,6 +71,8 @@ In Zeus, the ZEN modules expose the same kind of utility for live mission manage
 The Set Respawn Time Zeus module targets the player it is placed on. If it is not placed on a player, it opens an owner-style selector for sides, groups, and players. The timer can be applied only to the current respawn instance, or kept after future respawns.
 
 The Add ACE Arsenal module works in Eden and Zeus. It can add only an ACE interaction, or also a scroll action, and can be configured as a normal arsenal with blacklist or a limited arsenal with optional compatible magazine and attachment expansion.
+
+The Add ZEN Intel module works in Eden and mirrors Zeus Enhanced's Create/Edit Intel behavior. It attaches hold-action or ACE-interaction intel to synced objects and creates diary intel for the finder, group, or side when collected. Zeus does not need a duplicate MMM module because Zeus Enhanced already provides the live Create/Edit Intel module.
 
 Gear randomization modules can either use their normal manual fields or an MMA preset ID. Presets are defined in MMA through addon config, mission `description.ext`, or script; the MMM modules simply apply the matching preset or category to the selected units.
 
