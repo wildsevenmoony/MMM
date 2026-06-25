@@ -1,0 +1,53 @@
+[h1][b]Moony's Magnificent Modules[/b] - Update DD.MM.YYYY[/h1]
+Version: 1.6.1.2
+
+[h2]Added[/h2]
+[list]
+[*] ACE Arsenal module for Eden and Zeus
+[*] Optional scroll-wheel action for ACE Arsenal objects
+[*] Arsenal blacklist and limited-whitelist modes
+[*] Optional compatible magazine and attachment expansion for limited arsenals
+[*] Set Respawn Timer selector for sides, groups and players when the Zeus module is not placed on a unit
+[*] Option to apply respawn timer changes once or for the whole mission
+[*] ZEN Intel Eden module that mirrors Zeus Enhanced's intel behavior for preplaced objects
+[*] Module to add MMA Zeus self-action eligibility when MMA is loaded
+[*] MMA gear randomization preset support in randomization modules
+[/list]
+
+[h2]Removed[/h2]
+[list]
+[*] Nothing
+[/list]
+
+[h2]Changed[/h2]
+[list]
+[*] Mobile HQ Zeus module can update an existing MHQ on the target instead of creating a duplicate
+[*] Mobile HQ modules can choose whether the MHQ starts deployed
+[*] Animation modules can disable Eden preview when preview movement would disturb placement
+[*] SwitchMove and PlayMove animation handling was improved for multiplayer
+[*] Respawn timer defaults and limits were refined for live Zeus use
+[*] Documentation and Steam description were updated for the newer modules
+[/list]
+
+[h1][b]Moony's Magnificent Modules[/b] - Update 25.05.2026[/h1]
+Version: 1.5.0
+
+[h2]Added[/h2]
+[list]
+[*] Apply ACE Damage (Eden/Zeus)
+[*] (From 1.4.0 Update) PlayMove Animation Module (Eden)
+[/list]
+
+[h2]Removed[/h2]
+[list]
+[*] Nothing
+[/list]
+
+[h2]Changed[/h2]
+[list]
+[*] Make custom dialogs beautiful again; they now look close to ZEN dialogs
+[*] Become Zeus / Step down as Zeus should work more reliable now
+[*] Base Medic: caller does not get a "You have been healed" notification anymore when healing team mates
+[*] General code improvements
+[*] (From 1.4.0 Update) Animation modules play animations in Eden now
+[/list]
