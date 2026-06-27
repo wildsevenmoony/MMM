@@ -21,6 +21,10 @@ if (!isServer || {isNull _mhq}) exitWith {};
 
 private _deployed = _mhq getVariable [QGVAR(mhqDeployed), false];
 
+if (_deployed && {!(_mhq isKindOf "CAManBase")} && {vehicle _mhq isEqualTo _mhq}) then {
+    _mhq engineOn false;
+};
+
 if (
     _deployed
     && {missionNamespace getVariable [QGVAR(mhqBaseMedicEnabled), false]}

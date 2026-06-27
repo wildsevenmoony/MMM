@@ -22,8 +22,14 @@ params [
 if (!isServer || {isNull _mhq}) exitWith {};
 if (_mhq getVariable [QGVAR(mhqAlwaysDeployed), false]) exitWith {
     _mhq setVariable [QGVAR(mhqDeployed), true, true];
+    if !(_mhq isKindOf "CAManBase") then {
+        _mhq engineOn false;
+    };
     [_mhq] call EFUNC(modules,mobileHQApplyFeatures);
 };
 
 _mhq setVariable [QGVAR(mhqDeployed), _deployed, true];
+if (_deployed && {!(_mhq isKindOf "CAManBase")}) then {
+    _mhq engineOn false;
+};
 [_mhq] call EFUNC(modules,mobileHQApplyFeatures);

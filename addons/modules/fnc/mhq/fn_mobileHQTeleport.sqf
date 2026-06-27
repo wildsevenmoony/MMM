@@ -23,6 +23,12 @@ if (!hasInterface || {isNull _player} || {isNull _destination}) exitWith {false}
 if (!alive _player || {!alive _destination}) exitWith {false};
 if !(_destination getVariable [QGVAR(mhqDeployed), false]) exitWith {false};
 
+[_player, _destination, true] call EFUNC(modules,mobileHQCanTeleportTo) params ["_canTeleport", "_reason"];
+if (!_canTeleport) exitWith {
+    [_reason, 2, _player, 12] call ace_common_fnc_displayTextStructured;
+    false
+};
+
 [_player, _destination] spawn {
     params ["_player", "_destination"];
 
@@ -47,14 +53,32 @@ if !(_destination getVariable [QGVAR(mhqDeployed), false]) exitWith {false};
     disableUserInput true;
     sleep 3;
 
-    private _angle = random 360;
-    private _position = _destination getPos [5, _angle];
+    [_player, _destination, true] call EFUNC(modules,mobileHQCanTeleportTo) params ["_canTeleport", "_reason"];
+    if (!_canTeleport) exitWith {
+        disableUserInput false;
+        cutText ["", "BLACK IN", 0.5];
+        titleFadeOut 0.1;
+        [_reason, 2, _player, 12] call ace_common_fnc_displayTextStructured;
+    };
 
     if (vehicle _player isNotEqualTo _player) then {
         moveOut _player;
     };
 
-    _player setVehiclePosition [_position, [], 5, "NONE"];
+    if (_destination isKindOf "CAManBase" && {vehicle _destination isNotEqualTo _destination}) then {
+        private _vehicle = vehicle _destination;
+        private _movedIn = _player moveInAny _vehicle;
+        if (!_movedIn) exitWith {
+            disableUserInput false;
+            cutText ["", "BLACK IN", 0.5];
+            titleFadeOut 0.1;
+            ["No free seat is available in the MHQ vehicle.", 2, _player, 12] call ace_common_fnc_displayTextStructured;
+        };
+    } else {
+        private _angle = random 360;
+        private _position = _destination getPos [5, _angle];
+        _player setVehiclePosition [_position, [], 5, "NONE"];
+    };
 
     sleep 2;
     disableUserInput false;

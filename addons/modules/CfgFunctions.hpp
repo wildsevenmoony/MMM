@@ -37,7 +37,9 @@ class CfgFunctions
 			class mobileHQAddActions{};
 			class mobileHQApplyFeatures{};
 			class mobileHQCanRespawn{};
+			class mobileHQCanTeleportTo{};
 			class mobileHQHandleRespawn{};
+			class mobileHQIsMoving{};
 			class mobileHQInit{};
 			class mobileHQMonitor{};
 			class mobileHQParseArsenalItems{};

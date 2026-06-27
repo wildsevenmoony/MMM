@@ -113,7 +113,8 @@ private _teleportChildren = {
 
     private _destinations = _mhqs select {
         private _mhqSide = call compile (_x getVariable [QGVAR(mhqSide), "west"]);
-        (_mhqSide isEqualTo _playerSide) || {_includeFriendly && {_playerSide getFriend _mhqSide >= 0.6}}
+        ((_mhqSide isEqualTo _playerSide) || {_includeFriendly && {_playerSide getFriend _mhqSide >= 0.6}})
+        && {[_player, _x] call EFUNC(modules,mobileHQCanTeleportTo)}
     };
 
     _destinations apply {
