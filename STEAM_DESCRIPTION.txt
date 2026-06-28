@@ -31,7 +31,6 @@ It adds a collection of practical Eden and Zeus modules for faster mission setup
 [*] Use MMA gear randomization presets from Eden or Zeus randomization modules
 [*] Small Zeus utility modules for ammo, fuel, dragging/carrying, crater cleanup, respawn timers, ACE arsenals, Mobile HQs, and more
 [*] Optional Zeus module to add MMA Zeus self-action eligibility when Moony's Magnificent Additions is loaded
-[*] Optional infection Zeus helpers when the matching Moony infection systems are loaded
 [*] Custom medic insignia
 [/list]
 
@@ -45,7 +44,7 @@ It adds a collection of practical Eden and Zeus modules for faster mission setup
 
 [b]Optional Dependencies[/b]
 [list]
-[*] Moony's Magnificent Additions, for gear randomization presets and infection Zeus helpers
+[*] Moony's Magnificent Additions, for gear randomization presets and Zeus-action eligibility helpers
 [/list]
 
 [b]Usage[/b]

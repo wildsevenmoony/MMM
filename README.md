@@ -46,8 +46,6 @@ The mod was built for the groups I play with, so some behavior and wording is in
   - Enable unlimited ammo or fuel.
   - Manage Mobile HQs during live missions.
   - Add MMA Zeus self-action eligibility to a unit when Moony's Magnificent Additions is loaded.
-- Infection Zeus helpers when the related infection systems are loaded:
-  - Infect, cure, set infection value, toggle immunity, kill infected units, and create toxic areas.
 - Custom medic insignia.
 
 ## Requirements
@@ -60,7 +58,7 @@ MMM is built around the Arma 3 modding stack used by the modules:
 - ZEN
 - Moony's Magnificent Base
 
-Some functionality depends on ACE medical, ACE interactions, or ZEN module behavior being available in the loaded modset. MMA preset randomization, infection Zeus helpers, and the Zeus-action eligibility helper are available when Moony's Magnificent Additions is loaded.
+Some functionality depends on ACE medical, ACE interactions, or ZEN module behavior being available in the loaded modset. MMA preset randomization and the Zeus-action eligibility helper are available when Moony's Magnificent Additions is loaded. Infection Zeus helpers are provided directly by Moony's Magnificent Additions.
 
 ## Usage
 

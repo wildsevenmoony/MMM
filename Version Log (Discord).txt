@@ -1,6 +1,6 @@
 # **Moony's Magnificent Modules** - Update DD.MM.YYYY
 -# [Mod Page](https://steamcommunity.com/sharedfiles/filedetails/?id=3455903038)
--# Version 1.6.1.3
+-# Version 1.6.1.4
 ## Added
 - ACE Arsenal module for Eden and Zeus
 - Optional scroll-wheel action for ACE Arsenal objects
@@ -12,14 +12,15 @@
 - MMA gear randomization preset support in randomization modules
 - ZEN Intel Eden module that mirrors Zeus Enhanced's intel behavior for preplaced objects
 ## Removed
-- Nothing
+- MMM-owned infection Zeus helper modules; infection Zeus tools are now provided directly by MMA
 ## Changed
 - Mobile HQ Zeus module can update an existing MHQ on the target instead of creating a duplicate
 - Mobile HQ modules can choose whether the MHQ starts deployed
 - Animation modules can disable Eden preview when preview movement would disturb placement
 - SwitchMove and PlayMove animation handling was improved for multiplayer
 - Respawn timer defaults and limits were refined for live Zeus use
-- Documentation and Steam description were updated for the newer modules
+
+---
 
 # **Moony's Magnificent Modules** - Update 25.05.2026
 -# [Mod Page](https://steamcommunity.com/sharedfiles/filedetails/?id=3455903038)

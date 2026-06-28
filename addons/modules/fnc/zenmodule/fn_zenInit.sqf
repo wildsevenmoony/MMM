@@ -51,18 +51,6 @@ if (!hasInterface) exitWith {};
 			["Apply ACE Damage",{_this call EFUNC(modules,aceDamageZeus)}]
 		];
 
-		private _mmmInfection = [];
-		if (isClass (configFile >> "CfgPatches" >> "mma_main")) then {
-			_mmmInfection = [
-				["Infect",{_this call EFUNC(modules,infectionInfectZeus)}],
-				["Set Infection Value",{_this call EFUNC(modules,infectionSetValueZeus)}],
-				["Cure",{_this call EFUNC(modules,infectionCureZeus)}],
-				["Kill Infected",{_this call EFUNC(modules,infectionKillInfectedZeus)}],
-				["Toggle Immunity",{_this call EFUNC(modules,infectionImmunityZeus)}],
-				["Toxic Area",{_this call EFUNC(modules,toxicAreaZeus)}]
-			];
-		};
-
 		private _mmmRandom = [
 			["Full Gear Randomization",{_this call EFUNC(modules,randomizeGearZeus)}],
 			["Backpacks Randomization",{_this call EFUNC(modules,randomizeGearBackpacksGroupZeus)}],
@@ -82,7 +70,6 @@ if (!hasInterface) exitWith {};
 			["Moony's Magnificent", _mmmMain],
 			["Moony's Magnificent AI", _mmmAI],
 			["Moony's Magnificent Fun", _mmmFun],
-			["Moony's Magnificent Infection", _mmmInfection],
 			["Moony's Magnificent Medical", _mmmMedical],
 			["Moony's Magnificent Random", _mmmRandom]
 			// ["Moony's Magnificent TEST", _mmmTest]

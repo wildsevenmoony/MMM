@@ -143,18 +143,6 @@ class CfgFunctions
 			class zeusHatesArma{};
 			class zeusHatesPlayerbase{};
 		};
-		class Zenmodule_mmm_Infection
-		{
-			file = PATHTOF(fnc\zenmodule\mmm_Infection);
-
-			class infectionCureZeus{};
-			class infectionImmunitySet{};
-			class infectionImmunityZeus{};
-			class infectionInfectZeus{};
-			class infectionKillInfectedZeus{};
-			class infectionSetValueZeus{};
-			class toxicAreaZeus{};
-		};
 		class Zenmodule_mmm_Medical
 		{
 			file = PATHTOF(fnc\zenmodule\mmm_Medical);
