@@ -369,6 +369,14 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
+			class GVAR(ambientAnimationGeneralCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "General";
+				description = "";
+			};
+
 			class GVAR(animationPreview3DEN): Checkbox
 			{
 				property = QGVAR(animationPreview3DEN);
@@ -377,6 +385,14 @@ class CfgVehicles
 				typeName = "BOOL";
 				defaultValue = "true";
 				expression = "_this setVariable ['%s', _value]; if (is3DEN) then {[_this] call mmm_modules_fnc_refreshAnimationPreview3DEN;};";
+			};
+
+			class GVAR(ambientAnimationSelectionCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Animation";
+				description = "";
 			};
 
 			class GVAR(ambientAnimationMPSelection): Combo
@@ -428,6 +444,14 @@ class CfgVehicles
 				};
 			};
 
+			class GVAR(ambientAnimationPlacementCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Placement";
+				description = "";
+			};
+
 			class GVAR(ambientAnimationMPSnapObject): Edit
   			{
 				property = QGVAR(ambientAnimationMPSnapObjectEdit);
@@ -436,6 +460,14 @@ class CfgVehicles
 				expression = "_this setVariable ['%s', _value]; if (is3DEN) then {[_this, 'ambient'] call mmm_modules_fnc_previewAnimation3DEN;};";
 			};
 			
+			class GVAR(ambientAnimationRuntimeCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Runtime";
+				description = "";
+			};
+
 			class GVAR(ambientAnimationMPDamage): Combo
   			{
 				property = QGVAR(ambientAnimationMPDamageCombo);
@@ -495,6 +527,14 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
+			class GVAR(animationGeneralCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "General";
+				description = "";
+			};
+
 			class GVAR(animationPreview3DEN): Checkbox
 			{
 				property = QGVAR(animationPreview3DEN);
@@ -503,6 +543,14 @@ class CfgVehicles
 				typeName = "BOOL";
 				defaultValue = "true";
 				expression = "_this setVariable ['%s', _value]; if (is3DEN) then {[_this] call mmm_modules_fnc_refreshAnimationPreview3DEN;};";
+			};
+
+			class GVAR(animationSelectionCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Animation";
+				description = "";
 			};
 
 			class GVAR(animationSelection): Combo
@@ -577,6 +625,14 @@ class CfgVehicles
 				expression = "_this setVariable ['%s', _value]; if (is3DEN) then {[_this, 'switchMove'] call mmm_modules_fnc_previewAnimation3DEN;};";
 			};
 			
+			class GVAR(animationRuntimeCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Runtime";
+				description = "";
+			};
+
 			class GVAR(animationDamage): Combo
   			{
 				property = QGVAR(animationDamageCombo);
@@ -635,6 +691,14 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
+			class GVAR(aceArsenalAccessCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Access";
+				description = "";
+			};
+
 			class GVAR(arsenalScrollAction): Checkbox
   			{
 				property = QGVAR(aceArsenalScrollAction);
@@ -644,6 +708,15 @@ class CfgVehicles
 				defaultValue = "false";
 				expression = "_this setVariable ['%s', _value, true];";
 			};
+
+			class GVAR(aceArsenalContentCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Content";
+				description = "";
+			};
+
 			class GVAR(arsenalBlacklist): Edit
   			{
 				property = QGVAR(aceArsenalBlacklist);
@@ -653,6 +726,15 @@ class CfgVehicles
 				defaultValue = "''";
 				expression = "_this setVariable ['%s', _value, true];";
 			};
+
+			class GVAR(aceArsenalLimitedCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Limited Arsenal";
+				description = "";
+			};
+
 			class GVAR(aceArsenalLimited): Checkbox
   			{
 				property = QGVAR(aceArsenalLimited);
@@ -723,6 +805,14 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
+			class GVAR(zenIntelSharingCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Sharing";
+				description = "";
+			};
+
 			class GVAR(zenIntelShare): Combo
 			{
 				property = QGVAR(zenIntelShare);
@@ -747,6 +837,15 @@ class CfgVehicles
 				defaultValue = "true";
 				expression = "_this setVariable ['%s', _value, true];";
 			};
+
+			class GVAR(zenIntelActionCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Action";
+				description = "";
+			};
+
 			class GVAR(zenIntelActionType): Combo
 			{
 				property = QGVAR(zenIntelActionType);
@@ -795,6 +894,15 @@ class CfgVehicles
 				defaultValue = "1";
 				expression = "_this setVariable ['%s', _value, true];";
 			};
+
+			class GVAR(zenIntelDiaryCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Diary Record";
+				description = "";
+			};
+
 			class GVAR(zenIntelTitle): Edit
 			{
 				property = QGVAR(zenIntelTitle);
@@ -882,6 +990,14 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
+			class GVAR(playMoveAnimationGeneralCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "General";
+				description = "";
+			};
+
 			class GVAR(animationPreview3DEN): Checkbox
 			{
 				property = QGVAR(animationPreview3DEN);
@@ -890,6 +1006,14 @@ class CfgVehicles
 				typeName = "BOOL";
 				defaultValue = "true";
 				expression = "_this setVariable ['%s', _value]; if (is3DEN) then {[_this] call mmm_modules_fnc_refreshAnimationPreview3DEN;};";
+			};
+
+			class GVAR(playMoveAnimationSelectionCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Animation";
+				description = "";
 			};
 
 			class GVAR(playMoveAnimationSelection): Combo
@@ -915,6 +1039,14 @@ class CfgVehicles
 				displayName = "Custom Animation";
 				tooltip = "Optional animation name. If set, this overrides the selected animation. Quoted input and comma-separated lists are accepted; only the first entry is used.";
 				expression = "_this setVariable ['%s', _value]; if (is3DEN) then {[_this, 'playMove'] call mmm_modules_fnc_previewAnimation3DEN;};";
+			};
+
+			class GVAR(playMoveAnimationRuntimeCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Runtime";
+				description = "";
 			};
 
 			class GVAR(playMoveAnimationDamage): Combo
@@ -976,6 +1108,14 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
+			class GVAR(mobileHQIdentityCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Identity";
+				description = "";
+			};
+
 			class GVAR(mobileHQName): Edit
 			{
 				property = QGVAR(mobileHQName);
@@ -1000,6 +1140,14 @@ class CfgVehicles
 					class Independent {name = "Independent"; value = "independent";};
 					class Civilian {name = "Civilian"; value = "civilian";};
 				};
+			};
+
+			class GVAR(mobileHQDeploymentCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Deployment";
+				description = "";
 			};
 
 			class GVAR(mobileHQAlwaysDeployed): Checkbox
@@ -2771,6 +2919,14 @@ class CfgVehicles
 
 		class Attributes: AttributesBase
 		{
+			class GVAR(spawnWreckEffectsCategory)
+			{
+				data = "AttributeSystemSubcategory";
+				control = "SubCategory";
+				displayName = "Effects";
+				description = "";
+			};
+
 			class GVAR(spawnWreckACECookingOff): Combo
   			{
 				property = QGVAR(spawnWreckACECookingOffCombo);

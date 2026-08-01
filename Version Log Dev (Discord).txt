@@ -1,12 +1,12 @@
-# **Moony's Magnificent Modules** - Update DD.MM.YYYY
+# **Moony's Magnificent Modules** - Update 04.07.2026
 -# [Mod Page](https://steamcommunity.com/sharedfiles/filedetails/?id=3455903038)
--# Version 1.6.1.4
+-# Version 1.6.1.5
 ## Added
 - Nothing
 ## Removed
 - MMM-owned infection Zeus helper modules; infection Zeus tools are now provided directly by MMA
 ## Changed
-- Nothing
+- Animation, ACE Arsenal, ZEN Intel, Mobile HQ and wreck module attribute dialogs now use clearer subcategory sections
 
 ---
 

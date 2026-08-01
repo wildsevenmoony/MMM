@@ -1,5 +1,5 @@
 [h1][b]Moony's Magnificent Modules[/b] - Update DD.MM.YYYY[/h1]
-Version: 1.6.1.4
+Version: 1.6.1.5
 
 [h2]Added[/h2]
 [list]
@@ -26,6 +26,7 @@ Version: 1.6.1.4
 [*] Animation modules can disable Eden preview when preview movement would disturb placement
 [*] SwitchMove and PlayMove animation handling was improved for multiplayer
 [*] Respawn timer defaults and limits were refined for live Zeus use
+[*] Animation, ACE Arsenal, ZEN Intel, Mobile HQ and wreck module attribute dialogs now use clearer subcategory sections
 [/list]
 
 [hr][/hr]
