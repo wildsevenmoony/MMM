@@ -1,4 +1,4 @@
-[h1][b]Moony's Magnificent Modules[/b] - Update 04.07.2026[/h1]
+[h1][b]Moony's Magnificent Modules[/b] - Update 20.08.2026[/h1]
 Version: 1.6.1.5
 
 [h2]Added[/h2]
